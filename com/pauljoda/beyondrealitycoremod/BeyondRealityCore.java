@@ -1,11 +1,12 @@
 package com.pauljoda.beyondrealitycoremod;
 
-import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.config.Configuration;
 
 import com.pauljoda.beyondrealitycoremod.handlers.BeyondRealityCoreCapeEvent;
 import com.pauljoda.beyondrealitycoremod.handlers.BeyondRealityCoreEvent;
 import com.pauljoda.beyondrealitycoremod.proxy.CommonProxy;
+
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -13,12 +14,11 @@ import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.relauncher.Side;
 
 
 @Mod(name = "Beyond Reality Core", modid = "beyondrealitycore", version = "1.1")
-@NetworkMod(channels = { "Beyond Reality Core" },clientSideRequired=true, serverSideRequired=false)
+//@NetworkMod(channels = { "Beyond Reality Core" },clientSideRequired=true, serverSideRequired=false)
 
 
 public class BeyondRealityCore {
@@ -37,7 +37,7 @@ public class BeyondRealityCore {
 		Configuration config = new Configuration(event.getSuggestedConfigurationFile());
 		config.load();
 		
-		bannedEnderBlocks = config.get("Settings", "Blocks the Endermen Don't want you to take", new String[] {"0", "1"}).getStringList();
+		bannedEnderBlocks = config.get("Settings", "Blocks the Endermen Don't want you to take", new String[] {"tile.whiteStone"}).getStringList();
 		aggroRange = config.get("Settings", "Enderman Range for block breaks", 16).getInt();
 		
 		config.save();

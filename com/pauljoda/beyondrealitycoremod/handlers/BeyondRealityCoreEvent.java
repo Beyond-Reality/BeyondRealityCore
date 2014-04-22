@@ -8,36 +8,26 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
-import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 
 import com.pauljoda.beyondrealitycoremod.BeyondRealityCore;
 
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+
 public class BeyondRealityCoreEvent {
 	
-	@ForgeSubscribe
+	@SubscribeEvent
 	public void onBlockBreak(BreakEvent event)
 	{
 		if(event.getPlayer().dimension == 1)
 		{
 			for(int i = 0; i < BeyondRealityCore.bannedEnderBlocks.length; i++)
 			{
-				int blockId;
-				int meta;
-				if(BeyondRealityCore.bannedEnderBlocks[i].contains(":"))
-				{
-					String splitID[] = BeyondRealityCore.bannedEnderBlocks[i].split(":");
-					blockId = Integer.parseInt(splitID[0]);
-					meta = Integer.parseInt(splitID[1]);
-				}
+				String blockId;
 
-				else
-				{
-					blockId = Integer.parseInt(BeyondRealityCore.bannedEnderBlocks[i]);
-					meta = 0;
-				}
-
-				if(blockId == event.block.blockID && meta == event.blockMetadata)
+				blockId = BeyondRealityCore.bannedEnderBlocks[i];
+				
+				if(event.block.getUnlocalizedName().equals(blockId))
 				{
 					angerEndermen(event.getPlayer(), event.world, event.x, event.y, event.z);
 				}

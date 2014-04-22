@@ -5,10 +5,12 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.*;
 import java.util.*;
+
 import javax.swing.ImageIcon;
+
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraftforge.client.event.RenderPlayerEvent;
-import net.minecraftforge.event.ForgeSubscribe;
 
 public class BeyondRealityCoreCapeEvent
 {
@@ -28,7 +30,7 @@ public class BeyondRealityCoreCapeEvent
 		instance = this;
 	}
 
-	@ForgeSubscribe
+	@SubscribeEvent
 	public void onPreRenderSpecials (RenderPlayerEvent.Specials.Pre event)
 	{
 		if (event.entityPlayer instanceof AbstractClientPlayer)
@@ -37,7 +39,7 @@ public class BeyondRealityCoreCapeEvent
 
 			if (!capePlayersBeyondReality.contains(abstractClientPlayer))
 			{
-				String cloakURL = cloaksBeyondReality.get(event.entityPlayer.username);
+				String cloakURL = cloaksBeyondReality.get(event.entityPlayer.getDisplayName());
 
 				if (cloakURL == null)
 				{
@@ -46,7 +48,7 @@ public class BeyondRealityCoreCapeEvent
 
 				capePlayersBeyondReality.add(abstractClientPlayer);
 
-				abstractClientPlayer.getTextureCape().textureUploaded = false;
+				//abstractClientPlayer.getTextureCape().textureUploaded = false;
 				new Thread(new CloakThread(abstractClientPlayer, cloakURL)).start();
 				event.renderCape = true;
 			}
@@ -118,7 +120,8 @@ public class BeyondRealityCoreCapeEvent
 				Image cape = new ImageIcon(new URL(cloakURL)).getImage();
 				BufferedImage bo = new BufferedImage(cape.getWidth(null), cape.getHeight(null), BufferedImage.TYPE_INT_ARGB);
 				bo.getGraphics().drawImage(cape, 0, 0, null);
-				abstractClientPlayer.getTextureCape().bufferedImage = bo;
+				//abstractClientPlayer.getTextureCape().bufferedImage = bo;
+				abstractClientPlayer.getTextureCape().setBufferedImage(bo);
 			}
 			catch (MalformedURLException e)
 			{
