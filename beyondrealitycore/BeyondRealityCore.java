@@ -17,8 +17,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.relauncher.Side;
 
 
-@Mod(name = "Beyond Reality Core", modid = "beyondrealitycore", version = "1.1")
-//@NetworkMod(channels = { "Beyond Reality Core" },clientSideRequired=true, serverSideRequired=false)
+@Mod(name = "Beyond Reality Core", modid = "beyondrealitycore", version = "1.2")
 
 
 public class BeyondRealityCore {
@@ -40,7 +39,7 @@ public class BeyondRealityCore {
 		bannedEnderBlocks = config.get("End Settings", "Blocks the Endermen Don't want you to take", new String[] {"tile.whiteStone"}).getStringList();
 		aggroRange = config.get("End Settings", "Enderman Range for block breaks", 16).getInt();
 		
-		perSilverfish = config.get("Stone Breaking", "Chance of silverfish spawning when breaking stone (0-100)", 2).getInt();
+		perSilverfish = config.get("Stone Breaking", "Chance of silverfish spawning when breaking stone (0-100)", 5).getInt();
 		numSilverfish = config.get("Stone Breaking", "Max # of silverfish to spawn", 2).getInt();
 		
 		config.save();

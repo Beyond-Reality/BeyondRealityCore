@@ -3,6 +3,7 @@ package beyondrealitycore.handlers;
 import java.util.List;
 import java.util.Random;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.entity.monster.EntitySilverfish;
@@ -39,12 +40,20 @@ public class BeyondRealityCoreEvent {
 			
 			if (!event.world.isRemote)
 			{
-				int rnd1 = (int)(Math.random() * ((BeyondRealityCore.numSilverfish - 0) + 1)); 			
-				int rnd2 = (int)(Math.random() * ((100 - 0) + 1));
+				//int rnd1 = (int)(Math.random() * ((BeyondRealityCore.numSilverfish - 0) + 1)); 			
+				//int rnd2 = (int)(Math.random() * ((100 - 0) + 1));
+				Random random = new Random();
+				//Random random2 = new Random();
 				
-				if (rnd2 <= BeyondRealityCore.perSilverfish)
+				int rnd1 = random.nextInt(100);
+				int rnd2 = random.nextInt(BeyondRealityCore.numSilverfish) + 1;
+				
+				//System.out.println(String.valueOf(rnd1));
+				//System.out.println(String.valueOf(rnd2));
+				
+				if (rnd1 <= BeyondRealityCore.perSilverfish)
 				{
-					for(int i = 0; i < rnd1; i++)
+					for(int i = 0; i < rnd2; i++)
 					{
 						EntitySilverfish entitysilverfish = new EntitySilverfish(event.world);
 						entitysilverfish.setLocationAndAngles((double)event.x + 0.5D, (double)event.y, (double)event.z + 0.5D, 0.0F, 0.0F);

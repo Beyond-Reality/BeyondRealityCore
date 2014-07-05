@@ -6,6 +6,7 @@ import java.io.*;
 import java.net.*;
 import java.util.*;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -15,7 +16,7 @@ import net.minecraftforge.client.event.RenderPlayerEvent;
 public class BeyondRealityCoreCapeEvent
 {
 
-	private final String serverLocation = "https://raw.github.com/beyondreality/BeyondRealityModPack/master/TeamMembers.txt";
+	private final String serverLocation = "https://raw.githubusercontent.com/beyondreality/BeyondRealityModPack/master/TeamMembers.txt";
 	private final int timeout = 1000;
 
 	private static final Graphics TEST_GRAPHICS = new BufferedImage(128, 128, BufferedImage.TYPE_INT_RGB).getGraphics();
@@ -117,16 +118,16 @@ public class BeyondRealityCoreCapeEvent
 		{
 			try
 			{
-				Image cape = new ImageIcon(new URL(cloakURL)).getImage();
-				BufferedImage bo = new BufferedImage(cape.getWidth(null), cape.getHeight(null), BufferedImage.TYPE_INT_ARGB);
-				bo.getGraphics().drawImage(cape, 0, 0, null);
-				//abstractClientPlayer.getTextureCape().bufferedImage = bo;
+				BufferedImage bo = new BufferedImage(2048, 1024, BufferedImage.TYPE_INT_ARGB);	
+				bo.getGraphics().drawImage(ImageIO.read(new URL(cloakURL)), 0, 0, null);
 				abstractClientPlayer.getTextureCape().setBufferedImage(bo);
 			}
 			catch (MalformedURLException e)
 			{
 				e.printStackTrace();
-			}
+			} catch (IOException e) {
+				e.printStackTrace();
+			} 
 		}
 	}
 
@@ -144,10 +145,13 @@ public class BeyondRealityCoreCapeEvent
 		{
 			try
 			{
-				TEST_GRAPHICS.drawImage(new ImageIcon(new URL(cloakURL)).getImage(), 0, 0, null);
+				TEST_GRAPHICS.drawImage(ImageIO.read(new URL(cloakURL)), 0, 0, null);
+				//TEST_GRAPHICS.drawImage(new ImageIcon(new URL(cloakURL)).getImage(), 0, 0, null);
 			}
 			catch (MalformedURLException e)
 			{
+				e.printStackTrace();
+			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
