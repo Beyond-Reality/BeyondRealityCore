@@ -1,0 +1,16 @@
+[
+{
+  "modid": "beyondrealitycore",
+  "name": "Beyond Reality Core",
+  "description": "Capes and things for Beyond Reality modpack.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "http://www.mcbeyondreality.com",
+  "updateUrl": "",
+  "authorList": ["Dyonovan"],
+  "credits": "Paul Joda",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
