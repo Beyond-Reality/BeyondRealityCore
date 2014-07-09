@@ -1,7 +1,9 @@
-package beyondrealitycore.handlers;
+package com.mcbeyondreality.beyondrealitycore.handlers;
 
 import java.util.List;
 import java.util.Random;
+
+import com.mcbeyondreality.beyondrealitycore.BeyondRealityCore;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.EntityEnderman;
@@ -11,7 +13,6 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
-import beyondrealitycore.BeyondRealityCore;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class BeyondRealityCoreEvent {

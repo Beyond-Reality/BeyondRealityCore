@@ -1,4 +1,4 @@
-package beyondrealitycore.handlers;
+package com.mcbeyondreality.beyondrealitycore.handlers;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;

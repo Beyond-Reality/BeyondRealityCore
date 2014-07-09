@@ -1,9 +1,10 @@
-package beyondrealitycore;
+package com.mcbeyondreality.beyondrealitycore;
+
+import com.mcbeyondreality.beyondrealitycore.handlers.BeyondRealityCoreEvent;
+import com.mcbeyondreality.beyondrealitycore.proxy.CommonProxy;
 
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
-import beyondrealitycore.handlers.BeyondRealityCoreEvent;
-import beyondrealitycore.proxy.CommonProxy;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -13,7 +14,7 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
 
-@Mod(name = "Beyond Reality Core", modid = "beyondrealitycore", version = "1.2")
+@Mod(name = "Beyond Reality Core", modid = "beyondrealitycore", version = "1.3")
 
 
 public class BeyondRealityCore {
