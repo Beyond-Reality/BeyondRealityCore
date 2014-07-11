@@ -22,7 +22,7 @@ public class BeyondRealityCore {
 	@Instance("beyondrealitycore")
 	public static BeyondRealityCore instance;
 	
-	@SidedProxy( clientSide="beyondrealitycore.proxy.ClientProxy", serverSide="beyondrealitycore.proxy.CommonProxy")
+	@SidedProxy( clientSide="com.mcbeyondreality.beyondrealitycore.proxy.ClientProxy", serverSide="com.mcbeyondreality.beyondrealitycore.proxy.CommonProxy")
 	public static CommonProxy proxy;
 	
 	public static String[] bannedEnderBlocks;
