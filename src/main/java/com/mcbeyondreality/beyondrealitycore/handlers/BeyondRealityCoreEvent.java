@@ -62,28 +62,7 @@ public class BeyondRealityCoreEvent {
 				
 			}
 			
-		} else if(blockID.toString().equalsIgnoreCase("minecraft:stone")) {
-			
-			if (!event.world.isRemote)
-			{
-				Random random = new Random();
-								
-				int rnd1 = random.nextInt(100);
-				int rnd2 = random.nextInt(BeyondRealityCore.numSilverfish) + 1;
-												
-				if (rnd1 <= BeyondRealityCore.perSilverfish)
-				{
-					for(int i = 0; i < rnd2; i++)
-					{
-						EntitySilverfish entitysilverfish = new EntitySilverfish(event.world);
-						entitysilverfish.setLocationAndAngles((double)event.x + 0.5D, (double)event.y, (double)event.z + 0.5D, 0.0F, 0.0F);
-						event.world.spawnEntityInWorld(entitysilverfish);
-						entitysilverfish.spawnExplosionParticle();
-					}
-				}
-				
-			}
-		}
+		} 
 	}
 	
 	

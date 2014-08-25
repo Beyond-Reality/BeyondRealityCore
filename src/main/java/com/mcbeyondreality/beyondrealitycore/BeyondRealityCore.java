@@ -3,7 +3,6 @@ package com.mcbeyondreality.beyondrealitycore;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 
-import com.mcbeyondreality.beyondrealitycore.handlers.BeyondRealityCoreCapeEvent;
 import com.mcbeyondreality.beyondrealitycore.handlers.BeyondRealityCoreEvent;
 import com.mcbeyondreality.beyondrealitycore.proxy.CommonProxy;
 
@@ -14,7 +13,6 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.relauncher.Side;
 
 
 @Mod(name = "Beyond Reality Core", modid = "beyondrealitycore", version = "1.3")
@@ -29,7 +27,7 @@ public class BeyondRealityCore {
 	public static CommonProxy proxy;
 	
 	public static String[] bannedEnderBlocks, bannedNetherBlocks;
-	public static int aggrorangeEnd, aggrorangeNether, numSilverfish, perSilverfish;
+	public static int aggrorangeEnd, aggrorangeNether;
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event){	
@@ -42,17 +40,9 @@ public class BeyondRealityCore {
 		bannedNetherBlocks = config.get("Nether Settings", "Blocks the Pigmen Don't want you to take", new String[] {"gregtech:gt.blockores"}).getStringList();
 		aggrorangeNether = config.get("Nether Settings", "Pigmen Range for block breaks", 16).getInt();
 		
-		perSilverfish = config.get("Stone Breaking", "Chance of silverfish spawning when breaking stone (0-100)", 5).getInt();
-		numSilverfish = config.get("Stone Breaking", "Max # of silverfish to spawn", 2).getInt();
-		
 		config.save();
 
 		MinecraftForge.EVENT_BUS.register(new BeyondRealityCoreEvent());
-
-		if (event.getSide() == Side.CLIENT)
-        {
-		MinecraftForge.EVENT_BUS.register(new BeyondRealityCoreCapeEvent());
-        }
 	}
 	
 	@EventHandler
