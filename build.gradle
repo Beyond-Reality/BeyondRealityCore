@@ -23,7 +23,7 @@ archivesBaseName = "beyondrealitycore"
 
 jar {
     manifest {
-        attributes("FMLCorePluginContainsFMLMod": "true", "FMLCorePlugin": "com.mcbeyondreality.beyondrealitycore.transformer.BRLoadingPlugin")
+       attributes("FMLCorePluginContainsFMLMod": "true", "FMLCorePlugin": "com.mcbeyondreality.beyondrealitycore.transformer.BRLoadingPlugin")
     }
 }
 
