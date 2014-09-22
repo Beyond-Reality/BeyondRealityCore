@@ -1,8 +1,12 @@
 package com.mcbeyondreality.beyondrealitycore;
 
+import net.minecraft.command.ICommandManager;
+import net.minecraft.command.ServerCommandManager;
+import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 
+import com.mcbeyondreality.beyondrealitycore.commands.CommandGetUUID;
 import com.mcbeyondreality.beyondrealitycore.handlers.BeyondRealityCoreEvent;
 import com.mcbeyondreality.beyondrealitycore.proxy.CommonProxy;
 
@@ -13,6 +17,7 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.event.FMLServerStartingEvent;
 
 
 @Mod(name = "Beyond Reality Core", modid = "beyondrealitycore", version = "1.3")
@@ -28,6 +33,15 @@ public class BeyondRealityCore {
 	
 	public static String[] bannedEnderBlocks, bannedNetherBlocks;
 	public static int aggrorangeEnd, aggrorangeNether;
+	
+	@EventHandler
+    public void serverLoad(FMLServerStartingEvent event)
+    {
+        MinecraftServer server = MinecraftServer.getServer();
+        ICommandManager command = server.getCommandManager();
+        ServerCommandManager manager = (ServerCommandManager) command;
+        manager.registerCommand(new CommandGetUUID());
+    }
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event){	
