@@ -27,7 +27,10 @@ import org.lwjgl.opengl.GLContext;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.URI;
+import java.net.URL;
+import java.net.UnknownHostException;
 import java.util.*;
 
 @SideOnly(Side.CLIENT)
@@ -190,6 +193,7 @@ public class BRCGuiMainMenu extends GuiScreen implements GuiYesNoCallback
         this.buttonList.add(new GuiButton(0, this.width / 2 - 100, i + 72 + 12, 98, 20, I18n.format("menu.options", new Object[0])));
         this.buttonList.add(new GuiButton(4, this.width / 2 + 2, i + 72 + 12, 98, 20, I18n.format("menu.quit", new Object[0])));
         this.buttonList.add(new GuiButtonLanguage(5, this.width / 2 - 124, i + 72 + 12));
+
         Object object = this.field_104025_t;
 
         synchronized (this.field_104025_t)
@@ -204,6 +208,31 @@ public class BRCGuiMainMenu extends GuiScreen implements GuiYesNoCallback
         }
     }
 
+    public static boolean isInternetReachable()
+    {
+        try {
+            //make a URL to a known source
+            URL url = new URL("http://www.google.com");
+
+            //open a connection to that source
+            HttpURLConnection urlConnect = (HttpURLConnection)url.openConnection();
+
+            //trying to retrieve data from the source. If there
+            //is no connection, this line will fail
+            Object objData = urlConnect.getContent();
+
+        } catch (UnknownHostException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return false;
+        }
+        catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
     /**
      * Adds Singleplayer and Multiplayer buttons on Main Menu for players who have bought the game.
      */
@@ -211,12 +240,12 @@ public class BRCGuiMainMenu extends GuiScreen implements GuiYesNoCallback
     {
         this.buttonList.add(new GuiButton(1, this.width / 2 - 100, p_73969_1_, I18n.format("menu.singleplayer", new Object[0])));
         this.buttonList.add(new GuiButton(2, this.width / 2 - 100, p_73969_1_ + p_73969_2_ * 1, I18n.format("menu.multiplayer", new Object[0])));
-        GuiButton realmsButton = new GuiButton(14, this.width / 2 - 100, p_73969_1_ + p_73969_2_ * 2, I18n.format("menu.online", new Object[0]));
+        GuiButton websiteButton = new GuiButton(14, this.width / 2 - 100, p_73969_1_ + p_73969_2_ * 2, "Pack Support");
         GuiButton fmlModButton = new GuiButton(6, this.width / 2 - 100, p_73969_1_ + p_73969_2_ * 2, "Mods");
         fmlModButton.xPosition = this.width / 2 + 2;
-        realmsButton.width = 98;
+        websiteButton.width = 98;
         fmlModButton.width = 98;
-        this.buttonList.add(realmsButton);
+        this.buttonList.add(websiteButton);
         this.buttonList.add(fmlModButton);
     }
 
@@ -258,9 +287,15 @@ public class BRCGuiMainMenu extends GuiScreen implements GuiYesNoCallback
             this.mc.displayGuiScreen(new GuiMultiplayer(this));
         }
 
-        if (p_146284_1_.id == 14)
+        if (p_146284_1_.id == 14 && isInternetReachable())
         {
-            this.func_140005_i();
+            try {
+                String url = "http://www.mcbeyondreality.com/";
+                java.awt.Desktop.getDesktop().browse(java.net.URI.create(url));
+            }
+            catch (java.io.IOException e) {
+                System.out.println(e.getMessage());
+            }
         }
 
         if (p_146284_1_.id == 4)
