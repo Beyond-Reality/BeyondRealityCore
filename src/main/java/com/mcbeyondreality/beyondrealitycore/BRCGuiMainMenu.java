@@ -341,21 +341,25 @@ public class BRCGuiMainMenu extends GuiScreen implements GuiYesNoCallback
         double height = scaledresolution.getScaledHeight();
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         tessellator.startDrawingQuads();
-        tessellator.setColorOpaque_I(0x999999);
+        //tessellator.setColorOpaque_I(0x999999);
         tessellator.addVertexWithUV(0, 0, 0, 0, 0);
         tessellator.addVertexWithUV(0, height, 0, 0, 1);
         tessellator.addVertexWithUV(width, height, 0, 1, 1);
         tessellator.addVertexWithUV(width, 0, 0, 1, 0);
         tessellator.draw();
-        int k = this.width / 2 - 190;
+        tessellator.setColorOpaque_I(-1);
+
+        int k = this.width / 2 - 180;
         byte b0 = 30;
         this.mc.getTextureManager().bindTexture(minecraftTitleTextures);
-        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+        //GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
+        GL11.glEnable(GL11.GL_BLEND);
+        OpenGlHelper.glBlendFunc(770, 771, 1, 0);
         this.drawTexturedModalRect(k, b0, 0, 0, 184, 39);
-        this.drawTexturedModalRect(this.width / 2 + 5, b0, 0, 39, 184, 39);
+        this.drawTexturedModalRect(this.width / 2, b0, 0, 39, 184, 39);
+        GL11.glDisable(GL11.GL_BLEND);
 
-        tessellator.setColorOpaque_I(-1);
         GL11.glPushMatrix();
         GL11.glTranslatef((float)(this.width / 2 + 90), 70.0F, 0.0F);
         GL11.glRotatef(-20.0F, 0.0F, 0.0F, 1.0F);
