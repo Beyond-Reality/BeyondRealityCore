@@ -50,7 +50,7 @@ public class BRCGuiMainMenu extends GuiScreen implements GuiYesNoCallback
     public String field_146972_A;
     public String field_104024_v;
     public static final ResourceLocation splashTexts = new ResourceLocation("beyondrealitycore:texts/splashes.txt");
-    public static final ResourceLocation minecraftTitleTextures = new ResourceLocation("textures/gui/title/minecraft.png");
+    public static final ResourceLocation minecraftTitleTextures = new ResourceLocation("beyondrealitycore:textures/title.png");
     public static final ResourceLocation backGround = new ResourceLocation("beyondrealitycore:textures/background.png");
     public static final String field_96138_a = "Please click " + EnumChatFormatting.UNDERLINE + "here" + EnumChatFormatting.RESET + " for more information.";
     public int field_92024_r;
@@ -347,25 +347,13 @@ public class BRCGuiMainMenu extends GuiScreen implements GuiYesNoCallback
         tessellator.addVertexWithUV(width, height, 0, 1, 1);
         tessellator.addVertexWithUV(width, 0, 0, 1, 0);
         tessellator.draw();
-        short short1 = 274;
-        int k = this.width / 2 - short1 / 2;
+        int k = this.width / 2 - 190;
         byte b0 = 30;
         this.mc.getTextureManager().bindTexture(minecraftTitleTextures);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-        if ((double)this.updateCounter < 1.0E-4D)
-        {
-            this.drawTexturedModalRect(k + 0, b0 + 0, 0, 0, 99, 44);
-            this.drawTexturedModalRect(k + 99, b0 + 0, 129, 0, 27, 44);
-            this.drawTexturedModalRect(k + 99 + 26, b0 + 0, 126, 0, 3, 44);
-            this.drawTexturedModalRect(k + 99 + 26 + 3, b0 + 0, 99, 0, 26, 44);
-            this.drawTexturedModalRect(k + 155, b0 + 0, 0, 45, 155, 44);
-        }
-        else
-        {
-            this.drawTexturedModalRect(k + 0, b0 + 0, 0, 0, 155, 44);
-            this.drawTexturedModalRect(k + 155, b0 + 0, 0, 45, 155, 44);
-        }
+        this.drawTexturedModalRect(k, b0, 0, 0, 184, 39);
+        this.drawTexturedModalRect(this.width / 2 + 5, b0, 0, 39, 184, 39);
 
         tessellator.setColorOpaque_I(-1);
         GL11.glPushMatrix();

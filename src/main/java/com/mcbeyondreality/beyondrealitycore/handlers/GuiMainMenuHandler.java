@@ -8,7 +8,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiMainMenu;
 import net.minecraftforge.client.event.GuiScreenEvent;
-import scala.actors.threadpool.Arrays;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +24,8 @@ public class GuiMainMenuHandler {
     public static List<String> getBrandings()
     {
         List<String>brands = new ArrayList<String>();
-        brands = Arrays.asList(BeyondRealityCore.bottomLeftBranding);
+        for(int i = 0; i < BeyondRealityCore.bottomLeftBranding.length; i++)
+            brands.add(BeyondRealityCore.bottomLeftBranding[i]);
         return brands;
     }
 }
