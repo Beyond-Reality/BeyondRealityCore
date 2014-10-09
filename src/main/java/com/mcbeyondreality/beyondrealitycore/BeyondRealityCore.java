@@ -1,15 +1,9 @@
 package com.mcbeyondreality.beyondrealitycore;
 
-import net.minecraft.command.ICommandManager;
-import net.minecraft.command.ServerCommandManager;
-import net.minecraft.server.MinecraftServer;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.config.Configuration;
-
 import com.mcbeyondreality.beyondrealitycore.commands.CommandGetUUID;
 import com.mcbeyondreality.beyondrealitycore.handlers.BeyondRealityCoreEvent;
+import com.mcbeyondreality.beyondrealitycore.handlers.GuiMainMenuHandler;
 import com.mcbeyondreality.beyondrealitycore.proxy.CommonProxy;
-
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -18,7 +12,11 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
-
+import net.minecraft.command.ICommandManager;
+import net.minecraft.command.ServerCommandManager;
+import net.minecraft.server.MinecraftServer;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.config.Configuration;
 
 @Mod(name = "Beyond Reality Core", modid = "beyondrealitycore", version = "1.3")
 
@@ -31,8 +29,9 @@ public class BeyondRealityCore {
 	@SidedProxy( clientSide="com.mcbeyondreality.beyondrealitycore.proxy.ClientProxy", serverSide="com.mcbeyondreality.beyondrealitycore.proxy.CommonProxy")
 	public static CommonProxy proxy;
 	
-	public static String[] bannedEnderBlocks, bannedNetherBlocks;
+	public static String[] bannedEnderBlocks, bannedNetherBlocks, bottomLeftBranding;
 	public static int aggrorangeEnd, aggrorangeNether;
+
 	
 	@EventHandler
     public void serverLoad(FMLServerStartingEvent event)
@@ -44,7 +43,7 @@ public class BeyondRealityCore {
     }
 	
 	@EventHandler
-	public void preInit(FMLPreInitializationEvent event){	
+	public void preInit(FMLPreInitializationEvent event){
 		Configuration config = new Configuration(event.getSuggestedConfigurationFile());
 		config.load();
 		
@@ -53,10 +52,12 @@ public class BeyondRealityCore {
 		
 		bannedNetherBlocks = config.get("Nether Settings", "Blocks the Pigmen Don't want you to take", new String[] {"gregtech:gt.blockores"}).getStringList();
 		aggrorangeNether = config.get("Nether Settings", "Pigmen Range for block breaks", 16).getInt();
-		
+
+		bottomLeftBranding = config.get("main menu settings", "Bottom Left Branding", new String[] {"Beyond Reality"}).getStringList();
 		config.save();
 
 		MinecraftForge.EVENT_BUS.register(new BeyondRealityCoreEvent());
+        MinecraftForge.EVENT_BUS.register(new GuiMainMenuHandler());
 	}
 	
 	@EventHandler

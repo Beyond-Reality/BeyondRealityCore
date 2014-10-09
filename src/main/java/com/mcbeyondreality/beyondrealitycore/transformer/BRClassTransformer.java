@@ -37,7 +37,7 @@ public class BRClassTransformer implements IClassTransformer {
 		String blockClass = "net/minecraft/block/Block";
 		
 		MethodVisitor mv = writer.visitMethod(ACC_PUBLIC, methodName, "(L" + worldClass + ";IIIL" + blockClass + ";)V", null, null);
-		mv.visitCode();
+        mv.visitCode();
 
 		Label l0 = new Label();
 		mv.visitLabel(l0);
@@ -65,5 +65,4 @@ public class BRClassTransformer implements IClassTransformer {
 
 		return writer.toByteArray();
 	}
-
 }
