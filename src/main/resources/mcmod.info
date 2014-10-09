@@ -7,8 +7,8 @@
   "mcversion": "1.7.10-10.13.0.1169",
   "url": "http://www.mcbeyondreality.com",
   "updateUrl": "",
-  "authorList": ["Dyonovan"],
-  "credits": "Paul Joda",
+  "authorList": ["Dyonovan", "pauljoda"],
+  "credits": "pauljoda",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []

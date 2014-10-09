@@ -1,5 +1,6 @@
 package com.mcbeyondreality.beyondrealitycore.transformer;
 
+import com.mcbeyondreality.beyondrealitycore.BeyondRealityCore;
 import net.minecraft.launchwrapper.IClassTransformer;
 
 import org.objectweb.asm.ClassReader;
@@ -15,7 +16,7 @@ public class BRClassTransformer implements IClassTransformer {
 	@Override
 	public byte[] transform(String obfName, String transformedName, byte[] basicClass) {
 		
-		if (transformedName.equals("net.minecraft.block.BlockLeavesBase") && BRCallHook.FASTER_LEAVEDECAY) {
+		if (transformedName.equals("net.minecraft.block.BlockLeavesBase") && BeyondRealityCore.fastLeafDecay) {
 			
 			return patchLeaveClass(basicClass);
 		}

@@ -1,7 +1,7 @@
 package com.mcbeyondreality.beyondrealitycore;
 
 import com.google.common.base.Strings;
-import com.mcbeyondreality.beyondrealitycore.handlers.GuiMainMenuHandler;
+import com.mcbeyondreality.beyondrealitycore.handlers.GuiHandler;
 import cpw.mods.fml.client.GuiModList;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -410,7 +410,7 @@ public class BRCGuiMainMenu extends GuiScreen implements GuiYesNoCallback
             s = s + " Demo";
         }
 
-        List<String> brandings = GuiMainMenuHandler.getBrandings();
+        List<String> brandings = GuiHandler.getBrandings();
         for (int i = 0; i < brandings.size(); i++)
         {
             String brd = brandings.get(i);

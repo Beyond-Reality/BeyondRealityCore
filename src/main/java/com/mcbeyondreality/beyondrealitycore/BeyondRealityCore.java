@@ -2,7 +2,7 @@ package com.mcbeyondreality.beyondrealitycore;
 
 import com.mcbeyondreality.beyondrealitycore.commands.CommandGetUUID;
 import com.mcbeyondreality.beyondrealitycore.handlers.BeyondRealityCoreEvent;
-import com.mcbeyondreality.beyondrealitycore.handlers.GuiMainMenuHandler;
+import com.mcbeyondreality.beyondrealitycore.handlers.GuiHandler;
 import com.mcbeyondreality.beyondrealitycore.proxy.CommonProxy;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -12,11 +12,20 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
+import cpw.mods.fml.relauncher.Side;
+import net.minecraft.client.Minecraft;
 import net.minecraft.command.ICommandManager;
 import net.minecraft.command.ServerCommandManager;
 import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
+import org.xml.sax.SAXException;
+
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import java.io.File;
+import java.io.IOException;
 
 @Mod(name = "Beyond Reality Core", modid = "beyondrealitycore", version = "1.3")
 
@@ -31,6 +40,7 @@ public class BeyondRealityCore {
 	
 	public static String[] bannedEnderBlocks, bannedNetherBlocks, bottomLeftBranding;
 	public static int aggrorangeEnd, aggrorangeNether;
+    public static boolean fastLeafDecay;
 
 	
 	@EventHandler
@@ -44,7 +54,24 @@ public class BeyondRealityCore {
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event){
-		Configuration config = new Configuration(event.getSuggestedConfigurationFile());
+
+        if(event.getSide() == Side.CLIENT) {
+            try {
+                GuiHandler.addCustomServers(Minecraft.getMinecraft());
+            } catch (ParserConfigurationException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (SAXException e) {
+                e.printStackTrace();
+            } catch (TransformerConfigurationException e) {
+                e.printStackTrace();
+            } catch (TransformerException e) {
+                e.printStackTrace();
+            }
+        }
+
+        Configuration config = new Configuration(new File("config/BeyondRealityCore/beyondrealitycore.cfg"));
 		config.load();
 		
 		bannedEnderBlocks = config.get("End Settings", "Blocks the Endermen Don't want you to take", new String[] {"minecraft:end_stone", "gregtech:gt.blockores"}).getStringList();
@@ -54,10 +81,13 @@ public class BeyondRealityCore {
 		aggrorangeNether = config.get("Nether Settings", "Pigmen Range for block breaks", 16).getInt();
 
 		bottomLeftBranding = config.get("main menu settings", "Bottom Left Branding", new String[] {"Beyond Reality"}).getStringList();
-		config.save();
+
+        fastLeafDecay = config.get(Configuration.CATEGORY_GENERAL, "Overwrite leaf decay?", false).getBoolean();
+
+        config.save();
 
 		MinecraftForge.EVENT_BUS.register(new BeyondRealityCoreEvent());
-        MinecraftForge.EVENT_BUS.register(new GuiMainMenuHandler());
+        MinecraftForge.EVENT_BUS.register(new GuiHandler());
 	}
 	
 	@EventHandler
