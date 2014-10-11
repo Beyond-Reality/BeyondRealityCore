@@ -52,7 +52,7 @@ public class BRCGuiMainMenu extends GuiScreen implements GuiYesNoCallback
     public String field_92025_p;
     public String field_146972_A;
     public String field_104024_v;
-    public static final ResourceLocation splashTexts = new ResourceLocation("beyondrealitycore:texts/splashes.txt");
+    public static final ResourceLocation splashTexts = new ResourceLocation("config/BeyondReality/splashes.txt");
     public static final ResourceLocation minecraftTitleTextures = new ResourceLocation("beyondrealitycore:textures/title.png");
     public static final ResourceLocation backGround = new ResourceLocation("beyondrealitycore:textures/background.png");
     public static final String field_96138_a = "Please click " + EnumChatFormatting.UNDERLINE + "here" + EnumChatFormatting.RESET + " for more information.";
