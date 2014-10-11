@@ -87,6 +87,8 @@ public class BeyondRealityCore {
         config.save();
 
 		MinecraftForge.EVENT_BUS.register(new BeyondRealityCoreEvent());
+
+        if(event.getSide() == Side.CLIENT)
         MinecraftForge.EVENT_BUS.register(new GuiHandler());
 	}
 	
