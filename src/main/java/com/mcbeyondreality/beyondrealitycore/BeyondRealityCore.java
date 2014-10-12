@@ -3,6 +3,7 @@ package com.mcbeyondreality.beyondrealitycore;
 import com.mcbeyondreality.beyondrealitycore.commands.CommandGetUUID;
 import com.mcbeyondreality.beyondrealitycore.handlers.BeyondRealityCoreEvent;
 import com.mcbeyondreality.beyondrealitycore.handlers.GuiHandler;
+import com.mcbeyondreality.beyondrealitycore.handlers.RightClickHandler;
 import com.mcbeyondreality.beyondrealitycore.proxy.CommonProxy;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -87,6 +88,7 @@ public class BeyondRealityCore {
         config.save();
 
 		MinecraftForge.EVENT_BUS.register(new BeyondRealityCoreEvent());
+        MinecraftForge.EVENT_BUS.register(new RightClickHandler());
 
         if(event.getSide() == Side.CLIENT)
         MinecraftForge.EVENT_BUS.register(new GuiHandler());
