@@ -26,9 +26,15 @@ minecraft {
     assetDir = "src/main/resources"
 }
 
+repositories {
+    maven {
+        name = "IGW"
+        url = "http://maven.k-4u.nl/"
+    }
+}
+
 dependencies {
-
-
+    compile "igwmod:IGW-Mod-1.7.10:1.1.1-17:userdev"
 }
 processResources
         {

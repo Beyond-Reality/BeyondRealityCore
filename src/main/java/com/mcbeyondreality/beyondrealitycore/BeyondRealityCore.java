@@ -2,6 +2,7 @@ package com.mcbeyondreality.beyondrealitycore;
 
 import com.mcbeyondreality.beyondrealitycore.commands.CommandGetUUID;
 import com.mcbeyondreality.beyondrealitycore.event.BeyondRealityCoreEvent;
+import com.mcbeyondreality.beyondrealitycore.event.LeafDecayEvent;
 import com.mcbeyondreality.beyondrealitycore.handlers.GuiHandler;
 import com.mcbeyondreality.beyondrealitycore.event.RightClickEvent;
 import com.mcbeyondreality.beyondrealitycore.proxy.CommonProxy;
@@ -88,6 +89,7 @@ public class BeyondRealityCore {
 
         MinecraftForge.EVENT_BUS.register(new BeyondRealityCoreEvent());
         MinecraftForge.EVENT_BUS.register(new RightClickEvent());
+        MinecraftForge.EVENT_BUS.register(new LeafDecayEvent());
 
         if(event.getSide() == Side.CLIENT)
             MinecraftForge.EVENT_BUS.register(new GuiHandler());
