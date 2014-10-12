@@ -1,6 +1,6 @@
 package com.mcbeyondreality.beyondrealitycore.handlers;
 
-import com.mcbeyondreality.beyondrealitycore.BRCGuiMainMenu;
+import com.mcbeyondreality.beyondrealitycore.gui.BRCGuiMainMenu;
 import com.mcbeyondreality.beyondrealitycore.BeyondRealityCore;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;

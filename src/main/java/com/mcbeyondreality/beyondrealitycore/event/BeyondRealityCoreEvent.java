@@ -1,4 +1,4 @@
-package com.mcbeyondreality.beyondrealitycore.handlers;
+package com.mcbeyondreality.beyondrealitycore.event;
 
 import java.util.List;
 import java.util.Random;

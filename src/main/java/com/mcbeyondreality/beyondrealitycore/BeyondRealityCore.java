@@ -1,9 +1,9 @@
 package com.mcbeyondreality.beyondrealitycore;
 
 import com.mcbeyondreality.beyondrealitycore.commands.CommandGetUUID;
-import com.mcbeyondreality.beyondrealitycore.handlers.BeyondRealityCoreEvent;
+import com.mcbeyondreality.beyondrealitycore.event.BeyondRealityCoreEvent;
 import com.mcbeyondreality.beyondrealitycore.handlers.GuiHandler;
-import com.mcbeyondreality.beyondrealitycore.handlers.RightClickHandler;
+import com.mcbeyondreality.beyondrealitycore.event.RightClickEvent;
 import com.mcbeyondreality.beyondrealitycore.proxy.CommonProxy;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -32,29 +32,28 @@ import java.io.IOException;
 
 
 public class BeyondRealityCore {
-	
-	@Instance("beyondrealitycore")
-	public static BeyondRealityCore instance;
-	
-	@SidedProxy( clientSide="com.mcbeyondreality.beyondrealitycore.proxy.ClientProxy", serverSide="com.mcbeyondreality.beyondrealitycore.proxy.CommonProxy")
-	public static CommonProxy proxy;
-	
-	public static String[] bannedEnderBlocks, bannedNetherBlocks, bottomLeftBranding;
-	public static int aggrorangeEnd, aggrorangeNether;
+
+    @Instance("beyondrealitycore")
+    public static BeyondRealityCore instance;
+
+    @SidedProxy( clientSide="com.mcbeyondreality.beyondrealitycore.proxy.ClientProxy", serverSide="com.mcbeyondreality.beyondrealitycore.proxy.CommonProxy")
+    public static CommonProxy proxy;
+
+    public static String[] bannedEnderBlocks, bannedNetherBlocks, bottomLeftBranding;
+    public static int aggrorangeEnd, aggrorangeNether;
     public static boolean fastLeafDecay;
 
-	
-	@EventHandler
-    public void serverLoad(FMLServerStartingEvent event)
-    {
+
+    @EventHandler
+    public void serverLoad(FMLServerStartingEvent event) {
         MinecraftServer server = MinecraftServer.getServer();
         ICommandManager command = server.getCommandManager();
         ServerCommandManager manager = (ServerCommandManager) command;
         manager.registerCommand(new CommandGetUUID());
     }
-	
-	@EventHandler
-	public void preInit(FMLPreInitializationEvent event){
+
+    @EventHandler
+    public void preInit(FMLPreInitializationEvent event){
 
         if(event.getSide() == Side.CLIENT) {
             try {
@@ -73,32 +72,32 @@ public class BeyondRealityCore {
         }
 
         Configuration config = new Configuration(new File("config/BeyondRealityCore/beyondrealitycore.cfg"));
-		config.load();
-		
-		bannedEnderBlocks = config.get("End Settings", "Blocks the Endermen Don't want you to take", new String[] {"minecraft:end_stone", "gregtech:gt.blockores"}).getStringList();
-		aggrorangeEnd = config.get("End Settings", "Enderman Range for block breaks", 16).getInt();
-		
-		bannedNetherBlocks = config.get("Nether Settings", "Blocks the Pigmen Don't want you to take", new String[] {"gregtech:gt.blockores"}).getStringList();
-		aggrorangeNether = config.get("Nether Settings", "Pigmen Range for block breaks", 16).getInt();
+        config.load();
 
-		bottomLeftBranding = config.get("main menu settings", "Bottom Left Branding", new String[] {"Beyond Reality"}).getStringList();
+        bannedEnderBlocks = config.get("End Settings", "Blocks the Endermen Don't want you to take", new String[] {"minecraft:end_stone", "gregtech:gt.blockores"}).getStringList();
+        aggrorangeEnd = config.get("End Settings", "Enderman Range for block breaks", 16).getInt();
+
+        bannedNetherBlocks = config.get("Nether Settings", "Blocks the Pigmen Don't want you to take", new String[] {"gregtech:gt.blockores"}).getStringList();
+        aggrorangeNether = config.get("Nether Settings", "Pigmen Range for block breaks", 16).getInt();
+
+        bottomLeftBranding = config.get("main menu settings", "Bottom Left Branding", new String[] {"Beyond Reality"}).getStringList();
 
         fastLeafDecay = config.get(Configuration.CATEGORY_GENERAL, "Overwrite leaf decay?", false).getBoolean();
 
         config.save();
 
-		MinecraftForge.EVENT_BUS.register(new BeyondRealityCoreEvent());
-        MinecraftForge.EVENT_BUS.register(new RightClickHandler());
+        MinecraftForge.EVENT_BUS.register(new BeyondRealityCoreEvent());
+        MinecraftForge.EVENT_BUS.register(new RightClickEvent());
 
         if(event.getSide() == Side.CLIENT)
-        MinecraftForge.EVENT_BUS.register(new GuiHandler());
-	}
-	
-	@EventHandler
-	public void init(FMLInitializationEvent event) {
-	}
-	
-	@EventHandler
-	public void postInit(FMLPostInitializationEvent event) {}
+            MinecraftForge.EVENT_BUS.register(new GuiHandler());
+    }
+
+    @EventHandler
+    public void init(FMLInitializationEvent event) {
+    }
+
+    @EventHandler
+    public void postInit(FMLPostInitializationEvent event) {}
 
 }

@@ -1,4 +1,4 @@
-package com.mcbeyondreality.beyondrealitycore;
+package com.mcbeyondreality.beyondrealitycore.gui;
 
 import com.google.common.base.Strings;
 import com.mcbeyondreality.beyondrealitycore.handlers.GuiHandler;

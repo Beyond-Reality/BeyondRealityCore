@@ -1,4 +1,4 @@
-package com.mcbeyondreality.beyondrealitycore.handlers;
+package com.mcbeyondreality.beyondrealitycore.event;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -7,7 +7,7 @@ import net.minecraft.item.ItemTool;
 import net.minecraft.network.play.server.S2FPacketSetSlot;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
-public class RightClickHandler {
+public class RightClickEvent {
     private int[] slots = {1, 2, 3, 4, 5, 6, 7, 8, 0, -1};
     @SubscribeEvent
     public void playerRightClick(PlayerInteractEvent event)

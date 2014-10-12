@@ -52,7 +52,6 @@ processResources
 
 jar {
     manifest {
-        attributes("FMLCorePluginContainsFMLMod": "true", "FMLCorePlugin": "com.mcbeyondreality.beyondrealitycore.transformer.BRLoadingPlugin")
         attributes 'FMLAT': 'beyondrealitycore_at.cfg'
     }
 }
