@@ -72,6 +72,8 @@ public class BeyondRealityCore {
             }
         }
 
+        proxy.registerHandlers();
+
         Configuration config = new Configuration(new File("config/BeyondRealityCore/beyondrealitycore.cfg"));
         config.load();
 
