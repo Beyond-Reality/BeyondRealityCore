@@ -29,6 +29,7 @@ import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class GuiHandler {
@@ -50,7 +51,28 @@ public class GuiHandler {
 
     public static void addCustomServers(Minecraft mc) throws ParserConfigurationException, IOException, SAXException, TransformerException {
 
-        NBTTagList nbttaglist = new NBTTagList();
+        NBTTagCompound nbttagcompound = CompressedStreamTools.read(new File(mc.mcDataDir, "servers.dat"));
+        List servers = new ArrayList();
+
+        if (nbttagcompound == null)
+        {
+            return;
+        }
+
+        NBTTagList nbttaglist = nbttagcompound.getTagList("servers", 10);
+
+        for (int i = 0; i < nbttaglist.tagCount(); ++i)
+        {
+            servers.add(ServerData.getServerDataFromNBTCompound(nbttaglist.getCompoundTagAt(i)));
+        }
+
+        Iterator iterator = servers.iterator();
+
+        while (iterator.hasNext())
+        {
+            ServerData serverdata = (ServerData)iterator.next();
+            nbttaglist.appendTag(serverdata.getNBTCompound());
+        }
 
         File serverFile = new File("config/BeyondRealityCore/beyondrealitycoreServers.xml");
 
@@ -98,7 +120,6 @@ public class GuiHandler {
             }
         }
 
-        NBTTagCompound nbttagcompound = new NBTTagCompound();
         nbttagcompound.setTag("servers", nbttaglist);
 
         try {
