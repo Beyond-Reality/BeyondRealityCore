@@ -1,7 +1,7 @@
 package com.mcbeyondreality.beyondrealitycore.handlers;
 
-import com.mcbeyondreality.beyondrealitycore.gui.BRCGuiMainMenu;
 import com.mcbeyondreality.beyondrealitycore.BeyondRealityCore;
+import com.mcbeyondreality.beyondrealitycore.gui.BRCGuiMainMenu;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -29,7 +29,6 @@ import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class GuiHandler {
@@ -52,7 +51,7 @@ public class GuiHandler {
     public static void addCustomServers(Minecraft mc) throws ParserConfigurationException, IOException, SAXException, TransformerException {
 
         NBTTagCompound nbttagcompound = CompressedStreamTools.read(new File(mc.mcDataDir, "servers.dat"));
-        List servers = new ArrayList();
+        List<ServerData> servers = new ArrayList();
 
         if (nbttagcompound == null)
         {
@@ -65,15 +64,7 @@ public class GuiHandler {
         {
             servers.add(ServerData.getServerDataFromNBTCompound(nbttaglist.getCompoundTagAt(i)));
         }
-
-        Iterator iterator = servers.iterator();
-
-        while (iterator.hasNext())
-        {
-            ServerData serverdata = (ServerData)iterator.next();
-            nbttaglist.appendTag(serverdata.getNBTCompound());
-        }
-
+        nbttaglist = new NBTTagList();
         File serverFile = new File("config/BeyondRealityCore/beyondrealitycoreServers.xml");
 
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -116,8 +107,20 @@ public class GuiHandler {
 
                 Element eElement = (Element) nNode;
                 ServerData serverdata = new ServerData(eElement.getElementsByTagName("name").item(0).getTextContent(), eElement.getElementsByTagName("ip").item(0).getTextContent());
-                nbttaglist.appendTag(serverdata.getNBTCompound());
+                boolean hasServer = false;
+                for(int i = 0; i < servers.size(); i++)
+                {
+                    if(servers.get(i).serverIP.equals(serverdata.serverIP))
+                        hasServer = true;
+                }
+                if(!hasServer) {
+                    servers.add(serverdata);
+                }
             }
+        }
+
+        for(int i = 0; i < servers.size(); i++) {
+            nbttaglist.appendTag(servers.get(i).getNBTCompound());
         }
 
         nbttagcompound.setTag("servers", nbttaglist);
