@@ -23,7 +23,7 @@ public class RightClickEvent {
         if (newSlot < 0 || newSlot > 8) return;
         ItemStack slotStack = event.entityPlayer.inventory.getStackInSlot(newSlot);
 
-        if (slotStack == null) return;
+        if (slotStack == null || slotStack.getItem() instanceof ItemTool) return;
 
         event.entityPlayer.inventory.currentItem = newSlot;
         if(!((EntityPlayerMP) event.entityPlayer).theItemInWorldManager.activateBlockOrUseItem(event.entityPlayer, event.world, slotStack, event.x, event.y, event.z, event.face, 0.5f, 0.5f, 0.5f))

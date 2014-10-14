@@ -17,12 +17,25 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "1.7.10-1.5.1"
+ext.configFile = file "build.properties"
+
+configFile.withReader {
+    def prop = new Properties()
+    prop.load(it)
+    project.ext.config = new ConfigSlurper().parse prop
+}
+
+version = "${config.minecraft_version}-${config.mod_version}"
 group= "com.mcbeyondreality.beyondrealitycore" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "beyondrealitycore"
 
 minecraft {
-    version = "1.7.10-10.13.0.1208"
+    version = config.minecraft_version + "-" + config.forge_version
+
+    replaceIn "BeyondRealityCore.java"
+    replace "@VERSION@", "${config.mod_version}"
+
+    assetDir = "src/main/resources"
     assetDir = "src/main/resources"
 }
 
@@ -36,25 +49,23 @@ repositories {
 dependencies {
     compile "igwmod:IGW-Mod-1.7.10:1.1.1-17:userdev"
 }
-processResources
-        {
-            // this will ensure that this task is redone when the versions change.
-            inputs.property "version", project.version
-            inputs.property "mcversion", project.minecraft.version
+processResources {
+    // exclude xcf files, as they are for development only
+    exclude '**/*.xcf'
 
-            // replace stuff in mcmod.info, nothing else
-            from(sourceSets.main.resources.srcDirs) {
-                include 'mcmod.info'
+    // replace stuff in mcmod.info, nothing else
+    from(sourceSets.main.resources.srcDirs) {
+        include '*.info'
 
-                // replace version and mcversion
-                expand 'version':project.version, 'mcversion':project.minecraft.version
-            }
+        // replace version and mcversion
+        expand 'mod_version': project.version, 'minecraft_version': project.config.minecraft_version
+    }
 
-            // copy everything else, thats not the mcmod.info
-            from(sourceSets.main.resources.srcDirs) {
-                exclude 'mcmod.info'
-            }
-        }
+    // copy everything else, thats not the mcmod.info
+    from(sourceSets.main.resources.srcDirs) {
+        exclude '**/*.info'
+    }
+}
 
 jar {
     manifest {
