@@ -29,7 +29,7 @@ import javax.xml.transform.TransformerException;
 import java.io.File;
 import java.io.IOException;
 
-@Mod(name = "Beyond Reality Core", modid = "beyondrealitycore", version = "1.5")
+@Mod(name = "Beyond Reality Core", modid = "beyondrealitycore", version = "1.5.1")
 
 
 public class BeyondRealityCore {
