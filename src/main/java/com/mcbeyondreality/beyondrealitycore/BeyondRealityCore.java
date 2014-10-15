@@ -3,6 +3,7 @@ package com.mcbeyondreality.beyondrealitycore;
 import com.mcbeyondreality.beyondrealitycore.commands.CommandGetUUID;
 import com.mcbeyondreality.beyondrealitycore.event.BeyondRealityCoreEvent;
 import com.mcbeyondreality.beyondrealitycore.event.LeafDecayEvent;
+import com.mcbeyondreality.beyondrealitycore.handlers.CustomBlockHandler;
 import com.mcbeyondreality.beyondrealitycore.handlers.GuiHandler;
 import com.mcbeyondreality.beyondrealitycore.event.RightClickEvent;
 import com.mcbeyondreality.beyondrealitycore.proxy.CommonProxy;
@@ -41,7 +42,7 @@ public class BeyondRealityCore {
     public static CommonProxy proxy;
 
     public static String[] bannedEnderBlocks, bannedNetherBlocks, bottomLeftBranding;
-    public static int aggrorangeEnd, aggrorangeNether;
+    public static int aggrorangeEnd, aggrorangeNether, customBlocksCount;
     public static boolean fastLeafDecay;
 
 
@@ -83,12 +84,14 @@ public class BeyondRealityCore {
         bannedNetherBlocks = config.get("Nether Settings", "Blocks the Pigmen Don't want you to take", new String[] {"gregtech:gt.blockores"}).getStringList();
         aggrorangeNether = config.get("Nether Settings", "Pigmen Range for block breaks", 16).getInt();
 
+        customBlocksCount = config.get(Configuration.CATEGORY_GENERAL, "Number of custom blocks", 1).getInt();
         bottomLeftBranding = config.get("main menu settings", "Bottom Left Branding", new String[] {"Beyond Reality"}).getStringList();
 
         fastLeafDecay = config.get(Configuration.CATEGORY_GENERAL, "Overwrite leaf decay?", false).getBoolean();
 
         config.save();
 
+        CustomBlockHandler.init();
         MinecraftForge.EVENT_BUS.register(new BeyondRealityCoreEvent());
         MinecraftForge.EVENT_BUS.register(new RightClickEvent());
         MinecraftForge.EVENT_BUS.register(new LeafDecayEvent());

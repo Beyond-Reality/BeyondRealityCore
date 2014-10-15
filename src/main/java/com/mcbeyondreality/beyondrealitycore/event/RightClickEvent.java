@@ -12,7 +12,7 @@ public class RightClickEvent {
     @SubscribeEvent
     public void playerRightClick(PlayerInteractEvent event)
     {
-        if (event.isCanceled() || event.world.isRemote || event.action != PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK) return;
+        if (event.isCanceled() || event.world.isRemote || event.action != PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK || !event.entityLiving.isSneaking()) return;
         ItemStack heldItem = event.entityPlayer.inventory.getCurrentItem();
 
         if (heldItem == null || !(heldItem.getItem() instanceof ItemTool)) return;
