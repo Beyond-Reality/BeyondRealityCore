@@ -1,1 +1,32 @@
-tile.beyondrealitycore:customBlock_0.name=Custom Block
+tile.beyondrealitycore:customBlock_0.name=Moon Iron Ore
+tile.beyondrealitycore:customBlock_1.name=Mars Iron Ore
+tile.beyondrealitycore:customBlock_2.name=Mars Gold Ore
+tile.beyondrealitycore:customBlock_3.name=Moon Diamond Ore
+tile.beyondrealitycore:customBlock_4.name=Mars Diamond Ore
+tile.beyondrealitycore:customBlock_5.name=Moon Redstone Ore
+tile.beyondrealitycore:customBlock_6.name=Mars Redstone Ore
+tile.beyondrealitycore:customBlock_7.name=Moon Lapis Ore
+tile.beyondrealitycore:customBlock_8.name=Mars Lapis Ore
+tile.beyondrealitycore:customBlock_9.name=Moon Tetrahedryte Ore
+tile.beyondrealitycore:customBlock_10.name=Mars Tetrahedryte Ore
+tile.beyondrealitycore:customBlock_11.name=Moon Bauxite Ore
+tile.beyondrealitycore:customBlock_12.name=Mars Bauxite Ore
+tile.beyondrealitycore:customBlock_13.name=Mars Uranium Ore
+tile.beyondrealitycore:customBlock_14.name=Moon Casseterite Ore
+tile.beyondrealitycore:customBlock_15.name=Mars Casseterite Ore
+tile.beyondrealitycore:customBlock_16.name=Moon Silver Ore
+tile.beyondrealitycore:customBlock_17.name=Mars Silver Ore
+tile.beyondrealitycore:customBlock_18.name=Moon Lead Ore
+tile.beyondrealitycore:customBlock_19.name=Mars Lead Ore
+tile.beyondrealitycore:customBlock_20.name=Mars Iridium Ore
+tile.beyondrealitycore:customBlock_21.name=Mars Platnium Ore
+tile.beyondrealitycore:customBlock_22.name=Mars Osmium Ore
+tile.beyondrealitycore:customBlock_23.name=Mars Tungstate Ore
+tile.beyondrealitycore:customBlock_24.name=Moon Naqadah Ore
+tile.beyondrealitycore:customBlock_25.name=Moon Ruby Ore
+tile.beyondrealitycore:customBlock_26.name=Mars Ruby Ore
+tile.beyondrealitycore:customBlock_27.name=Moon Glowstone
+tile.beyondrealitycore:customBlock_28.name=Mars Mutagen crystals
+tile.beyondrealitycore:customBlock_29.name=Mars Naquadria Ore
+
+
