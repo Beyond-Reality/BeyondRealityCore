@@ -19,6 +19,7 @@ import cpw.mods.fml.relauncher.Side;
 import net.minecraft.client.Minecraft;
 import net.minecraft.command.ICommandManager;
 import net.minecraft.command.ServerCommandManager;
+import net.minecraft.init.Items;
 import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
@@ -41,7 +42,7 @@ public class BeyondRealityCore {
     @SidedProxy( clientSide="com.mcbeyondreality.beyondrealitycore.proxy.ClientProxy", serverSide="com.mcbeyondreality.beyondrealitycore.proxy.CommonProxy")
     public static CommonProxy proxy;
 
-    public static String[] bannedEnderBlocks, bannedNetherBlocks, bottomLeftBranding;
+    public static String[] bannedEnderBlocks, bannedNetherBlocks, rightClickBlackList, bottomLeftBranding;
     public static int aggrorangeEnd, aggrorangeNether, customBlocksCount;
     public static boolean fastLeafDecay;
 
@@ -84,6 +85,7 @@ public class BeyondRealityCore {
         bannedNetherBlocks = config.get("Nether Settings", "Blocks the Pigmen Don't want you to take", new String[] {"gregtech:gt.blockores"}).getStringList();
         aggrorangeNether = config.get("Nether Settings", "Pigmen Range for block breaks", 16).getInt();
 
+        rightClickBlackList = config.get(Configuration.CATEGORY_GENERAL, "Black Listed Items for right click", new String[] {Items.golden_shovel.getUnlocalizedName(), "another unlocalized name"}).getStringList();
         customBlocksCount = config.get(Configuration.CATEGORY_GENERAL, "Number of custom blocks", 1).getInt();
         bottomLeftBranding = config.get("main menu settings", "Bottom Left Branding", new String[] {"Beyond Reality"}).getStringList();
 

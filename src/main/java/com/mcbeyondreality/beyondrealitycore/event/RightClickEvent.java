@@ -1,5 +1,6 @@
 package com.mcbeyondreality.beyondrealitycore.event;
 
+import com.mcbeyondreality.beyondrealitycore.BeyondRealityCore;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
@@ -16,6 +17,11 @@ public class RightClickEvent {
         ItemStack heldItem = event.entityPlayer.inventory.getCurrentItem();
 
         if (heldItem == null || !(heldItem.getItem() instanceof ItemTool)) return;
+        for(String name : BeyondRealityCore.rightClickBlackList)
+        {
+            if(heldItem.getUnlocalizedName().equals(name))
+                return;
+        }
         int oldSlot = event.entityPlayer.inventory.currentItem;
         if (oldSlot < 0 || oldSlot > 8) return;
 
