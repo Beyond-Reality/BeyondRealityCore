@@ -1,0 +1,57 @@
+* Advanced Solar Panels
+
+** Fixed helmet recipes.
+
+
+** Big Reactors
+
+* Reactor Casing now requires steel plates x6 graphitex2 uraniumingotx1
+* Turbine Housing now requires Steel Plates x6 graphitex2 CyaniteIngotx1
+* Changed Fuel rod recipe.
+* desynced yellowrite from uranium Ore dic. (when uranium is more common than tin there is issues)
+* desynced Blutonium from plutonium ore dic. (wtf op?)
+* Decreased power production multiplier to 0.4 from 0.8
+* Increased Fuel Usage Multiplier to 5.0 from 1.5 
+** Reasoning Currently a 5x5 can produce 4 million MB (4000 buckets) of steam with the cost of around 2 uranium which can be converted to EU. While on the IC2 side the reactor can use a fuel rod (6 ingots) and can safley produce the same EU.
+
+* Botanina
+
+** Changed Manasteel recipe. Requires ingotSteel replaces old recipe of ingotIron
+
+*Dungeon pack
+
+** Increased treasure dungeon rarity to 5000 from 2000
+
+* EnderIO
+
+* Basic gear now requires steel rods and ingots
+* Chassis now requires steel plates from steel ingots.
+* B:darkSteelDrainPowerFromInventory=true from false
+* enderIoRange=12 from 8
+* Dark Steel now requires SteelPlate in place of Iron ingot
+
+* Extra Utils
+** Ender Quarry Power usage slightly increased
+** Generators now have new recipes
+** Changed the recipe for ender quarry
+** Changed the recipe for quarry upgrade's
+** Changed the recipe for Diamond matrix
+
+* Forestry
+
+** Added Gregtech Ores to Miners Backpack.
+
+* gendustry
+** Added recipe for vibarant nuggets to ingots.
+** fixed vibrant and energistic bees.
+** Imprinter's Death chance natural reduced to 17% from 30%
+** Imprinters Death chance artifical reduced to 35% from 50%
+
+* GraviSuit
+
+Disabled Portal Mode
+Disabled Translocator Mode
+
+**Gregtech
+
+*Removed lava in centrifuge recipe. (this was also done in 1.6.4)
