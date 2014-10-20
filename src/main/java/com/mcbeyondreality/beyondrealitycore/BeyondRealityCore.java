@@ -44,7 +44,7 @@ public class BeyondRealityCore {
 
     public static String[] bannedEnderBlocks, bannedNetherBlocks, rightClickBlackList, bottomLeftBranding;
     public static int aggrorangeEnd, aggrorangeNether, customBlocksCount;
-    public static boolean fastLeafDecay;
+    public static boolean fastLeafDecay, rightClick;
 
 
     @EventHandler
@@ -89,6 +89,7 @@ public class BeyondRealityCore {
         customBlocksCount = config.get(Configuration.CATEGORY_GENERAL, "Number of custom blocks", 1).getInt();
         bottomLeftBranding = config.get("main menu settings", "Bottom Left Branding", new String[] {"Beyond Reality"}).getStringList();
 
+        rightClick = config.get(Configuration.CATEGORY_GENERAL, "Use right click handler?", true).getBoolean();
         fastLeafDecay = config.get(Configuration.CATEGORY_GENERAL, "Overwrite leaf decay?", false).getBoolean();
 
         config.save();

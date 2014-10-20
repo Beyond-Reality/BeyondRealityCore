@@ -2,6 +2,8 @@ package com.mcbeyondreality.beyondrealitycore.event;
 
 import com.mcbeyondreality.beyondrealitycore.BeyondRealityCore;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
@@ -10,10 +12,11 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
 public class RightClickEvent {
     private int[] slots = {1, 2, 3, 4, 5, 6, 7, 8, 0, -1};
+    @SideOnly(Side.CLIENT)
     @SubscribeEvent
     public void playerRightClick(PlayerInteractEvent event)
     {
-        if (event.isCanceled() || event.world.isRemote || event.action != PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK) return;
+        if (event.isCanceled() || event.world.isRemote || event.action != PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK || !BeyondRealityCore.rightClick) return;
         ItemStack heldItem = event.entityPlayer.inventory.getCurrentItem();
 
         if (heldItem == null || !(heldItem.getItem() instanceof ItemTool)) return;
