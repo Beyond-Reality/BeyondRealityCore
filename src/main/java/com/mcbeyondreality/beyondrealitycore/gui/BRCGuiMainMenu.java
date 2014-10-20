@@ -290,7 +290,7 @@ public class BRCGuiMainMenu extends GuiScreen implements GuiYesNoCallback
         if (p_146284_1_.id == 14 && isInternetReachable())
         {
             try {
-                String url = "http://www.mcbeyondreality.com/";
+                String url = "http://www.beyondrealitypack.com/";
                 java.awt.Desktop.getDesktop().browse(java.net.URI.create(url));
             }
             catch (java.io.IOException e) {
