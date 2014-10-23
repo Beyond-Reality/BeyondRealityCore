@@ -1,5 +1,6 @@
 package com.mcbeyondreality.beyondrealitycore.handlers;
 
+import com.mcbeyondreality.beyondrealitycore.BeyondRealityCore
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -23,10 +24,10 @@ public class DimGuardEraser {
 				
 				if(compound.hasKey("DimensionGuard")) {
 					compound.removeTag("DimensionGuard");
-					DimItemConfig.logger.log(Level.INFO, "Removed DimensionGuard Tags from: " + itemStack.getDisplayName());					
+					BeyondRealityCore.logger.log(Level.INFO, "Removed DimensionGuard Tags from: " + itemStack.getDisplayName());					
 					if(compound.hasNoTags()) {
 						// This might be a teeny bit risky.
-						DimItemConfig.logger.log(Level.INFO, "This should display Empty Brackets {}: " + compound.toString());
+						BeyondRealityCore.logger.log(Level.INFO, "This should display Empty Brackets {}: " + compound.toString());
 						itemStack.setTagCompound(null);
 					}
 				}
