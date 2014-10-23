@@ -33,6 +33,8 @@ import javax.xml.transform.TransformerException;
 import java.io.File;
 import java.io.IOException;
 
+import org.apache.logging.log4j.Logger;
+
 @Mod(name = "Beyond Reality Core", modid = "beyondrealitycore", version = "@VERSION@")
 
 
@@ -40,6 +42,9 @@ public class BeyondRealityCore {
 
     @Instance("beyondrealitycore")
     public static BeyondRealityCore instance;
+	
+	// Log4J Logger 
+	public static Logger logger;
 
     @SidedProxy( clientSide="com.mcbeyondreality.beyondrealitycore.proxy.ClientProxy", serverSide="com.mcbeyondreality.beyondrealitycore.proxy.CommonProxy")
     public static CommonProxy proxy;
@@ -75,6 +80,9 @@ public class BeyondRealityCore {
                 e.printStackTrace();
             }
         }
+		
+		// initialize logger
+		logger = event.getModLog();		
 
         proxy.registerHandlers();
 
