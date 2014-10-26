@@ -2,6 +2,7 @@ package com.mcbeyondreality.beyondrealitycore.event;
 
 import com.mcbeyondreality.beyondrealitycore.BeyondRealityCore;
 import com.mcbeyondreality.beyondrealitycore.data.BannedBlocksForDimension;
+import com.mcbeyondreality.beyondrealitycore.gui.GuiColor;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -11,6 +12,7 @@ import net.minecraft.item.ItemTool;
 import net.minecraft.network.play.server.S2FPacketSetSlot;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
 public class RightClickEvent {
@@ -65,6 +67,14 @@ public class RightClickEvent {
                 }
 
             }
+        }
+    }
+
+    @SubscribeEvent
+    public void onToolTip(ItemTooltipEvent event)
+    {
+        if (BannedBlocksForDimension.isBlockBanned(event.entity.dimension, event.itemStack.getItem().getUnlocalizedName())) {
+            event.toolTip.add(GuiColor.RED + "Banned in this Dimension");
         }
     }
 }
