@@ -1,6 +1,7 @@
 package com.mcbeyondreality.beyondrealitycore;
 
 import com.mcbeyondreality.beyondrealitycore.commands.CommandGetUUID;
+import com.mcbeyondreality.beyondrealitycore.commands.CommandToggleToolRightClick;
 import com.mcbeyondreality.beyondrealitycore.event.BeyondRealityCoreEvent;
 import com.mcbeyondreality.beyondrealitycore.event.LeafDecayEvent;
 import com.mcbeyondreality.beyondrealitycore.event.RightClickEvent;
@@ -53,6 +54,7 @@ public class BeyondRealityCore {
         ICommandManager command = server.getCommandManager();
         ServerCommandManager manager = (ServerCommandManager) command;
         manager.registerCommand(new CommandGetUUID());
+        manager.registerCommand(new CommandToggleToolRightClick());
     }
 
     @EventHandler
