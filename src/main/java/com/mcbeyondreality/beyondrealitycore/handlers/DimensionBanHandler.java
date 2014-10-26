@@ -36,7 +36,7 @@ public class DimensionBanHandler
             dimId.setAttribute("DimensionId", "-1");
             rootElement.appendChild(dimId);
 
-            Element bannedBlock = doc.createElement("block");
+            Element bannedBlock = doc.createElement("name");
             bannedBlock.appendChild(doc.createTextNode("tile.ice"));
             dimId.appendChild(bannedBlock);
 
@@ -56,7 +56,7 @@ public class DimensionBanHandler
             Node nNode = nList.item(temp);
             if (nNode.getNodeType() == Node.ELEMENT_NODE) {
                 Element eElement = (Element) nNode;
-                NodeList blocks = ((Element) nNode).getElementsByTagName("block");
+                NodeList blocks = ((Element) nNode).getElementsByTagName("name");
                 for(int i = 0; i < blocks.getLength(); i++)
                     BannedBlocksForDimension.addBannedBlockToDimension(Integer.parseInt(((Element) nNode).getAttribute("DimensionId")), blocks.item(i).getTextContent());
             }
