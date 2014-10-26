@@ -1,13 +1,17 @@
 package com.mcbeyondreality.beyondrealitycore.event;
 
 import com.mcbeyondreality.beyondrealitycore.BeyondRealityCore;
+import com.mcbeyondreality.beyondrealitycore.data.BannedBlocksForDimension;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
 import net.minecraft.network.play.server.S2FPacketSetSlot;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
 public class RightClickEvent {
@@ -45,4 +49,23 @@ public class RightClickEvent {
         event.setCanceled(true);
     }
 
+    @SubscribeEvent
+    public void onBlockPlace(PlayerInteractEvent event)
+    {
+        if(event.action == PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK)
+        {
+            if(event.entityPlayer.getCurrentEquippedItem() != null) {
+                if (event.entityPlayer.getCurrentEquippedItem().getItem() instanceof ItemBlock) {
+                    if (BannedBlocksForDimension.isBlockBanned(event.entity.dimension, event.entityPlayer.getCurrentEquippedItem().getItem().getUnlocalizedName())) {
+
+                        event.entityPlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.RED + "You Can't Place " +
+                                EnumChatFormatting.YELLOW +  event.entityPlayer.getCurrentEquippedItem().getDisplayName() +
+                                EnumChatFormatting.RED + " In this Dimension"));
+
+                        event.setCanceled(true);
+                    }
+                }
+            }
+        }
+    }
 }

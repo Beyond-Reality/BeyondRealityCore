@@ -6,6 +6,7 @@ import com.mcbeyondreality.beyondrealitycore.event.BeyondRealityCoreEvent;
 import com.mcbeyondreality.beyondrealitycore.event.LeafDecayEvent;
 import com.mcbeyondreality.beyondrealitycore.event.RightClickEvent;
 import com.mcbeyondreality.beyondrealitycore.handlers.CustomBlockHandler;
+import com.mcbeyondreality.beyondrealitycore.handlers.DimensionBanHandler;
 import com.mcbeyondreality.beyondrealitycore.handlers.GuiHandler;
 import com.mcbeyondreality.beyondrealitycore.proxy.CommonProxy;
 import cpw.mods.fml.common.Mod;
@@ -75,6 +76,20 @@ public class BeyondRealityCore {
                 e.printStackTrace();
             }
         }
+
+        try
+        {
+            DimensionBanHandler.loadBanedBlocks();
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SAXException e) {
+            e.printStackTrace();
+        } catch (TransformerException e) {
+            e.printStackTrace();
+        }
+
 
         proxy.register();
 
