@@ -16,6 +16,7 @@ public class BeyondRealityTab extends BaseWikiTab {
         itemRenderer = new RenderItem();
         itemRenderer.setRenderManager(RenderManager.instance);
         pageEntries.add("changelog");
+        pageEntries.add("gregguide");
     }
 
     @Override

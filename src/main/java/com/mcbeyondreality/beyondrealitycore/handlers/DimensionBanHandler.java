@@ -23,6 +23,7 @@ public class DimensionBanHandler
     public static void loadBanedBlocks() throws ParserConfigurationException, TransformerException, IOException, SAXException {
         File bannedBlocksFile = new File("config/BeyondRealityCore/bannedBlocksByDimension.xml");
 
+
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 
