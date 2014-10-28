@@ -37,7 +37,7 @@ public class DimensionBanHandler
             rootElement.appendChild(dimId);
 
             Element bannedBlock = doc.createElement("name");
-            bannedBlock.appendChild(doc.createTextNode("tile.ice"));
+            bannedBlock.appendChild(doc.createTextNode("minecraft:ice"));
             dimId.appendChild(bannedBlock);
 
             TransformerFactory transformerFactory = TransformerFactory.newInstance();

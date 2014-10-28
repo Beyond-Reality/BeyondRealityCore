@@ -24,7 +24,28 @@ public class BannedBlocksForDimension
     {
         if(!bannedBlocks.containsKey(dimension))
             return false;
+
+        String[] compare = name.split(":");
         List<String> list = bannedBlocks.get(dimension);
+        for(int i = 0; i < list.size(); i++)
+        {
+            String[] uniqueID = list.get(i).split(":");
+            if(uniqueID.length == 3) //Split 3 times, meta is specified
+            {
+                if(uniqueID[0].equals(compare[0]) && uniqueID[1].equals(compare[1]) && uniqueID[2].equals(compare[2]))
+                    return true;
+            }
+            else if(uniqueID.length == 2) //Modid and name specified
+            {
+                if(uniqueID[0].equals(compare[0]) && uniqueID[1].equals(compare[1]))
+                    return true;
+            }
+            else
+            {
+                if(uniqueID[0].equals(compare[0]))
+                    return true;
+            }
+        }
         return list.contains(name);
     }
 }

@@ -4,6 +4,7 @@ import com.mcbeyondreality.beyondrealitycore.BeyondRealityCore;
 import com.mcbeyondreality.beyondrealitycore.data.BannedBlocksForDimension;
 import com.mcbeyondreality.beyondrealitycore.gui.GuiColor;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -56,8 +57,9 @@ public class RightClickEvent {
         if(event.action == PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK)
         {
             if(event.entityPlayer.getCurrentEquippedItem() != null) {
-
-                if (BannedBlocksForDimension.isBlockBanned(event.entity.dimension, event.entityPlayer.getCurrentEquippedItem().getItem().getUnlocalizedName())) {
+                GameRegistry.UniqueIdentifier id = GameRegistry.findUniqueIdentifierFor(event.entityPlayer.getCurrentEquippedItem().getItem());
+                String idName = id.modId + ":" + id.name + ":" + event.entityPlayer.getCurrentEquippedItem().getItemDamage();
+                if (BannedBlocksForDimension.isBlockBanned(event.entity.dimension, idName)) {
 
                     event.entityPlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.RED + "You Can't Use " +
                             EnumChatFormatting.YELLOW +  event.entityPlayer.getCurrentEquippedItem().getDisplayName() +
