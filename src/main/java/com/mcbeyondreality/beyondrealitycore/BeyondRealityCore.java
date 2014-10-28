@@ -8,6 +8,7 @@ import com.mcbeyondreality.beyondrealitycore.event.RightClickEvent;
 import com.mcbeyondreality.beyondrealitycore.handlers.CustomBlockHandler;
 import com.mcbeyondreality.beyondrealitycore.handlers.DimensionBanHandler;
 import com.mcbeyondreality.beyondrealitycore.handlers.GuiHandler;
+import com.mcbeyondreality.beyondrealitycore.handlers.PlayerLogInHandler;
 import com.mcbeyondreality.beyondrealitycore.notification.NotificationTickHandler;
 import com.mcbeyondreality.beyondrealitycore.proxy.CommonProxy;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -46,9 +47,10 @@ public class BeyondRealityCore {
     @SidedProxy( clientSide="com.mcbeyondreality.beyondrealitycore.proxy.ClientProxy", serverSide="com.mcbeyondreality.beyondrealitycore.proxy.CommonProxy")
     public static CommonProxy proxy;
 
+    private static Configuration config;
     public static String[] bannedEnderBlocks, bannedNetherBlocks, rightClickBlackList, bottomLeftBranding;
     public static int aggrorangeEnd, aggrorangeNether, customBlocksCount;
-    public static boolean fastLeafDecay, rightClick;
+    public static boolean fastLeafDecay, rightClick, displayWikiHelp;
 
 
     @EventHandler
@@ -95,7 +97,7 @@ public class BeyondRealityCore {
 
         proxy.register();
 
-        Configuration config = new Configuration(new File("config/BeyondRealityCore/beyondrealitycore.cfg"));
+        config = new Configuration(new File("config/BeyondRealityCore/beyondrealitycore.cfg"));
         config.load();
 
         bannedEnderBlocks = config.get("End Settings", "Blocks the Endermen Don't want you to take", new String[] {"minecraft:end_stone", "gregtech:gt.blockores"}).getStringList();
@@ -110,7 +112,7 @@ public class BeyondRealityCore {
 
         rightClick = config.get(Configuration.CATEGORY_GENERAL, "Use right click handler?", true).getBoolean();
         fastLeafDecay = config.get(Configuration.CATEGORY_GENERAL, "Overwrite leaf decay?", false).getBoolean();
-
+        displayWikiHelp = config.get(Configuration.CATEGORY_GENERAL, "Display 'Press I to open In Game Wiki' on log in", true).getBoolean();
         config.save();
 
         CustomBlockHandler.init();
@@ -121,6 +123,7 @@ public class BeyondRealityCore {
         if(event.getSide() == Side.CLIENT) {
             MinecraftForge.EVENT_BUS.register(new GuiHandler());
             FMLCommonHandler.instance().bus().register(new NotificationTickHandler());
+            FMLCommonHandler.instance().bus().register(new PlayerLogInHandler());
         }
     }
 
@@ -131,4 +134,14 @@ public class BeyondRealityCore {
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {}
 
+    public static void set(String categoryName, String propertyName, boolean newValue) {
+
+        config.load();
+        if (config.getCategoryNames().contains(categoryName)) {
+            if (config.getCategory(categoryName).containsKey(propertyName)) {
+                config.getCategory(categoryName).get(propertyName).set(newValue);
+            }
+        }
+        config.save();
+    }
 }

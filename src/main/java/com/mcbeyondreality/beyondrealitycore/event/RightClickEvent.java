@@ -55,7 +55,6 @@ public class RightClickEvent {
     @SubscribeEvent
     public void onBlockPlace(PlayerInteractEvent event)
     {
-
         if(event.action == PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK)
         {
             if(event.entityPlayer.getCurrentEquippedItem() != null) {
