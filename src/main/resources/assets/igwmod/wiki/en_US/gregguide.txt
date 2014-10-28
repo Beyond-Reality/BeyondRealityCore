@@ -1,0 +1,106 @@
+[prefix{l}]Welcome![prefix{}]
+
+Gregtech is a hard mod to get started in, and info is sometimes tough to obtain. This guide should ease your transition from total n00b to Gregtech master.
+
+[prefix{l}]This Guide[prefix{}]
+
+This guide will not wipe your ass. This guide assumes you have a brain and can do basic math and problem solving. Gregtech, being a mod for a game, you will need to make setups for yourself.
+
+What this guide will do is teach you step by step the mechanics and progression required to advance to the final tiers in the tech tree
+
+
+[prefix{l}]The Beginning- Newborn Infant Era[prefix{}]
+
+[prefix{a}]What am I doing here?[prefix{}]
+First thing to understand is that Gregtech changes a lot about modded minecraft, let alone vanilla Minecraft. Hard mode enabled, you will need to fight to survive and thrive in the harsh unforgiving world of the evil German programmer.
+
+[prefix{l}]What is hard mode?[prefix{}]
+Hard mode GregTech has many nerfs and tweaks that make the game significantly harder than usual. These can all be enabled or disabled independently to the user’s liking in the configs [link to config guide]. For the purposes of this guide, we will assume you are starting a new SSP (single player) world with only GregTech, IC2, CodeChickenCore, NEI, and your brain.  
+
+[prefix{l}]A brave new world[prefix{}]
+You have spawned in. A naked Steve, alone and scared in the world of modded minecraft. You will notice one thing at this time. A message appears in the chat “It’s dangerous to go alone, take this!” and a flint axe appears in your hand. In adventure mode, you cannot break blocks with anything but the correct tool. The axe is your lifeline.
+g
+ACT QUICKLY! Time to stop dilly-dallying. You must go rush out and acquire resources right away and construct something before dusk. There are many ways to go about this, but we recommend obtaining [x] amount of wood. You will then have to make some more tools, a shovel, a pickaxe, another axe, and depending on your plan, a hoe and sword. In case of emergency, you can use an axe as a sword, but the axe does not deal as much damage as the sword and its durability will be consumed faster.
+
+The first two changes to recipes you will encounter in a world are the Wood Nerf, and the Vanilla Tool Nerf.  Under Gregtech, wood and stick crafting outputs are halved (2 planks per wood, 2 sticks per 2 planks).  This makes Wood a limited resource in the early game.  This change can be worked around by crafting a Saw, but that requires metal.  The second change you will encounter is that all vanilla Minecraft tools have had their durabilities reduced by approximately 70-80%.  Wooden tools last for 13 uses, and stone tools last for 49 uses.
+
+Ideally, you do not want to make too many tools out of wood.  What you would want to do would be to make a wooden pickaxe, and use that to acquire sufficient cobblestone to make a set of stone tools.  (3 for a pick, 2 for a sword, 3 for an axe, 2 for a hoe, 1 for a shovel; 11 total out of the pick’s 13 durability.)  Alternatively, make flint tools.  Flint tools have around 64 durability and come pre-enhanced with Fire Aspect I, so a Flint Sword will set mobs on fire for extra damage. This can also be used to cook meat drops from pigs and cows, which makes hunger less of a pain.
+
+[prefix{l}]WIP[prefix{}]
+
+[prefix{l}]A Home- Caveman Era[prefix{}]
+[prefix{a}]Build some things[prefix{}]
+
+There are two biomes you need to be concerned about when selecting a house location: Swamps and Extreme Hills.  If you intend on spending any amount of time working in IC2 Crops (which you will), a Swamp will be necessary as the best Crops can only be cultivated in a Swamp.  Extreme Hills are a concern because the first three critical ores you will need to find are Iron, Copper, and Tin.  Iron and Copper can be found just about anywhere, but Tin can only be found at relatively high elevations (around 80-120).  And the only biome that reliably contains areas of high elevation is Extreme Hills.
+
+Once you have a house (or at least four walls, a door, and hopefully a bed), you will need a farm.  Water + Dirt + Stone Hoe + Seeds, you won’t need anything fancy but you will need a stable food source.  If you have encountered and killed any Skeletons up to this point, you can use the bones as bonemeal to accelerate your first harvest.  IC2 Crops are a generally underappreciated system, but even without working to try to get the best crops possible, IC2 crops give better output than vanilla farming.  And given the other difficulties you will encounter in the future, starting crops on day 1 will only help you.  Unless you built your house in or next to a forest, the next thing you should do is set up a tree farm.  Once again, because you’re a caveman, this doesn’t have to be special, just a small area in which you plant some saplings and wait for them to grow.  Wood will be in short supply until you get a saw, so it’s best to be prepared.
+
+The first thing you will want to do once you have found Iron or Copper and Tin is build a basic set of tools.  To do this, you first must make a hammer and a file.  The hammer allows you to smash (craft) 2 metal ingots into 1 metal plate, and the file is used in the crafting of almost all tools.  The hammer costs 6 metal ingots, and the file costs 2 metal plates.  Any ingots or plates can be used, as long as they are all the same metal.  (You can use 6 iron or 6 bronze to make a hammer, but you cannot use 3 iron and 3 bronze to make a hammer). You can use thaumcraft shards (if you have it installed) to craft hammers at the beginning, reserving your precious ingots.
+
+
+
+Tool
+Ingot cost
+Plate cost
+Hammer
+6
+--
+File
+--
+2
+Sword
+--
+2
+Pickaxe
+2
+1
+Axe
+1
+2
+Shovel
+--
+1
+Saw
+--
+2
+
+A full set of basic tools will cost 29 metal ingots.  Iron is actually better for basic tools, 0`as it is 33% more durable than bronze; as such, it’s better to save your bronze for making early Steam Machines (next section).  However, if you just want to get 
+them made, you can use other metals such as lead.
+
+The general rule for crafting basic tools is that first the tool head is crafted, using the required ingots and plates, a hammer, and a file, and then the tool head is crafted with a stick (wooden, the old-fashioned kind) to make the tool.  NEI is your friend, but take note that specific Gregtech tools and tool heads will not appear in an NEI search.  However, the general forms of GT tools will appear in a search, and if you look up the recipes for them you will find all the possible materials that tool can be made of.
+
+If you want to save on tools, the Saw can also be used as an Axe, to break wood blocks.  However, the Axe is twice as fast as the Saw.  The real purpose of the Saw, however, is to increase the number of planks you can craft from one wood block from 2 to 4, and the number of sticks you get from 2 planks from 2 to 4.  In other words, when using a saw the vanilla wood->planks and planks->sticks ratios are restored.  Once you have a saw, particularly if you have a tree farm, wood should no longer be in short supply.
+
+
+[prefix{l}]The Ratio of Death- Preindustrial Era[prefix{}]
+[prefix{6}]Early bronze machine setup[prefix{}]
+
+As the name implies, you’re going to need bronze - a ton of bronze as each early bronze machine block requires at least 5 bronze plates. During the bronze age you’re starting steam production for all the machines. You’ll also need some brick blocks so collect a stack or a couple of clay in preparation. First target in this phase is usually the steam macerator for ore doubling (if you have the required two diamonds, if not, find some or skip to next machine) and a small coal boiler or simple solar boiler to provide steam for it. These require 5 and 11 bronze plates respectively. Steam boilers require water which to turn into steam, so construct a bucket from 3 iron plates with the help of your hammer. Remember that steam machines (though not boilers) require that the backside of the machines is clear for releasing the used steam after an operation.
+
+Next step in reducing ore requirements is an steam alloy smelter which ups bronze yield with 3 copper + 1 tin into a result of 4 bronze instead of 3 bronze when mixing dust by hand. Additionally the alloy smelter accepts both dusts and ingots of copper and tin while also outputting directly into bronze ingots thus saving many steps of macerating and smelting.
+
+Steam forge hammer is a useful, fast and cheap tool to make dusts from crushed ores and getting coal (not coal dust) from coal ore. This also means longer lifetime for your bronze or iron hammer due to not having to use the tool durability for converting crushed ores into dust or in making plates from ingots.
+
+Making a cauldron from 7 iron plates (14 iron ingots) allows you to make plain dusts from impure or purified dusts. Throwing impure and purified dusts into a water-filled cauldron will normalize the dust for use in alloy smelter etc.
+
+At this point, it’s time to turn your plans towards obtaining steel with the use of a Bronze Plated Blast Furnace. This will be your first multiblock machine and that will show with the requirements - 32 bronze plated bricks and a bronze plated blast furnace block for control. Start the steel production as soon a as possible by inserting iron ingots or dust to top slot and at least 4 coal into bottom slot as you will need a lot of steel for the next age. Building more than one Blast Furnace is usually an excellent idea. If a new Bronze Plated Blast Furnace is built next to already existing one, they can have a common wall and thus save on material.
+
+
+[prefix{l}]Steamy- Bronze Age[prefix{}]
+[prefix{b}]Final bronze machine setup, prep for the electric era(s)[prefix{}]
+
+Now you will build high pressure steam machines, or will not build ‘em. High pressure steam machines require steel plates and are mainly for convenience and processing speed. High pressure steam machines are twice as fast as regular steam machines, but consume steam 3x as quickly. High pressure tech is not required for progression as the main bottleneck is steel production and therefore using steel for high pressure machines or boilers even slows down your progression towards electric era. At this point however, build a steam extractor or high pressure extractor for getting your first Rubber from sticky resin (obtainable also from slime balls). 
+
+You also have to make a plate mold to get rubber plates. A blank steel mold (better to make two in the same time) is created from 4 steel plates with the use of a hammer and a file. Molds are used in alloy smelter. Use a hammer on it in certain position crafting grid to get the plate mold. For the second empty mold, create a gear mold which allows gear production at cost of 8 ingots instead of the initial 12.
+
+[prefix{l}]The Big Transition- Early Electric Era[prefix{}]
+[prefix{e}]Now lets transition from steam to volts[prefix{}]
+
+After making the needed 2 steel gears for your initial bending machine, you can either smelt (don’t macerate) the mold to get 4 steel back (yay, 4 steel saved total!) or use it for later gear production until you get a tier 2 Extruder which will drop the gear cost to 4 ingots.
+A bending machine will allow 1 ingot -> 1 plate process. Of course, you’ll need to power the bending machine so you’ll need a steam turbine to generate electricity for it. Next machine targets are assembling machine, wire mill and a lathe. Centrifuge will also come handy. 
+Having a turbine going straight to your machinery works alright for the first few machines, but soon enough you’re gonna get a “Not enough power” error!
+The solution to this is to build a battery buffer. It holds from 1 to 16 batteries, depending on the version you build. One with 9 slots should serve you just fine through most of the early electric era. Now, what kind of batteries do you put in? You find some gravel, if you have a shovel you can dig the gravel up for flint and 
+IC2’s RE-batteries is probably the first step on the journey
+The absolute best type of battery would be a lithium battery, but it takes a long time. Sodium batteries aren’t too difficult to make if you hit a salt vein, you can electrolyze the salt with a basic electrolyzer and get sodium to get unless you’re lucky enough to hit a Tungstate/Scheelite/Lithium vein.  They aren’t as good as lithium though, but still beats RE-batteries by a mile.
+
+Next long-term target is the electric blast furnace. Main difficulty in building it is nickel and steel. Steel is usually just a matter of waiting very useful
