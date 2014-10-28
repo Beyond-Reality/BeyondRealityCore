@@ -8,7 +8,9 @@ import com.mcbeyondreality.beyondrealitycore.event.RightClickEvent;
 import com.mcbeyondreality.beyondrealitycore.handlers.CustomBlockHandler;
 import com.mcbeyondreality.beyondrealitycore.handlers.DimensionBanHandler;
 import com.mcbeyondreality.beyondrealitycore.handlers.GuiHandler;
+import com.mcbeyondreality.beyondrealitycore.notification.NotificationTickHandler;
 import com.mcbeyondreality.beyondrealitycore.proxy.CommonProxy;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -115,8 +117,11 @@ public class BeyondRealityCore {
         MinecraftForge.EVENT_BUS.register(new BeyondRealityCoreEvent());
         MinecraftForge.EVENT_BUS.register(new RightClickEvent());
         MinecraftForge.EVENT_BUS.register(new LeafDecayEvent());
-        if(event.getSide() == Side.CLIENT)
+
+        if(event.getSide() == Side.CLIENT) {
             MinecraftForge.EVENT_BUS.register(new GuiHandler());
+            FMLCommonHandler.instance().bus().register(new NotificationTickHandler());
+        }
     }
 
     @EventHandler

@@ -3,6 +3,8 @@ package com.mcbeyondreality.beyondrealitycore.event;
 import com.mcbeyondreality.beyondrealitycore.BeyondRealityCore;
 import com.mcbeyondreality.beyondrealitycore.data.BannedBlocksForDimension;
 import com.mcbeyondreality.beyondrealitycore.gui.GuiColor;
+import com.mcbeyondreality.beyondrealitycore.notification.Notification;
+import com.mcbeyondreality.beyondrealitycore.notification.NotificationTickHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
@@ -11,7 +13,6 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
 import net.minecraft.network.play.server.S2FPacketSetSlot;
-import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -54,17 +55,14 @@ public class RightClickEvent {
     @SubscribeEvent
     public void onBlockPlace(PlayerInteractEvent event)
     {
+
         if(event.action == PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK)
         {
             if(event.entityPlayer.getCurrentEquippedItem() != null) {
                 GameRegistry.UniqueIdentifier id = GameRegistry.findUniqueIdentifierFor(event.entityPlayer.getCurrentEquippedItem().getItem());
                 String idName = id.modId + ":" + id.name + ":" + event.entityPlayer.getCurrentEquippedItem().getItemDamage();
                 if (BannedBlocksForDimension.isBlockBanned(event.entity.dimension, idName)) {
-
-                    event.entityPlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.RED + "You Can't Use " +
-                            EnumChatFormatting.YELLOW +  event.entityPlayer.getCurrentEquippedItem().getDisplayName() +
-                            EnumChatFormatting.RED + " In this Dimension"));
-
+                    NotificationTickHandler.guiNotification.queueNotification(new Notification(event.entityPlayer.getCurrentEquippedItem(), EnumChatFormatting.RED + "Object Banned", EnumChatFormatting.YELLOW + "You can't use that here"));
                     event.setCanceled(true);
                 }
 
