@@ -8,7 +8,6 @@ import com.mcbeyondreality.beyondrealitycore.event.RightClickEvent;
 import com.mcbeyondreality.beyondrealitycore.handlers.CustomBlockHandler;
 import com.mcbeyondreality.beyondrealitycore.handlers.DimensionBanHandler;
 import com.mcbeyondreality.beyondrealitycore.handlers.GuiHandler;
-import com.mcbeyondreality.beyondrealitycore.handlers.PlayerLogInHandler;
 import com.mcbeyondreality.beyondrealitycore.notification.NotificationTickHandler;
 import com.mcbeyondreality.beyondrealitycore.proxy.CommonProxy;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -50,7 +49,7 @@ public class BeyondRealityCore {
     private static Configuration config;
     public static String[] bannedEnderBlocks, bannedNetherBlocks, rightClickBlackList, bottomLeftBranding;
     public static int aggrorangeEnd, aggrorangeNether, customBlocksCount;
-    public static boolean fastLeafDecay, rightClick, displayWikiHelp;
+    public static boolean fastLeafDecay, rightClick;
 
 
     @EventHandler
@@ -112,7 +111,6 @@ public class BeyondRealityCore {
 
         rightClick = config.get(Configuration.CATEGORY_GENERAL, "Use right click handler?", true).getBoolean();
         fastLeafDecay = config.get(Configuration.CATEGORY_GENERAL, "Overwrite leaf decay?", false).getBoolean();
-        displayWikiHelp = config.get(Configuration.CATEGORY_GENERAL, "Display 'Press I to open In Game Wiki' on log in", true).getBoolean();
         config.save();
 
         CustomBlockHandler.init();
@@ -123,7 +121,6 @@ public class BeyondRealityCore {
         if(event.getSide() == Side.CLIENT) {
             MinecraftForge.EVENT_BUS.register(new GuiHandler());
             FMLCommonHandler.instance().bus().register(new NotificationTickHandler());
-            FMLCommonHandler.instance().bus().register(new PlayerLogInHandler());
         }
     }
 
