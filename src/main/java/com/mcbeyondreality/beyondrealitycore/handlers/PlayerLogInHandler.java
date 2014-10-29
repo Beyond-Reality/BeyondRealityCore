@@ -20,7 +20,7 @@ public class PlayerLogInHandler {
         Minecraft mc = Minecraft.getMinecraft();
 
         if (mc.theWorld != null) {
-            if (BeyondRealityCore.displayWikiHelp) {
+            if (BeyondRealityCore.displayWikiHelp && mc.theWorld.isRemote) {
                 NotificationTickHandler.guiNotification.queueNotification(new Notification(new ItemStack(Items.writable_book), EnumChatFormatting.DARK_BLUE + "Press 'I' for help", EnumChatFormatting.BLUE + "Contains Pack Info"));
                 BeyondRealityCore.displayWikiHelp = false;
                 BeyondRealityCore.set(Configuration.CATEGORY_GENERAL, "Display 'Press I to open In Game Wiki' on log in", false);
