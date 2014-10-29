@@ -1,11 +1,11 @@
 package com.mcbeyondreality.beyondrealitycore.IGW;
 
+import com.mcbeyondreality.beyondrealitycore.handlers.CustomBlockHandler;
 import igwmod.gui.GuiWiki;
 import igwmod.gui.tabs.BaseWikiTab;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 
 public class BeyondRealityTab extends BaseWikiTab {
@@ -26,7 +26,7 @@ public class BeyondRealityTab extends BaseWikiTab {
 
     @Override
     public ItemStack renderTabIcon(GuiWiki gui){
-        return new ItemStack(Blocks.crafting_table);
+        return new ItemStack(CustomBlockHandler.wikiBlock);
     }
 
     @Override

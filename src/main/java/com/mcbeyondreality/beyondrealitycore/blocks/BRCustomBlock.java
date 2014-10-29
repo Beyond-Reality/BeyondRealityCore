@@ -18,6 +18,4 @@ public class BRCustomBlock extends Block {
     public void registerBlockIcons(IIconRegister par1IconRegister) {
         blockIcon = par1IconRegister.registerIcon((this.getUnlocalizedName().substring(5)));
     }
-
-
 }
