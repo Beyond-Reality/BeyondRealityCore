@@ -1,7 +1,6 @@
 package com.mcbeyondreality.beyondrealitycore;
 
 import com.mcbeyondreality.beyondrealitycore.commands.CommandGetUUID;
-import com.mcbeyondreality.beyondrealitycore.commands.CommandToggleToolRightClick;
 import com.mcbeyondreality.beyondrealitycore.event.BeyondRealityCoreEvent;
 import com.mcbeyondreality.beyondrealitycore.event.LeafDecayEvent;
 import com.mcbeyondreality.beyondrealitycore.event.RightClickEvent;
@@ -23,7 +22,6 @@ import cpw.mods.fml.relauncher.Side;
 import net.minecraft.client.Minecraft;
 import net.minecraft.command.ICommandManager;
 import net.minecraft.command.ServerCommandManager;
-import net.minecraft.init.Items;
 import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
@@ -47,9 +45,9 @@ public class BeyondRealityCore {
     public static CommonProxy proxy;
 
     private static Configuration config;
-    public static String[] bannedEnderBlocks, bannedNetherBlocks, rightClickBlackList, bottomLeftBranding;
+    public static String[] bannedEnderBlocks, bannedNetherBlocks, bottomLeftBranding;
     public static int aggrorangeEnd, aggrorangeNether, customBlocksCount;
-    public static boolean fastLeafDecay, rightClick;
+    public static boolean fastLeafDecay;
 
 
     @EventHandler
@@ -58,7 +56,6 @@ public class BeyondRealityCore {
         ICommandManager command = server.getCommandManager();
         ServerCommandManager manager = (ServerCommandManager) command;
         manager.registerCommand(new CommandGetUUID());
-        manager.registerCommand(new CommandToggleToolRightClick());
     }
 
     @EventHandler
@@ -105,11 +102,9 @@ public class BeyondRealityCore {
         bannedNetherBlocks = config.get("Nether Settings", "Blocks the Pigmen Don't want you to take", new String[] {"gregtech:gt.blockores"}).getStringList();
         aggrorangeNether = config.get("Nether Settings", "Pigmen Range for block breaks", 16).getInt();
 
-        rightClickBlackList = config.get(Configuration.CATEGORY_GENERAL, "Black Listed Items for right click", new String[] {Items.golden_shovel.getUnlocalizedName(), "another unlocalized name"}).getStringList();
         customBlocksCount = config.get(Configuration.CATEGORY_GENERAL, "Number of custom blocks", 1).getInt();
         bottomLeftBranding = config.get("main menu settings", "Bottom Left Branding", new String[] {"Beyond Reality"}).getStringList();
 
-        rightClick = config.get(Configuration.CATEGORY_GENERAL, "Use right click handler?", true).getBoolean();
         fastLeafDecay = config.get(Configuration.CATEGORY_GENERAL, "Overwrite leaf decay?", false).getBoolean();
         config.save();
 
