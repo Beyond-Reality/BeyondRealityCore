@@ -19,7 +19,9 @@ public class RightClickEvent {
         {
             if(event.entityPlayer.getCurrentEquippedItem() != null) {
                 GameRegistry.UniqueIdentifier id = GameRegistry.findUniqueIdentifierFor(event.entityPlayer.getCurrentEquippedItem().getItem());
-                String idName = id.modId + ":" + id.name + ":" + event.entityPlayer.getCurrentEquippedItem().getItemDamage();
+                if(null check)
+                    {String idName = id.modId + ":" + id.name + ":" + event.entityPlayer.getCurrentEquippedItem().getItemDamage();
+                }
                 if (BannedBlocksForDimension.isBlockBanned(event.entity.dimension, idName)) {
                     if(event.entityPlayer.worldObj.isRemote)
                         NotificationTickHandler.guiNotification.queueNotification(new Notification(event.entityPlayer.getCurrentEquippedItem(), EnumChatFormatting.RED + "Object Banned", EnumChatFormatting.YELLOW + "You can't use that here"));
