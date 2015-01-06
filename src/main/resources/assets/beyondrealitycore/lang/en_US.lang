@@ -33,4 +33,19 @@ tile.beyondrealitycore:customBlock_28.name=Mars Mutagen crystals
 tile.beyondrealitycore:customBlock_29.name=Mars Naquadria Ore
 tile.beyondrealitycore:BRC:dimGuardKiller.name=BR Item Fixer
 
+itemGroup.tabBeyondReality=Beyond Reality Core
+tile.beyondrealitycore:oreApatite.name=Apatite Ore
+item.beyondrealitycore:gemApatite.name=Apatite
+tile.beyondrealitycore:oreCopper.name=Copper Ore
+tile.beyondrealitycore:oreTin.name=Tin Ore
+tile.beyondrealitycore:oreLead.name=Lead Ore
+tile.beyondrealitycore:oreSilver.name=Silver Ore
+tile.beyondrealitycore:oreNickel.name=Nickel Ore
+tile.beyondrealitycore:oreAluminium.name=Aluminium Ore
+tile.beyondrealitycore:orePlatinum.name=Platinum Ore
+tile.beyondrealitycore:oreCadmium.name=Cadmium Ore
+tile.beyondrealitycore:oreIndium.name=Indium Ore
+tile.beyondrealitycore:oreUranium.name=Uranium Ore
+tile.beyondrealitycore:orePhosphate.name=Phosphate Ore
+tile.beyondrealitycore:oreZinc.name=Zinc Ore
 
