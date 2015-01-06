@@ -1,5 +1,6 @@
 package com.mcbeyondreality.beyondrealitycore.blocks;
 
+import com.mcbeyondreality.beyondrealitycore.BeyondRealityCore;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -11,7 +12,7 @@ public class BRCustomBlock extends Block {
     public BRCustomBlock(String name) {
         super(Material.rock);
         this.setBlockName("beyondrealitycore:" + name);
-        this.setCreativeTab(CreativeTabs.tabBlock);
+        this.setCreativeTab(BeyondRealityCore.tabBeyondReality);
     }
 
     @SideOnly(Side.CLIENT)

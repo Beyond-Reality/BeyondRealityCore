@@ -34,31 +34,26 @@ minecraft {
 
     replaceIn "BeyondRealityCore.java"
     replace "@VERSION@", "${config.mod_version}"
-
-    assetDir = "src/main/resources"
-    assetDir = "src/main/resources"
+	
+    runDir = "eclipse"
 }
 
-processResources {
-    // exclude xcf files, as they are for development only
-    exclude '**/*.xcf'
+processResources
+{
+    // this will ensure that this task is redone when the versions change.
+    inputs.property "version", project.version
+    inputs.property "mcversion", project.minecraft.version
 
     // replace stuff in mcmod.info, nothing else
     from(sourceSets.main.resources.srcDirs) {
-        include '*.info'
-
+        include 'mcmod.info'
+                
         // replace version and mcversion
-        expand 'mod_version': project.version, 'minecraft_version': project.config.minecraft_version
+        expand 'version':project.version, 'mcversion':project.minecraft.version
     }
-
+        
     // copy everything else, thats not the mcmod.info
     from(sourceSets.main.resources.srcDirs) {
-        exclude '**/*.info'
-    }
-}
-
-jar {
-    manifest {
-        attributes 'FMLAT': 'beyondrealitycore_at.cfg'
+        exclude 'mcmod.info'
     }
 }
