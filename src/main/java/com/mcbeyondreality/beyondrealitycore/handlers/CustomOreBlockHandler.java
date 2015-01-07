@@ -12,7 +12,7 @@ public class CustomOreBlockHandler {
     static Block oreCadmium, oreIndium, oreUranium, orePhosphate, oreZinc;
 
     public static void init() {
-        oreApatite = new BRCustomOreBlock("oreApatite", "pickaxe", 2, BeyondRealityCore.gemApatite, 1, 4);
+        oreApatite = new BRCustomOreBlock("oreApatite", "pickaxe", 2, CustomItemHandler.gemApatite, 1, 4);
         oreCopper = new BRCustomOreBlock("oreCopper", "pickaxe", 2);
         oreTin = new BRCustomOreBlock("oreTin", "pickaxe", 2);
         oreLead = new BRCustomOreBlock("oreLead", "pickaxe", 2);

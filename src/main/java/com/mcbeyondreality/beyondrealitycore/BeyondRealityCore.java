@@ -5,10 +5,7 @@ import com.mcbeyondreality.beyondrealitycore.commands.CommandToggleToolRightClic
 import com.mcbeyondreality.beyondrealitycore.event.BeyondRealityCoreEvent;
 import com.mcbeyondreality.beyondrealitycore.event.LeafDecayEvent;
 import com.mcbeyondreality.beyondrealitycore.event.RightClickEvent;
-import com.mcbeyondreality.beyondrealitycore.handlers.CustomBlockHandler;
-import com.mcbeyondreality.beyondrealitycore.handlers.CustomOreBlockHandler;
-import com.mcbeyondreality.beyondrealitycore.handlers.DimensionBanHandler;
-import com.mcbeyondreality.beyondrealitycore.handlers.GuiHandler;
+import com.mcbeyondreality.beyondrealitycore.handlers.*;
 import com.mcbeyondreality.beyondrealitycore.notification.NotificationTickHandler;
 import com.mcbeyondreality.beyondrealitycore.proxy.CommonProxy;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -136,11 +133,7 @@ public class BeyondRealityCore {
         config.save();
 
         if(enableOreBlocks) {
-            GameRegistry.registerItem(gemApatite = new Item()
-                    .setUnlocalizedName("beyondrealitycore:gemApatite")
-                    .setTextureName("beyondrealitycore:gemApatite")
-                    .setCreativeTab(tabBeyondReality)
-                    ,"gemApatite");
+            CustomItemHandler.init();
             CustomOreBlockHandler.init();
         }
 
