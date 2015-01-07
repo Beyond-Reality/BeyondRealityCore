@@ -4,22 +4,24 @@ import com.mcbeyondreality.beyondrealitycore.BeyondRealityCore;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockFalling;
+import net.minecraft.block.BlockSand;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.Item;
 
 import java.util.Random;
 
-public class BRCustomOreBlock extends Block {
+public class BRCustomGravelBlock extends BlockFalling {
 
     private Item drop;
     private int meta;
     private int least_qty;
     private int most_qty;
 
-    public BRCustomOreBlock(String name, String tool, int hardness,
-                            Item drop, int meta, int least_qty, int most_qty) {
-        super(Material.rock);
+    public BRCustomGravelBlock(String name, String tool, int hardness,
+                               Item drop, int meta, int least_qty, int most_qty) {
+        //super(material);
         this.setBlockName("beyondrealitycore:" + name);
         this.setCreativeTab(BeyondRealityCore.tabBeyondReality);
         this.setHardness(1.5F);
@@ -35,15 +37,15 @@ public class BRCustomOreBlock extends Block {
         blockIcon = par1IconRegister.registerIcon((this.getUnlocalizedName().substring(5)));
     }
 
-    public BRCustomOreBlock(String name, String tool, int hardness, Item drop, int least_qty, int most_qty) {
+    public BRCustomGravelBlock(String name, String tool, int hardness, Item drop, int least_qty, int most_qty) {
         this(name, tool, hardness, drop, 0, least_qty, most_qty);
     }
 
-    public BRCustomOreBlock(String name, String tool, int hardness, Item drop) {
+    public BRCustomGravelBlock(String name, String tool, int hardness, Item drop) {
         this(name, tool, hardness, drop, 0, 1, 1);
     }
 
-    public BRCustomOreBlock(String name, String tool, int hardness) {
+    public BRCustomGravelBlock(String name, String tool, int hardness) {
         this(name, tool, hardness, null, 0, 1, 1);
     }
 

@@ -155,6 +155,7 @@ public class BeyondRealityCore {
     public void init(FMLInitializationEvent event) {
         if(enableOreBlocks) {
             CustomOreBlockHandler.oreDictInit();
+            CraftingHandler.init();
         }
     }
 
