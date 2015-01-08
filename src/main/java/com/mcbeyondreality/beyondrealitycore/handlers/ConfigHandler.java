@@ -8,7 +8,7 @@ import java.io.File;
 public class ConfigHandler {
 
     public static Configuration config;
-    public static String[] bannedEnderBlocks, bannedNetherBlocks, rightClickBlackList, bottomLeftBranding;
+    public static String[] bannedEnderBlocks, bannedNetherBlocks, rightClickBlackList, bottomLeftBranding, menuSayings;
     public static int aggrorangeEnd, aggrorangeNether, customBlocksCount;
     public static boolean fastLeafDecay, rightClick, enableOreBlocks, enableCustomBlocks;
     public static String strMainMenuBackground;
@@ -34,6 +34,8 @@ public class ConfigHandler {
         bottomLeftBranding = config.get("Main Menu Settings", "Bottom Left Branding",
                 new String[] {"Beyond Reality"}).getStringList();
         strMainMenuBackground = config.get("Main Menu Settings", "Main Menu Screen", "background.png").getString();
+        menuSayings = config.get("Main Menu Settings", "Main Menu Sayings",
+                new String[] {"Welcome to Beyond Reality", "This Pack is HARD!"}).getStringList();
 
         enableOreBlocks = config.get("Custom Blocks", "Enable Ore Blocks?", false).getBoolean();
         enableCustomBlocks = config.get("Custom Blocks", "Enable Custom Blocks?", false).getBoolean();

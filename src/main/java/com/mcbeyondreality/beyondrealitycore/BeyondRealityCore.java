@@ -115,8 +115,6 @@ public class BeyondRealityCore {
             }
         }
 
-        //File txtSplash = new File
-
         if(ConfigHandler.enableOreBlocks) {
             CustomItemHandler.init();
             CustomOreBlockHandler.init();

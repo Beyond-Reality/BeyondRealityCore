@@ -2,6 +2,7 @@ package com.mcbeyondreality.beyondrealitycore.gui;
 
 import com.google.common.base.Strings;
 import com.mcbeyondreality.beyondrealitycore.BeyondRealityCore;
+import com.mcbeyondreality.beyondrealitycore.handlers.ConfigHandler;
 import com.mcbeyondreality.beyondrealitycore.handlers.GuiHandler;
 import cpw.mods.fml.client.GuiModList;
 import cpw.mods.fml.relauncher.Side;
@@ -55,7 +56,7 @@ public class BRCGuiMainMenu extends GuiScreen implements GuiYesNoCallback
     public String field_92025_p;
     public String field_146972_A;
     public String field_104024_v;
-    public static final ResourceLocation splashTexts = new ResourceLocation("beyondrealitycore:texts/splashes.txt");
+    //public static final ResourceLocation splashTexts = new ResourceLocation("beyondrealitycore:texts/splashes.txt");
     public static final ResourceLocation minecraftTitleTextures = new ResourceLocation("beyondrealitycore:textures/title.png");
     //public static final ResourceLocation backGround = new ResourceLocation("beyondrealitycore:textures/background.png");
     public static BufferedImage image;
@@ -75,12 +76,22 @@ public class BRCGuiMainMenu extends GuiScreen implements GuiYesNoCallback
     {
         this.field_146972_A = field_96138_a;
         this.splashText = "Shrek is love, Shrek is life";
-        BufferedReader bufferedreader = null;
+
+
+        do {
+            //this.splashText = (String)arraylist.get(rand.nextInt(arraylist.size()));
+            this.splashText = ConfigHandler.menuSayings[rand.nextInt(ConfigHandler.menuSayings.length)];
+        }
+        while (this.splashText.hashCode() == 125780783);
+
+
+        /*BufferedReader bufferedreader = null;
 
         try
         {
             ArrayList arraylist = new ArrayList();
-            bufferedreader = new BufferedReader(new InputStreamReader(Minecraft.getMinecraft().getResourceManager().getResource(splashTexts).getInputStream(), Charsets.UTF_8));
+            bufferedreader = new BufferedReader(new InputStreamReader(Minecraft.getMinecraft()
+                    .getResourceManager().getResource(splashTexts).getInputStream(), Charsets.UTF_8));
             String s;
 
             while ((s = bufferedreader.readLine()) != null)
@@ -119,7 +130,7 @@ public class BRCGuiMainMenu extends GuiScreen implements GuiYesNoCallback
                     ;
                 }
             }
-        }
+        }*/
 
         this.updateCounter = rand.nextFloat();
         this.field_92025_p = "";
