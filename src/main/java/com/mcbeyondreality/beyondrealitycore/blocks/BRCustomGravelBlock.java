@@ -21,7 +21,7 @@ public class BRCustomGravelBlock extends BlockFalling {
 
     public BRCustomGravelBlock(String name, String tool, int hardness,
                                Item drop, int meta, int least_qty, int most_qty) {
-        //super(material);
+        super(Material.sand);
         this.setBlockName("beyondrealitycore:" + name);
         this.setCreativeTab(BeyondRealityCore.tabBeyondReality);
         this.setHardness(1.5F);

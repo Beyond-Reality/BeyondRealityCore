@@ -29,6 +29,7 @@ import net.minecraft.item.Item;
 import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
+import org.apache.commons.io.FileUtils;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -36,6 +37,7 @@ import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
 @Mod(name = "Beyond Reality Core", modid = "beyondrealitycore", version = "@VERSION@")
 
@@ -50,8 +52,10 @@ public class BeyondRealityCore {
 
     private static Configuration config;
     public static String[] bannedEnderBlocks, bannedNetherBlocks, rightClickBlackList, bottomLeftBranding;
+    public static File pngMainMenu;
     public static int aggrorangeEnd, aggrorangeNether, customBlocksCount;
     public static boolean fastLeafDecay, rightClick, enableOreBlocks, enableCustomBlocks;
+    public static String strMainMenuBackground;
     public static Item gemApatite;
 
     @EventHandler
@@ -125,12 +129,22 @@ public class BeyondRealityCore {
 
         bottomLeftBranding = config.get("Main Menu Settings", "Bottom Left Branding",
                 new String[] {"Beyond Reality"}).getStringList();
-
+        strMainMenuBackground = config.get("Main Menu Settings", "Main Menu Screen", "BeyondReality.png").getString();
 
         enableOreBlocks = config.get("Custom Blocks", "Enable Ore Blocks?", false).getBoolean();
         enableCustomBlocks = config.get("Custom Blocks", "Enable Custom Blocks?", false).getBoolean();
         customBlocksCount = config.get("Custom Blocks", "Number of custom blocks", 1).getInt();
         config.save();
+
+        pngMainMenu = new File("/config/BeyondRealityCore", strMainMenuBackground);
+        if(!pngMainMenu.exists()) {
+            URL inputUrl = getClass().getResource("/assets/beyondrealitycore/textures/background.png");
+            try {
+                FileUtils.copyURLToFile(inputUrl, pngMainMenu);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
         if(enableOreBlocks) {
             CustomItemHandler.init();
