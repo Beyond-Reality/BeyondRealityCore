@@ -1,25 +1,22 @@
 package com.mcbeyondreality.beyondrealitycore.event;
 
-import java.util.List;
-import java.util.Random;
-
 import com.mcbeyondreality.beyondrealitycore.BeyondRealityCore;
-
+import com.mcbeyondreality.beyondrealitycore.handlers.ConfigHandler;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.common.registry.GameRegistry.UniqueIdentifier;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.entity.monster.EntityPigZombie;
-import net.minecraft.entity.monster.EntitySilverfish;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.GameRegistry.UniqueIdentifier;
-import net.minecraft.block.Block;
-import net.minecraft.command.CommandGive;;
+
+import java.util.List;
+
+;
 
 public class BeyondRealityCoreEvent {
 	
@@ -31,32 +28,32 @@ public class BeyondRealityCoreEvent {
 		
 		if(event.getPlayer().dimension == 1)
 		{
-			for(int i = 0; i < BeyondRealityCore.bannedEnderBlocks.length; i++) {
-				String splitBlocks[] = BeyondRealityCore.bannedEnderBlocks[i].toString().split(":");
+			for(int i = 0; i < ConfigHandler.bannedEnderBlocks.length; i++) {
+				String splitBlocks[] = ConfigHandler.bannedEnderBlocks[i].toString().split(":");
 				
 				if (splitBlocks.length == 2) {
-					if (blockID.toString().equalsIgnoreCase(BeyondRealityCore.bannedEnderBlocks[i])) {
+					if (blockID.toString().equalsIgnoreCase(ConfigHandler.bannedEnderBlocks[i])) {
 						angerEndermen(event.getPlayer(), event.world, event.x, event.y, event.z);
 					}
 				} else {
 					String blockNameID = blockID + ":" + event.blockMetadata;
-					if (blockNameID.toString().equalsIgnoreCase(BeyondRealityCore.bannedEnderBlocks[i]))
+					if (blockNameID.toString().equalsIgnoreCase(ConfigHandler.bannedEnderBlocks[i]))
 						angerEndermen(event.getPlayer(), event.world, event.x, event.y, event.z);
 				}
 				
 			}
 		} else if(event.getPlayer().dimension == -1) {
 		
-			for(int i = 0; i < BeyondRealityCore.bannedNetherBlocks.length; i++) {
-				String splitBlocks[] = BeyondRealityCore.bannedNetherBlocks[i].toString().split(":");
+			for(int i = 0; i < ConfigHandler.bannedNetherBlocks.length; i++) {
+				String splitBlocks[] = ConfigHandler.bannedNetherBlocks[i].toString().split(":");
 				
 				if (splitBlocks.length == 2) {
-					if (blockID.toString().equalsIgnoreCase(BeyondRealityCore.bannedNetherBlocks[i])) {
+					if (blockID.toString().equalsIgnoreCase(ConfigHandler.bannedNetherBlocks[i])) {
 						angerPigmen(event.getPlayer(), event.world, event.x, event.y, event.z);
 					}
 				} else {
 					String blockNameID = blockID + ":" + event.blockMetadata;
-					if (blockNameID.toString().equalsIgnoreCase(BeyondRealityCore.bannedNetherBlocks[i]))
+					if (blockNameID.toString().equalsIgnoreCase(ConfigHandler.bannedNetherBlocks[i]))
 						angerPigmen(event.getPlayer(), event.world, event.x, event.y, event.z);
 				}
 				
@@ -68,7 +65,7 @@ public class BeyondRealityCoreEvent {
 	
 	private void angerEndermen(EntityPlayer player, World world, int x, int y,
 			int z) {
-		int aggroRange = BeyondRealityCore.aggrorangeEnd;
+		int aggroRange = ConfigHandler.aggrorangeEnd;
 		List<?> list = world.getEntitiesWithinAABB(
 				EntityEnderman.class,
 				AxisAlignedBB.getBoundingBox(x - aggroRange, y - aggroRange, z
@@ -87,7 +84,7 @@ public class BeyondRealityCoreEvent {
 	private void angerPigmen(EntityPlayer player, World world, int x, int y,
 			int z) {
 
-		int aggroRange = BeyondRealityCore.aggrorangeNether;
+		int aggroRange = ConfigHandler.aggrorangeNether;
 		List<EntityPigZombie> list = world.getEntitiesWithinAABB(
 				EntityPigZombie.class,
 				AxisAlignedBB.getBoundingBox(x - aggroRange, y - aggroRange, z

@@ -33,8 +33,6 @@ public class CraftingHandler {
                 "xx", "xx", 'x', new ItemStack(CustomItemHandler.tinyMagnetite));
         GameRegistry.addRecipe(new ItemStack(CustomOreBlockHandler.oreUranium),
                 "xx", "xx", 'x', new ItemStack(CustomItemHandler.tinyUranium));
-        GameRegistry.addRecipe(new ItemStack(CustomOreBlockHandler.orePhosphate),
-                "xx", "xx", 'x', new ItemStack(CustomItemHandler.tinyPhosphate));
         GameRegistry.addRecipe(new ItemStack(CustomOreBlockHandler.oreZinc),
                 "xx", "xx", 'x', new ItemStack(CustomItemHandler.tinyZinc));
         GameRegistry.addRecipe(new ItemStack(Blocks.iron_ore),

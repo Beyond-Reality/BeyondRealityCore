@@ -7,7 +7,7 @@ import net.minecraft.item.Item;
 public class CustomItemHandler {
 
     static Item gemApatite, tinyApatite, tinyCopper, tinyTin, tinyLead, tinySilver, tinyNickel, tinyAluminium;
-    static Item tinyPlatinum, tinyCadmium, tinyIndium, tinyMagnetite, tinyUranium, tinyPhosphate, tinyZinc;
+    static Item tinyPlatinum, tinyCadmium, tinyIndium, tinyMagnetite, tinyUranium, tinyZinc;
     static Item tinyIron, tinyGold, tinyDiamond, tinyEmerald, tinyRedstone, tinyLapis, tinyCoal;
 
     public static void init() {
@@ -25,7 +25,6 @@ public class CustomItemHandler {
         tinyIndium = new BRCustomItem("tinyIndium");
         tinyMagnetite = new BRCustomItem("tinyMagnetite");
         tinyUranium = new BRCustomItem("tinyUranium");
-        tinyPhosphate = new BRCustomItem("tinyPhosphate");
         tinyZinc = new BRCustomItem("tinyZinc");
         tinyIron = new BRCustomItem("tinyIron");
         tinyGold = new BRCustomItem("tinyGold");
@@ -49,7 +48,6 @@ public class CustomItemHandler {
         GameRegistry.registerItem(tinyIndium, "tinyIndium");
         GameRegistry.registerItem(tinyMagnetite, "tinyMagnetite");
         GameRegistry.registerItem(tinyUranium, "tinyUranium");
-        GameRegistry.registerItem(tinyPhosphate, "tinyPhosphate");
         GameRegistry.registerItem(tinyZinc, "tinyZinc");
         GameRegistry.registerItem(tinyIron, "tinyIron");
         GameRegistry.registerItem(tinyGold, "tinyGold");

@@ -17,7 +17,6 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
-import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
@@ -28,7 +27,6 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.config.Configuration;
 import org.apache.commons.io.FileUtils;
 import org.xml.sax.SAXException;
 
@@ -50,13 +48,7 @@ public class BeyondRealityCore {
     @SidedProxy( clientSide="com.mcbeyondreality.beyondrealitycore.proxy.ClientProxy", serverSide="com.mcbeyondreality.beyondrealitycore.proxy.CommonProxy")
     public static CommonProxy proxy;
 
-    private static Configuration config;
-    public static String[] bannedEnderBlocks, bannedNetherBlocks, rightClickBlackList, bottomLeftBranding;
     public static File pngMainMenu;
-    public static int aggrorangeEnd, aggrorangeNether, customBlocksCount;
-    public static boolean fastLeafDecay, rightClick, enableOreBlocks, enableCustomBlocks;
-    public static String strMainMenuBackground;
-    public static Item gemApatite;
 
     @EventHandler
     public void serverLoad(FMLServerStartingEvent event) {
@@ -111,32 +103,9 @@ public class BeyondRealityCore {
 
         proxy.register();
 
-        config = new Configuration(new File("config/BeyondRealityCore/beyondrealitycore.cfg"));
-        config.load();
+        ConfigHandler.init();
 
-        bannedEnderBlocks = config.get("End Settings", "Blocks the Endermen Don't want you to take",
-                new String[] {"minecraft:end_stone", "gregtech:gt.blockores"}).getStringList();
-        aggrorangeEnd = config.get("End Settings", "Enderman Range for block breaks", 16).getInt();
-
-        bannedNetherBlocks = config.get("Nether Settings", "Blocks the Pigmen Don't want you to take",
-                new String[] {"gregtech:gt.blockores"}).getStringList();
-        aggrorangeNether = config.get("Nether Settings", "Pigmen Range for block breaks", 16).getInt();
-
-        rightClickBlackList = config.get(Configuration.CATEGORY_GENERAL, "Black Listed Items for right click",
-                new String[] {Items.golden_shovel.getUnlocalizedName(), "another unlocalized name"}).getStringList();
-        rightClick = config.get(Configuration.CATEGORY_GENERAL, "Use right click handler?", true).getBoolean();
-        fastLeafDecay = config.get(Configuration.CATEGORY_GENERAL, "Overwrite leaf decay?", false).getBoolean();
-
-        bottomLeftBranding = config.get("Main Menu Settings", "Bottom Left Branding",
-                new String[] {"Beyond Reality"}).getStringList();
-        strMainMenuBackground = config.get("Main Menu Settings", "Main Menu Screen", "BeyondReality.png").getString();
-
-        enableOreBlocks = config.get("Custom Blocks", "Enable Ore Blocks?", false).getBoolean();
-        enableCustomBlocks = config.get("Custom Blocks", "Enable Custom Blocks?", false).getBoolean();
-        customBlocksCount = config.get("Custom Blocks", "Number of custom blocks", 1).getInt();
-        config.save();
-
-        pngMainMenu = new File("/config/BeyondRealityCore", strMainMenuBackground);
+        pngMainMenu = new File("config/BeyondRealityCore/images", ConfigHandler.strMainMenuBackground);
         if(!pngMainMenu.exists()) {
             URL inputUrl = getClass().getResource("/assets/beyondrealitycore/textures/background.png");
             try {
@@ -146,12 +115,14 @@ public class BeyondRealityCore {
             }
         }
 
-        if(enableOreBlocks) {
+        //File txtSplash = new File
+
+        if(ConfigHandler.enableOreBlocks) {
             CustomItemHandler.init();
             CustomOreBlockHandler.init();
         }
 
-        if(enableCustomBlocks) {
+        if(ConfigHandler.enableCustomBlocks) {
             CustomBlockHandler.init();
         }
 
@@ -167,7 +138,7 @@ public class BeyondRealityCore {
 
     @EventHandler
     public void init(FMLInitializationEvent event) {
-        if(enableOreBlocks) {
+        if(ConfigHandler.enableOreBlocks) {
             CustomOreBlockHandler.oreDictInit();
             CraftingHandler.init();
         }
@@ -178,12 +149,13 @@ public class BeyondRealityCore {
 
     public static void set(String categoryName, String propertyName, boolean newValue) {
 
-        config.load();
-        if (config.getCategoryNames().contains(categoryName)) {
-            if (config.getCategory(categoryName).containsKey(propertyName)) {
-                config.getCategory(categoryName).get(propertyName).set(newValue);
+
+        ConfigHandler.config.load();
+        if (ConfigHandler.config.getCategoryNames().contains(categoryName)) {
+            if (ConfigHandler.config.getCategory(categoryName).containsKey(propertyName)) {
+                ConfigHandler.config.getCategory(categoryName).get(propertyName).set(newValue);
             }
         }
-        config.save();
+        ConfigHandler.config.save();
     }
 }

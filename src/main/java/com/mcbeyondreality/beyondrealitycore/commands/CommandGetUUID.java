@@ -1,7 +1,5 @@
 package com.mcbeyondreality.beyondrealitycore.commands;
 
-import java.util.List;
-
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.WrongUsageException;
@@ -9,7 +7,8 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.IChatComponent;
+
+import java.util.List;
 
 public class CommandGetUUID extends CommandBase {
 

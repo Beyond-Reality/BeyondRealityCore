@@ -1,6 +1,5 @@
 package com.mcbeyondreality.beyondrealitycore.handlers;
 
-import com.mcbeyondreality.beyondrealitycore.BeyondRealityCore;
 import com.mcbeyondreality.beyondrealitycore.gui.BRCGuiMainMenu;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
@@ -43,8 +42,8 @@ public class GuiHandler {
     public static List<String> getBrandings()
     {
         List<String>brands = new ArrayList<String>();
-        for(int i = 0; i < BeyondRealityCore.bottomLeftBranding.length; i++)
-            brands.add(BeyondRealityCore.bottomLeftBranding[i]);
+        for(int i = 0; i < ConfigHandler.bottomLeftBranding.length; i++)
+            brands.add(ConfigHandler.bottomLeftBranding[i]);
         return brands;
     }
 

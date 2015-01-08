@@ -4,15 +4,14 @@ import com.mcbeyondreality.beyondrealitycore.blocks.BRCustomGravelBlock;
 import com.mcbeyondreality.beyondrealitycore.blocks.BRCustomOreBlock;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class CustomOreBlockHandler {
 
     static Block oreApatite, oreCopper, oreTin, oreLead, oreSilver, oreNickel, oreAluminium, orePlatinum;
-    static Block oreCadmium, oreIndium, oreUranium, orePhosphate, oreZinc, oreMagnetite;
+    static Block oreCadmium, oreIndium, oreUranium, oreZinc, oreMagnetite;
     static Block gemApatite, tinyoreApatite, tinyoreCopper, tinyoreTin, tinyoreLead, tinyoreSilver, tinyoreNickel, tinyoreAluminium;
-    static Block tinyorePlatinum, tinyoreCadmium, tinyoreIndium, tinyoreMagnetite, tinyoreUranium, tinyorePhosphate, tinyoreZinc;
+    static Block tinyorePlatinum, tinyoreCadmium, tinyoreIndium, tinyoreMagnetite, tinyoreUranium, tinyoreZinc;
     static Block tinyoreIron, tinyoreGold, tinyoreDiamond, tinyoreEmerald, tinyoreRedstone, tinyoreLapis, tinyoreCoal;
 
     public static void init() {
@@ -28,7 +27,6 @@ public class CustomOreBlockHandler {
         oreCadmium = new BRCustomOreBlock("oreCadmium", "pickaxe", 2);
         oreIndium = new BRCustomOreBlock("oreIndium", "pickaxe", 2);
         oreUranium = new BRCustomOreBlock("oreUranium", "pickaxe", 2);
-        orePhosphate = new BRCustomOreBlock("orePhosphate", "pickaxe", 2);
         oreZinc = new BRCustomOreBlock("oreZinc", "pickaxe", 2);
         oreMagnetite = new BRCustomOreBlock("oreMagnetite", "pickaxe", 2);
 
@@ -45,7 +43,6 @@ public class CustomOreBlockHandler {
         tinyoreIndium = new BRCustomGravelBlock("tinyoreIndium", "shovel", 1, CustomItemHandler.tinyIndium);
         tinyoreMagnetite = new BRCustomGravelBlock("tinyoreMagnetite", "shovel", 1, CustomItemHandler.tinyMagnetite);
         tinyoreUranium = new BRCustomGravelBlock("tinyoreUranium", "shovel", 1, CustomItemHandler.tinyUranium);
-        tinyorePhosphate = new BRCustomGravelBlock("tinyorePhosphate", "shovel", 1, CustomItemHandler.tinyPhosphate);
         tinyoreZinc = new BRCustomGravelBlock("tinyoreZinc", "shovel", 1, CustomItemHandler.tinyZinc);
         tinyoreIron = new BRCustomGravelBlock("tinyoreIron", "shovel", 1, CustomItemHandler.tinyIron);
         tinyoreGold = new BRCustomGravelBlock("tinyoreGold", "shovel", 1, CustomItemHandler.tinyGold);
@@ -66,7 +63,6 @@ public class CustomOreBlockHandler {
         GameRegistry.registerBlock(oreCadmium, "oreCadmium");
         GameRegistry.registerBlock(oreIndium, "oreIndium");
         GameRegistry.registerBlock(oreUranium, "oreUranium");
-        GameRegistry.registerBlock(orePhosphate, "orePhosphate");
         GameRegistry.registerBlock(oreZinc, "oreZinc");
         GameRegistry.registerBlock(oreMagnetite, "oreMagnetite");
         //Tiny Ores
@@ -82,7 +78,6 @@ public class CustomOreBlockHandler {
         GameRegistry.registerBlock(tinyoreIndium, "tinyoreIndium");
         GameRegistry.registerBlock(tinyoreMagnetite, "tinyoreMagnetite");
         GameRegistry.registerBlock(tinyoreUranium, "tinyoreUranium");
-        GameRegistry.registerBlock(tinyorePhosphate, "tinyorePhosphate");
         GameRegistry.registerBlock(tinyoreZinc, "tinyoreZinc");
         GameRegistry.registerBlock(tinyoreIron, "tinyoreIron");
         GameRegistry.registerBlock(tinyoreGold, "tinyoreGold");
@@ -106,7 +101,6 @@ public class CustomOreBlockHandler {
         OreDictionary.registerOre("oreCadmium", oreCadmium);
         OreDictionary.registerOre("oreIndium", oreIndium);
         OreDictionary.registerOre("oreUranium", oreUranium);
-        OreDictionary.registerOre("orePhosphate", orePhosphate);
         OreDictionary.registerOre("oreZinc", oreZinc);
         OreDictionary.registerOre("oreMagnetite", oreMagnetite);
     }

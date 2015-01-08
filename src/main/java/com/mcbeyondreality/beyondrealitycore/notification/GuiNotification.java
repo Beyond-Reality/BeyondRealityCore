@@ -1,6 +1,5 @@
 package com.mcbeyondreality.beyondrealitycore.notification;
 
-import com.mcbeyondreality.beyondrealitycore.notification.Notification;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;

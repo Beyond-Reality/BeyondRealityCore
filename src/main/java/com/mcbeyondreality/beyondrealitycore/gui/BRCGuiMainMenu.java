@@ -1,6 +1,7 @@
 package com.mcbeyondreality.beyondrealitycore.gui;
 
 import com.google.common.base.Strings;
+import com.mcbeyondreality.beyondrealitycore.BeyondRealityCore;
 import com.mcbeyondreality.beyondrealitycore.handlers.GuiHandler;
 import cpw.mods.fml.client.GuiModList;
 import cpw.mods.fml.relauncher.Side;
@@ -24,6 +25,8 @@ import org.apache.logging.log4j.Logger;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GLContext;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -54,7 +57,10 @@ public class BRCGuiMainMenu extends GuiScreen implements GuiYesNoCallback
     public String field_104024_v;
     public static final ResourceLocation splashTexts = new ResourceLocation("beyondrealitycore:texts/splashes.txt");
     public static final ResourceLocation minecraftTitleTextures = new ResourceLocation("beyondrealitycore:textures/title.png");
-    public static final ResourceLocation backGround = new ResourceLocation("beyondrealitycore:textures/background.png");
+    //public static final ResourceLocation backGround = new ResourceLocation("beyondrealitycore:textures/background.png");
+    public static BufferedImage image;
+    public static DynamicTexture backgroundTexture;
+    public static ResourceLocation backGround;
     public static final String field_96138_a = "Please click " + EnumChatFormatting.UNDERLINE + "here" + EnumChatFormatting.RESET + " for more information.";
     public int field_92024_r;
     public int field_92023_s;
@@ -152,6 +158,15 @@ public class BRCGuiMainMenu extends GuiScreen implements GuiYesNoCallback
      */
     public void initGui()
     {
+
+        try {
+            image = ImageIO.read(BeyondRealityCore.pngMainMenu);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        this.backgroundTexture = new DynamicTexture(image);
+        this.backGround = this.mc.getTextureManager().getDynamicTextureLocation("backgroundpic", backgroundTexture);
+
         this.viewportTexture = new DynamicTexture(256, 256);
         this.field_110351_G = this.mc.getTextureManager().getDynamicTextureLocation("background", this.viewportTexture);
         Calendar calendar = Calendar.getInstance();
@@ -222,12 +237,10 @@ public class BRCGuiMainMenu extends GuiScreen implements GuiYesNoCallback
             Object objData = urlConnect.getContent();
 
         } catch (UnknownHostException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
             return false;
         }
         catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
             return false;
         }
