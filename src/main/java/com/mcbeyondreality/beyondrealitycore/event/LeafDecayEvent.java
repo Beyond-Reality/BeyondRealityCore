@@ -1,6 +1,7 @@
 package com.mcbeyondreality.beyondrealitycore.event;
 
 import com.mcbeyondreality.beyondrealitycore.BeyondRealityCore;
+import com.mcbeyondreality.beyondrealitycore.handlers.ConfigHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.block.BlockLog;
 import net.minecraftforge.event.world.BlockEvent;
@@ -11,7 +12,7 @@ public class LeafDecayEvent {
     @SubscribeEvent
     public void handleLeafDecay(BlockEvent.BreakEvent event)
     {
-        if (event.isCanceled() || event.world.isRemote || !BeyondRealityCore.fastLeafDecay) return;
+        if (event.isCanceled() || event.world.isRemote || !ConfigHandler.fastLeafDecay) return;
 
         if(event.block instanceof BlockLog)
         {

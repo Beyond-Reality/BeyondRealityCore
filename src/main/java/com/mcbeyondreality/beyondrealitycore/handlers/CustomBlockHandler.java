@@ -15,7 +15,7 @@ public class CustomBlockHandler {
     public static void init() {
         dimGuardKiller = new BlockDimGuardKiller();
         GameRegistry.registerBlock(dimGuardKiller, "dimGuardKiller");
-        for (int i = 0; i < BeyondRealityCore.customBlocksCount; i++)
+        for (int i = 0; i < ConfigHandler.customBlocksCount; i++)
             registerBlock("customBlock_" + i, i);
     }
     public static void registerBlock(String name, int i)

@@ -1,6 +1,7 @@
 package com.mcbeyondreality.beyondrealitycore.commands;
 
 import com.mcbeyondreality.beyondrealitycore.BeyondRealityCore;
+import com.mcbeyondreality.beyondrealitycore.handlers.ConfigHandler;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.util.ChatComponentText;
@@ -20,15 +21,15 @@ public class CommandToggleToolRightClick extends CommandBase
 
     @Override
     public void processCommand(ICommandSender user, String[] args) {
-        if(!BeyondRealityCore.rightClick)
+        if(!ConfigHandler.rightClick)
         {
             user.addChatMessage(new ChatComponentText(EnumChatFormatting.GREEN + "Tool right click enabled"));
-            BeyondRealityCore.rightClick = true;
+            ConfigHandler.rightClick = true;
         }
         else
         {
             user.addChatMessage(new ChatComponentText(EnumChatFormatting.RED + "Tool right click disabled"));
-            BeyondRealityCore.rightClick = false;
+            ConfigHandler.rightClick = false;
         }
     }
 }

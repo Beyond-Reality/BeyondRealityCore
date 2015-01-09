@@ -197,7 +197,7 @@ public class BRCGuiMainMenu extends GuiScreen implements GuiYesNoCallback
         }
         else if (calendar.get(2) + 1 == 1 && calendar.get(5) == 1)
         {
-            this.splashText = "Happy new year!";
+            this.splashText = "Happy New Year!";
         }
         else if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31)
         {

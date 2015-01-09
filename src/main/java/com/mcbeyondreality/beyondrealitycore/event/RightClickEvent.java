@@ -3,6 +3,7 @@ package com.mcbeyondreality.beyondrealitycore.event;
 import com.mcbeyondreality.beyondrealitycore.BeyondRealityCore;
 import com.mcbeyondreality.beyondrealitycore.data.BannedBlocksForDimension;
 import com.mcbeyondreality.beyondrealitycore.gui.GuiColor;
+import com.mcbeyondreality.beyondrealitycore.handlers.ConfigHandler;
 import com.mcbeyondreality.beyondrealitycore.notification.Notification;
 import com.mcbeyondreality.beyondrealitycore.notification.NotificationTickHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -23,11 +24,12 @@ public class RightClickEvent {
     @SubscribeEvent
     public void playerRightClick(PlayerInteractEvent event)
     {
-        if (event.isCanceled() || event.world.isRemote || event.action != PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK || !BeyondRealityCore.rightClick) return;
+        if (event.isCanceled() || event.world.isRemote ||
+                event.action != PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK || !ConfigHandler.rightClick) return;
         ItemStack heldItem = event.entityPlayer.inventory.getCurrentItem();
 
         if (heldItem == null || !(heldItem.getItem() instanceof ItemTool)) return;
-        for(String name : BeyondRealityCore.rightClickBlackList)
+        for(String name : ConfigHandler.rightClickBlackList)
         {
             if(heldItem.getUnlocalizedName().equals(name))
                 return;
