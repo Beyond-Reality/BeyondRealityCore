@@ -31,3 +31,4 @@ gradlew.bat
 .gradle/2.0/taskArtifacts/cache.properties
 .project
 gradle/wrapper/gradle-wrapper.properties
+Thumbs.db
