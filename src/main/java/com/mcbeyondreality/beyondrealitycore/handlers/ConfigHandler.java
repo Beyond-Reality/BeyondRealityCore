@@ -8,7 +8,7 @@ import java.io.File;
 public class ConfigHandler {
 
     public static Configuration config;
-    public static String[] bannedEnderBlocks, bannedNetherBlocks, rightClickBlackList, bottomLeftBranding, menuSayings;
+    public static String[] bannedEnderBlocks, bannedNetherBlocks, rightClickWhiteList, bottomLeftBranding, menuSayings;
     public static int aggrorangeEnd, aggrorangeNether, customBlocksCount;
     public static boolean fastLeafDecay, rightClick, enableOreBlocks, enableCustomBlocks;
     public static String strMainMenuBackground, strMainMenuTitle;
@@ -26,8 +26,8 @@ public class ConfigHandler {
                 new String[] {"gregtech:gt.blockores"}).getStringList();
         aggrorangeNether = config.get("Nether Settings", "Pigmen Range for block breaks", 16).getInt();
 
-        rightClickBlackList = config.get(Configuration.CATEGORY_GENERAL, "Black Listed Items for right click",
-                new String[] {Items.golden_shovel.getUnlocalizedName(), "another unlocalized name"}).getStringList();
+        rightClickWhiteList = config.get(Configuration.CATEGORY_GENERAL, "Whitelisted Items for right click",
+                new String[] {Items.stone_pickaxe.getUnlocalizedName(), "another unlocalized name"}).getStringList();
         rightClick = config.get(Configuration.CATEGORY_GENERAL, "Use right click handler?", true).getBoolean();
         fastLeafDecay = config.get(Configuration.CATEGORY_GENERAL, "Overwrite leaf decay?", false).getBoolean();
 

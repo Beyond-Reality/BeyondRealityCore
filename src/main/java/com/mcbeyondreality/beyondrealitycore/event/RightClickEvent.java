@@ -1,6 +1,5 @@
 package com.mcbeyondreality.beyondrealitycore.event;
 
-import com.mcbeyondreality.beyondrealitycore.BeyondRealityCore;
 import com.mcbeyondreality.beyondrealitycore.data.BannedBlocksForDimension;
 import com.mcbeyondreality.beyondrealitycore.gui.GuiColor;
 import com.mcbeyondreality.beyondrealitycore.handlers.ConfigHandler;
@@ -29,29 +28,33 @@ public class RightClickEvent {
         ItemStack heldItem = event.entityPlayer.inventory.getCurrentItem();
 
         if (heldItem == null || !(heldItem.getItem() instanceof ItemTool)) return;
-        for(String name : ConfigHandler.rightClickBlackList)
+        for(String name : ConfigHandler.rightClickWhiteList)
         {
-            if(heldItem.getUnlocalizedName().equals(name))
+            if(heldItem.getUnlocalizedName().equals(name)) {
+                int oldSlot = event.entityPlayer.inventory.currentItem;
+                if (oldSlot < 0 || oldSlot > 8) return;
+
+                int newSlot = slots[oldSlot];
+                if (newSlot < 0 || newSlot > 8) return;
+                ItemStack slotStack = event.entityPlayer.inventory.getStackInSlot(newSlot);
+
+                if (slotStack == null || slotStack.getItem() instanceof ItemTool) return;
+
+                event.entityPlayer.inventory.currentItem = newSlot;
+                if(!((EntityPlayerMP) event.entityPlayer).theItemInWorldManager.activateBlockOrUseItem(event.entityPlayer, event.world, slotStack, event.x, event.y, event.z, event.face, 0.5f, 0.5f, 0.5f))
+                    return;
+
+                if (slotStack.stackSize <= 0) slotStack = null;
+                event.entityPlayer.inventory.currentItem = oldSlot;
+                event.entityPlayer.inventory.setInventorySlotContents(newSlot, slotStack);
+                ((EntityPlayerMP) event.entityPlayer).playerNetServerHandler.sendPacket(new S2FPacketSetSlot(0, newSlot + 36, slotStack));
+                event.setCanceled(true);
                 return;
+            }
+
         }
-        int oldSlot = event.entityPlayer.inventory.currentItem;
-        if (oldSlot < 0 || oldSlot > 8) return;
 
-        int newSlot = slots[oldSlot];
-        if (newSlot < 0 || newSlot > 8) return;
-        ItemStack slotStack = event.entityPlayer.inventory.getStackInSlot(newSlot);
 
-        if (slotStack == null || slotStack.getItem() instanceof ItemTool) return;
-
-        event.entityPlayer.inventory.currentItem = newSlot;
-        if(!((EntityPlayerMP) event.entityPlayer).theItemInWorldManager.activateBlockOrUseItem(event.entityPlayer, event.world, slotStack, event.x, event.y, event.z, event.face, 0.5f, 0.5f, 0.5f))
-            return;
-
-        if (slotStack.stackSize <= 0) slotStack = null;
-        event.entityPlayer.inventory.currentItem = oldSlot;
-        event.entityPlayer.inventory.setInventorySlotContents(newSlot, slotStack);
-        ((EntityPlayerMP) event.entityPlayer).playerNetServerHandler.sendPacket(new S2FPacketSetSlot(0, newSlot + 36, slotStack));
-        event.setCanceled(true);
     }
 
     @SubscribeEvent
