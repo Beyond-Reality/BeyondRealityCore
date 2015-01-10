@@ -57,11 +57,11 @@ public class BRCGuiMainMenu extends GuiScreen implements GuiYesNoCallback
     public String field_146972_A;
     public String field_104024_v;
     //public static final ResourceLocation splashTexts = new ResourceLocation("beyondrealitycore:texts/splashes.txt");
-    public static final ResourceLocation minecraftTitleTextures = new ResourceLocation("beyondrealitycore:textures/title.png");
+    //public static final ResourceLocation minecraftTitleTextures = new ResourceLocation("beyondrealitycore:textures/title.png");
     //public static final ResourceLocation backGround = new ResourceLocation("beyondrealitycore:textures/background.png");
-    public static BufferedImage image;
-    public static DynamicTexture backgroundTexture;
-    public static ResourceLocation backGround;
+    public static BufferedImage image, imageTitle;
+    public static DynamicTexture backgroundTexture, backgroundTextureTitle;
+    public static ResourceLocation backGround, minecraftTitleTextures;
     public static final String field_96138_a = "Please click " + EnumChatFormatting.UNDERLINE + "here" + EnumChatFormatting.RESET + " for more information.";
     public int field_92024_r;
     public int field_92023_s;
@@ -176,7 +176,15 @@ public class BRCGuiMainMenu extends GuiScreen implements GuiYesNoCallback
             e.printStackTrace();
         }
         this.backgroundTexture = new DynamicTexture(image);
-        this.backGround = this.mc.getTextureManager().getDynamicTextureLocation("backgroundpic", backgroundTexture);
+        this.backGround = this.mc.getTextureManager().getDynamicTextureLocation("backgroundTexture", backgroundTexture);
+
+        try {
+            imageTitle = ImageIO.read(BeyondRealityCore.pngTitle);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        this.backgroundTextureTitle = new DynamicTexture(imageTitle);
+        this.minecraftTitleTextures = this.mc.getTextureManager().getDynamicTextureLocation("imgtitle", backgroundTextureTitle);
 
         this.viewportTexture = new DynamicTexture(256, 256);
         this.field_110351_G = this.mc.getTextureManager().getDynamicTextureLocation("background", this.viewportTexture);

@@ -11,7 +11,7 @@ public class ConfigHandler {
     public static String[] bannedEnderBlocks, bannedNetherBlocks, rightClickBlackList, bottomLeftBranding, menuSayings;
     public static int aggrorangeEnd, aggrorangeNether, customBlocksCount;
     public static boolean fastLeafDecay, rightClick, enableOreBlocks, enableCustomBlocks;
-    public static String strMainMenuBackground;
+    public static String strMainMenuBackground, strMainMenuTitle;
 
     public static void init() {
 
@@ -34,6 +34,7 @@ public class ConfigHandler {
         bottomLeftBranding = config.get("Main Menu Settings", "Bottom Left Branding",
                 new String[] {"Beyond Reality"}).getStringList();
         strMainMenuBackground = config.get("Main Menu Settings", "Main Menu Screen", "background.png").getString();
+        strMainMenuTitle = config.get("Main Menu Settings", "Main Menu Title", "title.png").getString();
         menuSayings = config.get("Main Menu Settings", "Main Menu Sayings",
                 new String[] {"Welcome to Beyond Reality", "This Pack is HARD!"}).getStringList();
 

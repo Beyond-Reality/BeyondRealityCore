@@ -48,7 +48,7 @@ public class BeyondRealityCore {
     @SidedProxy( clientSide="com.mcbeyondreality.beyondrealitycore.proxy.ClientProxy", serverSide="com.mcbeyondreality.beyondrealitycore.proxy.CommonProxy")
     public static CommonProxy proxy;
 
-    public static File pngMainMenu;
+    public static File pngMainMenu, pngTitle;
 
     @EventHandler
     public void serverLoad(FMLServerStartingEvent event) {
@@ -104,6 +104,16 @@ public class BeyondRealityCore {
         proxy.register();
 
         ConfigHandler.init();
+
+        pngTitle = new File("config/BeyondRealityCore/images", ConfigHandler.strMainMenuTitle);
+        if(!pngTitle.exists()) {
+            URL inputUrl = getClass().getResource("/assets/beyondrealitycore/textures/title.png");
+            try {
+                FileUtils.copyURLToFile(inputUrl, pngTitle);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
         pngMainMenu = new File("config/BeyondRealityCore/images", ConfigHandler.strMainMenuBackground);
         if(!pngMainMenu.exists()) {
