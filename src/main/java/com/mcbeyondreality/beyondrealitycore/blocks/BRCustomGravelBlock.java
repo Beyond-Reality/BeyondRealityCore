@@ -4,6 +4,7 @@ import com.mcbeyondreality.beyondrealitycore.BeyondRealityCore;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.BlockFalling;
+import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.Item;
 
@@ -19,6 +20,7 @@ public class BRCustomGravelBlock extends BlockFalling {
     public BRCustomGravelBlock(String name, String tool, int hardness,
                                Item drop, int meta, int least_qty, int most_qty) {
 
+        super(Material.rock);
         this.setBlockName("beyondrealitycore:" + name);
         this.setCreativeTab(BeyondRealityCore.tabBeyondReality);
         this.setHardness(1.5F);
