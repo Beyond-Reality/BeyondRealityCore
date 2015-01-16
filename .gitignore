@@ -14,7 +14,6 @@ CREDITS-fml.txt
 src/api/nei/
 eclipse/.metadata/.plugins/org.eclipse.debug.ui/launchConfigurationHistory.xml
 forge-1.7.10-10.13.0.1180-changelog.txt
-gradle/wrapper/gradle-wrapper.jar
 gradlew.bat
 LICENSE-fml.txt
 gradlew.bat
@@ -30,5 +29,4 @@ gradlew.bat
 .classpath
 .gradle/2.0/taskArtifacts/cache.properties
 .project
-gradle/wrapper/gradle-wrapper.properties
 Thumbs.db
