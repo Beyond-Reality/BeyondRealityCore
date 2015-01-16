@@ -14,7 +14,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 public class TileAim extends TileEntity implements IEnergyReceiver, IInventory {
 
-    private static EnergyStorage energy = new EnergyStorage(10000, 80, 0);
+    protected EnergyStorage energy = new EnergyStorage(10000, 80, 0);
     private ItemStack[] inventory;
 
     public TileAim() {
@@ -160,7 +160,8 @@ public class TileAim extends TileEntity implements IEnergyReceiver, IInventory {
         return true;
     }
 
-    public static float getPowerScaled() {
+    public float getPowerScaled() {
         return (float)energy.getEnergyStored() / (float)energy.getMaxEnergyStored();
     }
+
 }
