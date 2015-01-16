@@ -1,15 +1,23 @@
 package com.mcbeyondreality.beyondrealitycore.handlers;
 
+import com.mcbeyondreality.beyondrealitycore.BeyondRealityCore;
 import com.mcbeyondreality.beyondrealitycore.gui.BRCGuiMainMenu;
+import com.mcbeyondreality.beyondrealitycore.gui.ContainerAim;
+import com.mcbeyondreality.beyondrealitycore.gui.GuiAim;
+import com.mcbeyondreality.beyondrealitycore.tileentity.TileAim;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiMainMenu;
 import net.minecraft.client.multiplayer.ServerData;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 import net.minecraftforge.client.event.GuiScreenEvent;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -30,7 +38,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GuiHandler {
+public class GuiHandler implements IGuiHandler {
     @SideOnly(Side.CLIENT)
     @SubscribeEvent
     public void guiPostInit(GuiScreenEvent.InitGuiEvent.Post event) throws NoSuchFieldException {
@@ -131,4 +139,21 @@ public class GuiHandler {
         }
     }
 
+    @Override
+    public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
+
+        TileEntity entity = world.getTileEntity(x, y, z);
+
+        if(ID == BeyondRealityCore.GUIs.AIM.ordinal()) return new ContainerAim(player.inventory, (TileAim) entity);
+        else return null;
+    }
+
+    @Override
+    public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
+
+        TileEntity entity = world.getTileEntity(x, y, z);
+
+        if (ID == BeyondRealityCore.GUIs.AIM.ordinal()) return new GuiAim(player.inventory, (TileAim) entity);
+        else return null;
+    }
 }

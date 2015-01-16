@@ -1,35 +1,64 @@
 package com.mcbeyondreality.beyondrealitycore.tileentity;
 
+import cofh.api.energy.EnergyStorage;
 import cofh.api.energy.IEnergyHandler;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.ISidedInventory;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class TileAim extends TileEntity implements IEnergyHandler, ISidedInventory {
+public class TileAim extends TileEntity implements IEnergyHandler, IInventory {
 
-    private String furnaceName;
+    public final EnergyStorage energy = new EnergyStorage(10000);
+    private ItemStack[] inventory;
 
-    public void furnaceName(String string){
-        this.furnaceName = string;
+    public TileAim() {
+
+        inventory = new ItemStack[2];
     }
 
     @Override
     public void readFromNBT(NBTTagCompound tag) {
 
         super.readFromNBT(tag);
+        NBTTagList list = tag.getTagList("ItemsAim", Constants.NBT.TAG_COMPOUND);
+        for(int i = 0; i < list.tagCount(); i++) {
+            NBTTagCompound item = (NBTTagCompound) list.getCompoundTagAt(i);
+            int slot = item.getByte("SlotAim");
+            if(slot >= 0 && slot < getSizeInventory()) {
+                setInventorySlotContents(slot, ItemStack.loadItemStackFromNBT(item));
+            }
+        }
+        energy.readFromNBT(tag);
     }
 
     @Override
     public void writeToNBT(NBTTagCompound tag) {
 
         super.writeToNBT(tag);
+
+        NBTTagList list = new NBTTagList();
+        for(int i = 0; i < getSizeInventory(); i++) {
+            ItemStack itemstack = getStackInSlot(i);
+            if(itemstack != null) {
+                NBTTagCompound item = new NBTTagCompound();
+                item.setByte("SlotAim", (byte) i);
+                itemstack.writeToNBT(item);
+                list.appendTag(item);
+            }
+        }
+        tag.setTag("ItemsAim", list);
+
+        energy.writeToNBT(tag);
     }
+
     @Override
     public int receiveEnergy(ForgeDirection from, int maxReceive, boolean simulate) {
-        return 0;
+        return energy.receiveEnergy(maxReceive, simulate);
     }
 
     @Override
@@ -39,12 +68,12 @@ public class TileAim extends TileEntity implements IEnergyHandler, ISidedInvento
 
     @Override
     public int getEnergyStored(ForgeDirection from) {
-        return 0;
+        return energy.getEnergyStored();
     }
 
     @Override
     public int getMaxEnergyStored(ForgeDirection from) {
-        return 0;
+        return energy.getMaxEnergyStored();
     }
 
     @Override
@@ -52,49 +81,50 @@ public class TileAim extends TileEntity implements IEnergyHandler, ISidedInvento
         return true;
     }
 
-    @Override
-    public int[] getAccessibleSlotsFromSide(int p_94128_1_) {
-        return new int[0];
-    }
-
-    @Override
-    public boolean canInsertItem(int p_102007_1_, ItemStack p_102007_2_, int p_102007_3_) {
-        return false;
-    }
-
-    @Override
-    public boolean canExtractItem(int p_102008_1_, ItemStack p_102008_2_, int p_102008_3_) {
-        return false;
-    }
 
     @Override
     public int getSizeInventory() {
-        return 0;
+        return inventory.length;
     }
 
     @Override
-    public ItemStack getStackInSlot(int p_70301_1_) {
-        return null;
+    public ItemStack getStackInSlot(int i) {
+        return inventory[i];
     }
 
     @Override
-    public ItemStack decrStackSize(int p_70298_1_, int p_70298_2_) {
-        return null;
+    public ItemStack decrStackSize(int slot, int count) {
+        ItemStack itemstack = getStackInSlot(slot);
+
+        if(itemstack != null) {
+            if(itemstack.stackSize <= count) { setInventorySlotContents(slot, null); }
+        } else {
+            itemstack = itemstack.splitStack(count);
+            markDirty();
+        }
+        return itemstack;
     }
 
     @Override
-    public ItemStack getStackInSlotOnClosing(int p_70304_1_) {
-        return null;
+    public ItemStack getStackInSlotOnClosing(int slot) {
+        ItemStack itemStack = getStackInSlot(slot);
+        setInventorySlotContents(slot, null);
+        return itemStack;
     }
 
     @Override
-    public void setInventorySlotContents(int p_70299_1_, ItemStack p_70299_2_) {
-
+    public void setInventorySlotContents(int slot, ItemStack itemstack) {
+        inventory[slot] = itemstack;
+        if(itemstack != null && itemstack.stackSize > getInventoryStackLimit()) {
+            itemstack.stackSize = getInventoryStackLimit();
+        }
+        //onInventoryChanged();
+        markDirty();
     }
 
     @Override
     public String getInventoryName() {
-        return null;
+        return "beyondreality:AIM";
     }
 
     @Override
@@ -104,12 +134,12 @@ public class TileAim extends TileEntity implements IEnergyHandler, ISidedInvento
 
     @Override
     public int getInventoryStackLimit() {
-        return 0;
+        return 64;
     }
 
     @Override
-    public boolean isUseableByPlayer(EntityPlayer p_70300_1_) {
-        return false;
+    public boolean isUseableByPlayer(EntityPlayer player) {
+        return player.getDistanceSq(xCoord + 0.5D, yCoord + 0.5D, zCoord + 0.5D) <= 64;
     }
 
     @Override
@@ -123,7 +153,7 @@ public class TileAim extends TileEntity implements IEnergyHandler, ISidedInvento
     }
 
     @Override
-    public boolean isItemValidForSlot(int p_94041_1_, ItemStack p_94041_2_) {
-        return false;
+    public boolean isItemValidForSlot(int slot, ItemStack itemstack) {
+        return true;
     }
 }
