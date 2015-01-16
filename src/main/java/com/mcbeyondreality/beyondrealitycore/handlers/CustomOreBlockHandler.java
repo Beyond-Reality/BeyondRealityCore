@@ -1,7 +1,9 @@
 package com.mcbeyondreality.beyondrealitycore.handlers;
 
+import com.mcbeyondreality.beyondrealitycore.BeyondRealityCore;
 import com.mcbeyondreality.beyondrealitycore.blocks.BRCustomGravelBlock;
 import com.mcbeyondreality.beyondrealitycore.blocks.BRCustomOreBlock;
+import com.mcbeyondreality.beyondrealitycore.blocks.BlockAim;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraftforge.oredict.OreDictionary;
@@ -13,8 +15,12 @@ public class CustomOreBlockHandler {
     static Block gemApatite, tinyoreApatite, tinyoreCopper, tinyoreTin, tinyoreLead, tinyoreSilver, tinyoreNickel, tinyoreAluminium;
     static Block tinyorePlatinum, tinyoreCadmium, tinyoreIndium, tinyoreMagnetite, tinyoreUranium, tinyoreZinc;
     static Block tinyoreIron, tinyoreGold, tinyoreDiamond, tinyoreEmerald, tinyoreRedstone, tinyoreLapis, tinyoreCoal;
+    public static Block blockAim, blockAimActive;
 
     public static void init() {
+        blockAim = new BlockAim(false).setBlockName("beyondrealitycore:blockAim").setCreativeTab(BeyondRealityCore.tabBeyondReality);
+        blockAimActive = new BlockAim(true).setBlockName("beyondrealitycore:blockAimActive");
+
         //Normal Ore Blocks
         oreApatite = new BRCustomOreBlock("oreApatite", "pickaxe", 2, CustomItemHandler.gemApatite, 1, 4);
         oreCopper = new BRCustomOreBlock("oreCopper", "pickaxe", 2);
@@ -52,6 +58,8 @@ public class CustomOreBlockHandler {
         tinyoreLapis = new BRCustomGravelBlock("tinyoreLapis", "shovel", 1, CustomItemHandler.tinyLapis);
         tinyoreCoal = new BRCustomGravelBlock("tinyoreCoal", "shovel", 1, CustomItemHandler.tinyCoal);
 
+        GameRegistry.registerBlock(blockAimActive, "blockAimActive");
+        GameRegistry.registerBlock(blockAim, "blockAim");
         GameRegistry.registerBlock(oreApatite, "oreApatite");
         GameRegistry.registerBlock(oreCopper, "oreCopper");
         GameRegistry.registerBlock(oreTin, "oreTin");

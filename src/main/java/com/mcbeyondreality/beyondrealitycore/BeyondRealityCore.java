@@ -9,6 +9,7 @@ import com.mcbeyondreality.beyondrealitycore.handlers.*;
 import com.mcbeyondreality.beyondrealitycore.notification.NotificationTickHandler;
 import com.mcbeyondreality.beyondrealitycore.proxy.CommonProxy;
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -37,7 +38,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
-@Mod(name = "Beyond Reality Core", modid = "beyondrealitycore", version = "@VERSION@")
+@Mod(name = "Beyond Reality Core", modid = "beyondrealitycore", version = "@VERSION@", dependencies = "after:CoFHCore")
 
 
 public class BeyondRealityCore {
