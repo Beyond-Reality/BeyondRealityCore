@@ -9,6 +9,6 @@ public class CommonProxy {
     public void register() {
 
         GameRegistry.registerTileEntity(TileDimGuardKiller.class, "BRC:DimGuardFixer");
-        GameRegistry.registerTileEntity(TileAim.class, "BRC:tileAim");
+
     }
 }

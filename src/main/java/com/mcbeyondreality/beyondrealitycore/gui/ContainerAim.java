@@ -25,7 +25,7 @@ public class ContainerAim extends Container {
             }
         }
         //Aim Slots
-        this.addSlotToContainer(new Slot(entity, 0, 56, 35));
+        this.addSlotToContainer(new Slot(entity, 0, 56, 34));
         this.addSlotToContainer(new Slot(entity, 1, 116, 35));
     }
 

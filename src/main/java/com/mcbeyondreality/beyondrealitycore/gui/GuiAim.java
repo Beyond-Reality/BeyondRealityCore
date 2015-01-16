@@ -27,6 +27,10 @@ public class GuiAim extends GuiContainer {
         GL11.glColor4f(1F, 1F, 1F, 1F);
        this.mc.getTextureManager().bindTexture(backgroundimage);
         drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
+
+        //draw powerbar
+        float power = TileAim.getPowerScaled();
+        drawTexturedModalRect(guiLeft + 11 , guiTop + 16, 176, 33 , 17, (int)(55 * power));
     }
 
     @Override

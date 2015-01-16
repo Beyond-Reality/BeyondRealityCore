@@ -2,6 +2,7 @@ package com.mcbeyondreality.beyondrealitycore.tileentity;
 
 import cofh.api.energy.EnergyStorage;
 import cofh.api.energy.IEnergyHandler;
+import cofh.api.energy.IEnergyReceiver;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -11,9 +12,9 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class TileAim extends TileEntity implements IEnergyHandler, IInventory {
+public class TileAim extends TileEntity implements IEnergyReceiver, IInventory {
 
-    public final EnergyStorage energy = new EnergyStorage(10000);
+    private static EnergyStorage energy = new EnergyStorage(10000, 80, 0);
     private ItemStack[] inventory;
 
     public TileAim() {
@@ -27,7 +28,7 @@ public class TileAim extends TileEntity implements IEnergyHandler, IInventory {
         super.readFromNBT(tag);
         NBTTagList list = tag.getTagList("ItemsAim", Constants.NBT.TAG_COMPOUND);
         for(int i = 0; i < list.tagCount(); i++) {
-            NBTTagCompound item = (NBTTagCompound) list.getCompoundTagAt(i);
+            NBTTagCompound item = list.getCompoundTagAt(i);
             int slot = item.getByte("SlotAim");
             if(slot >= 0 && slot < getSizeInventory()) {
                 setInventorySlotContents(slot, ItemStack.loadItemStackFromNBT(item));
@@ -57,13 +58,13 @@ public class TileAim extends TileEntity implements IEnergyHandler, IInventory {
     }
 
     @Override
-    public int receiveEnergy(ForgeDirection from, int maxReceive, boolean simulate) {
-        return energy.receiveEnergy(maxReceive, simulate);
+    public void updateEntity() {
+
     }
 
     @Override
-    public int extractEnergy(ForgeDirection from, int maxExtract, boolean simulate) {
-        return 0;
+    public int receiveEnergy(ForgeDirection from, int maxReceive, boolean simulate) {
+        return energy.receiveEnergy(maxReceive, simulate);
     }
 
     @Override
@@ -97,11 +98,13 @@ public class TileAim extends TileEntity implements IEnergyHandler, IInventory {
         ItemStack itemstack = getStackInSlot(slot);
 
         if(itemstack != null) {
-            if(itemstack.stackSize <= count) { setInventorySlotContents(slot, null); }
-        } else {
+            if(itemstack.stackSize <= count) {
+                setInventorySlotContents(slot, null);
+            }
             itemstack = itemstack.splitStack(count);
-            markDirty();
+
         }
+        super.markDirty();
         return itemstack;
     }
 
@@ -119,7 +122,7 @@ public class TileAim extends TileEntity implements IEnergyHandler, IInventory {
             itemstack.stackSize = getInventoryStackLimit();
         }
         //onInventoryChanged();
-        markDirty();
+        super.markDirty();
     }
 
     @Override
@@ -155,5 +158,9 @@ public class TileAim extends TileEntity implements IEnergyHandler, IInventory {
     @Override
     public boolean isItemValidForSlot(int slot, ItemStack itemstack) {
         return true;
+    }
+
+    public static float getPowerScaled() {
+        return (float)energy.getEnergyStored() / (float)energy.getMaxEnergyStored();
     }
 }
