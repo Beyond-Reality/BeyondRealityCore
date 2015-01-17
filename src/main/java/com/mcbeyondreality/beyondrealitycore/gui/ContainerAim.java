@@ -1,6 +1,8 @@
 package com.mcbeyondreality.beyondrealitycore.gui;
 
 import com.mcbeyondreality.beyondrealitycore.tileentity.TileAim;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -11,6 +13,7 @@ import net.minecraft.item.ItemStack;
 public class ContainerAim extends Container {
 
     private TileAim aim;
+    private int lastPower = 0;
 
     public ContainerAim(InventoryPlayer invPlayer, TileAim entity) {
         this.aim = entity;
@@ -63,5 +66,29 @@ public class ContainerAim extends Container {
 
     }
 
+    @Override
+    public void addCraftingToCrafters(ICrafting crafter) {
+        crafter.sendProgressBarUpdate(this, 0, this.aim.getEnergyStored());
+    }
+
+    @Override
+    public void detectAndSendChanges() {
+        int power = this.aim.getEnergyStored();
+
+        for (int i = 0; i < this.crafters.size(); ++i) {
+            ICrafting icrafting = (ICrafting)this.crafters.get(i);
+            if (this.lastPower != this.aim.getEnergyStored()) {
+                icrafting.sendProgressBarUpdate(this, 0, this.aim.getEnergyStored());
+            }
+        }
+
+        this.lastPower = this.aim.getEnergyStored();
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void updateProgressBar(int i, int j) {
+        if (i ==0) aim.setEnergyStored(j);
+    }
 
 }

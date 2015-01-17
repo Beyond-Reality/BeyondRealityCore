@@ -61,7 +61,7 @@ public class TileAim extends TileEntity implements IEnergyHandler, IInventory {
         energy.writeToNBT(tag);
     }
 
-    @Override
+/*    @Override
     public Packet getDescriptionPacket() {
         NBTTagCompound tag = new NBTTagCompound();
         this.writeToNBT(tag);
@@ -71,11 +71,11 @@ public class TileAim extends TileEntity implements IEnergyHandler, IInventory {
     @Override
     public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet) {
         readFromNBT(packet.func_148857_g());
-    }
+    }*/
 
     @Override
     public void updateEntity() {
-        worldObj.markBlockForUpdate(this.xCoord, this.yCoord, this.zCoord);
+        //worldObj.markBlockForUpdate(this.xCoord, this.yCoord, this.zCoord);
         //markDirty();
     }
 
@@ -186,5 +186,11 @@ public class TileAim extends TileEntity implements IEnergyHandler, IInventory {
         return (float)energy.getEnergyStored() / (float)energy.getMaxEnergyStored();
     }
 
+    public int getEnergyStored() {
+        return energy.getEnergyStored();
+    }
 
+    public void setEnergyStored(int i) {
+        energy.setEnergyStored(i);
+    }
 }
