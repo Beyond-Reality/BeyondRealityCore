@@ -21,6 +21,7 @@ public class TileAim extends TileEntity implements IEnergyHandler, IInventory {
     protected EnergyStorage energy = new EnergyStorage(MAXENERGY, 80, 0);
     private ItemStack[] inventory;
     public long processedRF = 0;
+    public boolean isBurning = false;
 
 
     public TileAim() {
@@ -130,6 +131,17 @@ public class TileAim extends TileEntity implements IEnergyHandler, IInventory {
             itemstack.stackSize = getInventoryStackLimit();
         }
         super.markDirty();
+
+        if (inventory[0] != null && this.processedRF == 0) {
+            for(AIMMachineRecipe aim: AIMMachineRecipeHandler.aim) {
+                String blocks[] = aim.input.split(":");
+                Block block = GameRegistry.findBlock(blocks[0], blocks[1]);
+                if (itemstack.getUnlocalizedName().equalsIgnoreCase(block.getUnlocalizedName()))
+                    processedRF = aim.rf;
+
+            }
+
+        }
     }
 
     @Override
@@ -193,6 +205,7 @@ public class TileAim extends TileEntity implements IEnergyHandler, IInventory {
 
             for (AIMMachineRecipe aim : AIMMachineRecipeHandler.aim) {
                 String blocks[] = aim.input.split(":");
+
                 Block block = GameRegistry.findBlock(blocks[0], blocks[1]);
                 if (this.inventory[0].getUnlocalizedName().equalsIgnoreCase(block.getUnlocalizedName())) {
                     String blockoutput[] = aim.output.split(":");
@@ -211,90 +224,36 @@ public class TileAim extends TileEntity implements IEnergyHandler, IInventory {
         return null;
     }
 
-    public void transformItem() {
-        ItemStack output = canTransform();
-
-        if (output == null) return;
-
-        if (this.inventory[1] == null) {
-            this.inventory[1] = output.copy();
-        } else if (this.inventory[1].getItem() == output.getItem()) {
-            this.inventory[1].stackSize += output.stackSize; // Forge BugFix: Results may have multiple items
-        }
-
-        --this.inventory[0].stackSize;
-
-        if (this.inventory[0].stackSize <= 0) {
-            this.inventory[0] = null;
-        }
-
-    }
-
-
     @Override
     public void updateEntity() {
 
-        boolean flag = this.processedRF > 0;
-        boolean flag1 = false;
-
-        if (this.processedRF > 0)
-        {
-            processedRF -= this.energy.getEnergyStored() > 80 ? 80 : this.getEnergyStored();
+        if (this.processedRF > 0) {
+            long totalRF = this.energy.getEnergyStored();
+            long usedRF = Math.min(Math.min(totalRF, this.processedRF), 80);
+            processedRF -= usedRF;
+            energy.setEnergyStored((int) (totalRF - usedRF));
         }
 
-        if (!this.worldObj.isRemote)
-        {
-            if (this.processedRF > 0 || this.inventory[0] != null)
-            {
-                if (this.furnaceBurnTime == 0 && this.canSmelt())
-                {
-                    this.currentItemBurnTime = this.furnaceBurnTime = getItemBurnTime(this.furnaceItemStacks[1]);
+        if (!this.worldObj.isRemote) {
+            if (this.processedRF <= 0 && inventory[0] != null) {
 
-                    if (this.furnaceBurnTime > 0)
-                    {
-                        flag1 = true;
+                ItemStack output = this.canTransform();
 
-                        if (this.furnaceItemStacks[1] != null)
-                        {
-                            --this.furnaceItemStacks[1].stackSize;
+                if (output == null) return;
 
-                            if (this.furnaceItemStacks[1].stackSize == 0)
-                            {
-                                this.furnaceItemStacks[1] = furnaceItemStacks[1].getItem().getContainerItem(furnaceItemStacks[1]);
-                            }
-                        }
-                    }
+                if (this.inventory[1] == null) {
+                    this.inventory[1] = output.copy();
+                } else if (this.inventory[1].getItem() == output.getItem()) {
+                    this.inventory[1].stackSize += output.stackSize;
                 }
 
-                if (this.isBurning() && this.canSmelt())
-                {
-                    ++this.furnaceCookTime;
+                --this.inventory[0].stackSize;
 
-                    if (this.furnaceCookTime == 200)
-                    {
-                        this.furnaceCookTime = 0;
-                        this.smeltItem();
-                        flag1 = true;
-                    }
+                if (this.inventory[0].stackSize <= 0) {
+                    this.inventory[0] = null;
                 }
-                else
-                {
-                    this.furnaceCookTime = 0;
-                }
-            }
-
-            if (flag != this.furnaceBurnTime > 0)
-            {
-                flag1 = true;
-                BlockFurnace.updateFurnaceBlockState(this.furnaceBurnTime > 0, this.worldObj, this.xCoord, this.yCoord, this.zCoord);
+                this.markDirty();
             }
         }
-
-        if (flag1)
-        {
-            this.markDirty();
-        }
-
     }
-
 }
