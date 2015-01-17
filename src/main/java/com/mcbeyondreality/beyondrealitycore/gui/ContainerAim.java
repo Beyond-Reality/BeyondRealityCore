@@ -1,13 +1,18 @@
 package com.mcbeyondreality.beyondrealitycore.gui;
 
+import com.mcbeyondreality.beyondrealitycore.data.AIMMachineRecipe;
+import com.mcbeyondreality.beyondrealitycore.handlers.AIMMachineRecipeHandler;
 import com.mcbeyondreality.beyondrealitycore.tileentity.TileAim;
+import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
+import net.minecraft.inventory.SlotFurnace;
 import net.minecraft.item.ItemStack;
 
 public class ContainerAim extends Container {
@@ -28,9 +33,10 @@ public class ContainerAim extends Container {
                 this.addSlotToContainer(new Slot(invPlayer, 9 + x + y * 9, 8 + x * 18, 84 + y * 18));
             }
         }
+
         //Aim Slots
         this.addSlotToContainer(new Slot(entity, 0, 56, 34));
-        this.addSlotToContainer(new Slot(entity, 1, 116, 35));
+        this.addSlotToContainer(new SlotFurnace(invPlayer.player, entity, 1, 116, 35));
     }
 
     @Override
@@ -41,8 +47,11 @@ public class ContainerAim extends Container {
     @Override
     public ItemStack transferStackInSlot(EntityPlayer player, int i) {
         Slot slot = getSlot(i);
+        boolean found = false;
 
         if(slot != null && slot.getHasStack()) {
+
+            if(!this.aim.isItemValidForSlot(i, slot.getStack())) return null;
             ItemStack itemstack = slot.getStack();
             ItemStack result = itemstack.copy();
 

@@ -118,6 +118,17 @@ public class BeyondRealityCore {
         proxy.register();
 
         ConfigHandler.init();
+        try {
+            AIMMachineRecipeHandler.loadAIMRecipes();
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        } catch (TransformerException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SAXException e) {
+            e.printStackTrace();
+        }
 
         pngTitle = new File("config/BeyondRealityCore/images", ConfigHandler.strMainMenuTitle);
         if(!pngTitle.exists()) {

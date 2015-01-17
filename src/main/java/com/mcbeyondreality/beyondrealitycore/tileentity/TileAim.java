@@ -2,24 +2,26 @@ package com.mcbeyondreality.beyondrealitycore.tileentity;
 
 import cofh.api.energy.EnergyStorage;
 import cofh.api.energy.IEnergyHandler;
+import com.mcbeyondreality.beyondrealitycore.data.AIMMachineRecipe;
+import com.mcbeyondreality.beyondrealitycore.handlers.AIMMachineRecipeHandler;
+import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.ForgeDirection;
 
 public class TileAim extends TileEntity implements IEnergyHandler, IInventory {
 
-    protected EnergyStorage energy = new EnergyStorage(10000, 80, 0);
+    public static final int MAXENERGY = 10000;
+    protected EnergyStorage energy = new EnergyStorage(MAXENERGY, 80, 0);
     private ItemStack[] inventory;
-    protected float lastSyncPowerStored = -1;
-    private int storedEnergyRF;
+    public long processedRF = 0;
+
 
     public TileAim() {
 
@@ -39,6 +41,7 @@ public class TileAim extends TileEntity implements IEnergyHandler, IInventory {
             }
         }
         energy.readFromNBT(tag);
+        this.processedRF = tag.getLong("processedRF");
     }
 
     @Override
@@ -57,26 +60,8 @@ public class TileAim extends TileEntity implements IEnergyHandler, IInventory {
             }
         }
         tag.setTag("ItemsAim", list);
-
+        tag.setLong("processedRF", this.processedRF);
         energy.writeToNBT(tag);
-    }
-
-/*    @Override
-    public Packet getDescriptionPacket() {
-        NBTTagCompound tag = new NBTTagCompound();
-        this.writeToNBT(tag);
-        return new S35PacketUpdateTileEntity(xCoord, yCoord, xCoord, 1, tag);
-    }
-
-    @Override
-    public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet) {
-        readFromNBT(packet.func_148857_g());
-    }*/
-
-    @Override
-    public void updateEntity() {
-        //worldObj.markBlockForUpdate(this.xCoord, this.yCoord, this.zCoord);
-        //markDirty();
     }
 
     @Override
@@ -140,10 +125,10 @@ public class TileAim extends TileEntity implements IEnergyHandler, IInventory {
     @Override
     public void setInventorySlotContents(int slot, ItemStack itemstack) {
         inventory[slot] = itemstack;
+
         if(itemstack != null && itemstack.stackSize > getInventoryStackLimit()) {
             itemstack.stackSize = getInventoryStackLimit();
         }
-        //onInventoryChanged();
         super.markDirty();
     }
 
@@ -179,8 +164,16 @@ public class TileAim extends TileEntity implements IEnergyHandler, IInventory {
 
     @Override
     public boolean isItemValidForSlot(int slot, ItemStack itemstack) {
-        return true;
+        for(AIMMachineRecipe aim: AIMMachineRecipeHandler.aim) {
+            String blocks[] = aim.input.split(":");
+            Block block = GameRegistry.findBlock(blocks[0], blocks[1]);
+            if (itemstack.getUnlocalizedName().equalsIgnoreCase(block.getUnlocalizedName())) {
+                return true;
+            }
+        }
+        return false;
     }
+
 
     public float getPowerScaled() {
 
@@ -194,4 +187,114 @@ public class TileAim extends TileEntity implements IEnergyHandler, IInventory {
     public void setEnergyStored(int i) {
         energy.setEnergyStored(i);
     }
+
+    private ItemStack canTransform() {
+        if (this.inventory[0] != null) {
+
+            for (AIMMachineRecipe aim : AIMMachineRecipeHandler.aim) {
+                String blocks[] = aim.input.split(":");
+                Block block = GameRegistry.findBlock(blocks[0], blocks[1]);
+                if (this.inventory[0].getUnlocalizedName().equalsIgnoreCase(block.getUnlocalizedName())) {
+                    String blockoutput[] = aim.output.split(":");
+                    Block output = GameRegistry.findBlock(blockoutput[0], blockoutput[1]);
+                    ItemStack itemstack = new ItemStack(output);
+
+                    if (this.inventory[1] == null) return itemstack;
+                    if(!this.inventory[1].isItemEqual(itemstack)) return null;
+                    int result = this.inventory[0].stackSize + itemstack.stackSize;
+                    if (this.inventory[0].getMaxStackSize() < result) return null;
+                    return itemstack;
+                }
+            }
+        }
+
+        return null;
+    }
+
+    public void transformItem() {
+        ItemStack output = canTransform();
+
+        if (output == null) return;
+
+        if (this.inventory[1] == null) {
+            this.inventory[1] = output.copy();
+        } else if (this.inventory[1].getItem() == output.getItem()) {
+            this.inventory[1].stackSize += output.stackSize; // Forge BugFix: Results may have multiple items
+        }
+
+        --this.inventory[0].stackSize;
+
+        if (this.inventory[0].stackSize <= 0) {
+            this.inventory[0] = null;
+        }
+
+    }
+
+
+    @Override
+    public void updateEntity() {
+
+        boolean flag = this.processedRF > 0;
+        boolean flag1 = false;
+
+        if (this.processedRF > 0)
+        {
+            processedRF -= this.energy.getEnergyStored() > 80 ? 80 : this.getEnergyStored();
+        }
+
+        if (!this.worldObj.isRemote)
+        {
+            if (this.processedRF > 0 || this.inventory[0] != null)
+            {
+                if (this.furnaceBurnTime == 0 && this.canSmelt())
+                {
+                    this.currentItemBurnTime = this.furnaceBurnTime = getItemBurnTime(this.furnaceItemStacks[1]);
+
+                    if (this.furnaceBurnTime > 0)
+                    {
+                        flag1 = true;
+
+                        if (this.furnaceItemStacks[1] != null)
+                        {
+                            --this.furnaceItemStacks[1].stackSize;
+
+                            if (this.furnaceItemStacks[1].stackSize == 0)
+                            {
+                                this.furnaceItemStacks[1] = furnaceItemStacks[1].getItem().getContainerItem(furnaceItemStacks[1]);
+                            }
+                        }
+                    }
+                }
+
+                if (this.isBurning() && this.canSmelt())
+                {
+                    ++this.furnaceCookTime;
+
+                    if (this.furnaceCookTime == 200)
+                    {
+                        this.furnaceCookTime = 0;
+                        this.smeltItem();
+                        flag1 = true;
+                    }
+                }
+                else
+                {
+                    this.furnaceCookTime = 0;
+                }
+            }
+
+            if (flag != this.furnaceBurnTime > 0)
+            {
+                flag1 = true;
+                BlockFurnace.updateFurnaceBlockState(this.furnaceBurnTime > 0, this.worldObj, this.xCoord, this.yCoord, this.zCoord);
+            }
+        }
+
+        if (flag1)
+        {
+            this.markDirty();
+        }
+
+    }
+
 }
