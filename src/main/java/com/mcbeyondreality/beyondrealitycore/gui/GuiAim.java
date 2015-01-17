@@ -32,8 +32,8 @@ public class GuiAim extends GuiContainer {
         drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
 
         //draw powerbar
-        float power = this.tileAim.getPowerScaled();
-        drawTexturedModalRect(guiLeft + 11 , guiTop + 16, 176, 33 , 17, (int)(55 * power));
+        int power = (int) this.tileAim.getPowerScaled();
+        drawTexturedModalRect(guiLeft + 11 , guiTop + (71 - power), 176, 88 - power, 17, power);
     }
 
     @Override

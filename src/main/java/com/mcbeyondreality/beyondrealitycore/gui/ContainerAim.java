@@ -68,12 +68,12 @@ public class ContainerAim extends Container {
 
     @Override
     public void addCraftingToCrafters(ICrafting crafter) {
+        super.addCraftingToCrafters(crafter);
         crafter.sendProgressBarUpdate(this, 0, this.aim.getEnergyStored());
     }
 
     @Override
     public void detectAndSendChanges() {
-        int power = this.aim.getEnergyStored();
 
         for (int i = 0; i < this.crafters.size(); ++i) {
             ICrafting icrafting = (ICrafting)this.crafters.get(i);

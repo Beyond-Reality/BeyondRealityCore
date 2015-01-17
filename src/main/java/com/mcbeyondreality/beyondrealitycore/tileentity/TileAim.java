@@ -183,7 +183,8 @@ public class TileAim extends TileEntity implements IEnergyHandler, IInventory {
     }
 
     public float getPowerScaled() {
-        return (float)energy.getEnergyStored() / (float)energy.getMaxEnergyStored();
+
+        return ((float)energy.getEnergyStored() / (float)energy.getMaxEnergyStored()) * 55;
     }
 
     public int getEnergyStored() {
