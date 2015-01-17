@@ -4,6 +4,7 @@ import com.mcbeyondreality.beyondrealitycore.tileentity.TileAim;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
+import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
@@ -61,4 +62,6 @@ public class ContainerAim extends Container {
         return null;
 
     }
+
+
 }

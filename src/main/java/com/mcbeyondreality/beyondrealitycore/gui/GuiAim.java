@@ -14,14 +14,14 @@ import scala.collection.parallel.ParIterableLike;
 public class GuiAim extends GuiContainer {
 
     private ResourceLocation backgroundimage = new ResourceLocation("beyondrealitycore:textures/gui/aim.png");
-    public TileAim tileAim;
+    private TileAim tileAim;
 
     public GuiAim(InventoryPlayer invPlayer, TileAim entity) {
         super(new ContainerAim(invPlayer, entity));
 
         xSize = 176;
         ySize = 166;
-
+        float test = entity.getPowerScaled();
         this.tileAim = entity;
     }
 

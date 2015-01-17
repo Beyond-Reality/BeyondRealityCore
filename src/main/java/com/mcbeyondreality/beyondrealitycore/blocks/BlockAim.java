@@ -4,8 +4,7 @@ import com.mcbeyondreality.beyondrealitycore.BeyondRealityCore;
 import com.mcbeyondreality.beyondrealitycore.tileentity.TileAim;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.Block;
-import net.minecraft.block.ITileEntityProvider;
+import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
@@ -16,9 +15,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-import javax.swing.text.html.parser.Entity;
-
-public class BlockAim extends Block implements ITileEntityProvider {
+public class BlockAim extends BlockContainer {
 
     @SideOnly(Side.CLIENT)
     private IIcon top, front;
@@ -72,10 +69,11 @@ public class BlockAim extends Block implements ITileEntityProvider {
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta,
                                     float hitX, float hitY, float hitZ) {
-        if (world.getTileEntity(x, y, z) != null) {
-            player.openGui(BeyondRealityCore.instance, BeyondRealityCore.GUIs.AIM.ordinal(), world, x, y, z);
-            return true;
-        }
+
+            if (world.getTileEntity(x, y, z) != null) {
+                player.openGui(BeyondRealityCore.instance, BeyondRealityCore.GUIs.AIM.ordinal(), world, x, y, z);
+                return true;
+            }
 
         return true;
     }

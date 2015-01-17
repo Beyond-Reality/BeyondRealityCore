@@ -19,6 +19,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
+import cpw.mods.fml.common.network.FMLEventChannel;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
@@ -52,6 +53,8 @@ public class BeyondRealityCore {
     @SidedProxy( clientSide="com.mcbeyondreality.beyondrealitycore.proxy.ClientProxy", serverSide="com.mcbeyondreality.beyondrealitycore.proxy.CommonProxy")
     public static CommonProxy proxy;
 
+    //public static FMLEventChannel NetworkCon;
+
     public static File pngMainMenu, pngTitle;
 
     public enum GUIs {
@@ -65,6 +68,9 @@ public class BeyondRealityCore {
         ServerCommandManager manager = (ServerCommandManager) command;
         manager.registerCommand(new CommandGetUUID());
         manager.registerCommand(new CommandToggleToolRightClick());
+        //FMLEventChannel net = NetworkRegistry.INSTANCE.newEventDrivenChannel("beyondrealitycore");
+        //NetworkCon = net;
+
     }
 
     public static CreativeTabs tabBeyondReality = new CreativeTabs("tabBeyondReality") {

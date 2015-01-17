@@ -2,20 +2,24 @@ package com.mcbeyondreality.beyondrealitycore.tileentity;
 
 import cofh.api.energy.EnergyStorage;
 import cofh.api.energy.IEnergyHandler;
-import cofh.api.energy.IEnergyReceiver;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class TileAim extends TileEntity implements IEnergyReceiver, IInventory {
+public class TileAim extends TileEntity implements IEnergyHandler, IInventory {
 
     protected EnergyStorage energy = new EnergyStorage(10000, 80, 0);
     private ItemStack[] inventory;
+    protected float lastSyncPowerStored = -1;
+    private int storedEnergyRF;
 
     public TileAim() {
 
@@ -58,13 +62,31 @@ public class TileAim extends TileEntity implements IEnergyReceiver, IInventory {
     }
 
     @Override
-    public void updateEntity() {
+    public Packet getDescriptionPacket() {
+        NBTTagCompound tag = new NBTTagCompound();
+        this.writeToNBT(tag);
+        return new S35PacketUpdateTileEntity(xCoord, yCoord, xCoord, 1, tag);
+    }
 
+    @Override
+    public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet) {
+        readFromNBT(packet.func_148857_g());
+    }
+
+    @Override
+    public void updateEntity() {
+        worldObj.markBlockForUpdate(this.xCoord, this.yCoord, this.zCoord);
+        //markDirty();
     }
 
     @Override
     public int receiveEnergy(ForgeDirection from, int maxReceive, boolean simulate) {
         return energy.receiveEnergy(maxReceive, simulate);
+    }
+
+    @Override
+    public int extractEnergy(ForgeDirection from, int maxExtract, boolean simulate) {
+        return 0;
     }
 
     @Override
@@ -163,5 +185,6 @@ public class TileAim extends TileEntity implements IEnergyReceiver, IInventory {
     public float getPowerScaled() {
         return (float)energy.getEnergyStored() / (float)energy.getMaxEnergyStored();
     }
+
 
 }
