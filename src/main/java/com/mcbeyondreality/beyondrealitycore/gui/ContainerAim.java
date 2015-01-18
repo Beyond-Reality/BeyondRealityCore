@@ -19,6 +19,7 @@ public class ContainerAim extends Container {
 
     private TileAim aim;
     private int lastPower = 0;
+    private int lastProgress = 0;
 
     public ContainerAim(InventoryPlayer invPlayer, TileAim entity) {
         this.aim = entity;
@@ -47,7 +48,6 @@ public class ContainerAim extends Container {
     @Override
     public ItemStack transferStackInSlot(EntityPlayer player, int i) {
         Slot slot = getSlot(i);
-        boolean found = false;
 
         if(slot != null && slot.getHasStack()) {
 
@@ -79,25 +79,38 @@ public class ContainerAim extends Container {
     public void addCraftingToCrafters(ICrafting crafter) {
         super.addCraftingToCrafters(crafter);
         crafter.sendProgressBarUpdate(this, 0, this.aim.getEnergyStored());
+        crafter.sendProgressBarUpdate(this, 1, this.aim.processedPercent);
     }
 
     @Override
     public void detectAndSendChanges() {
+        super.detectAndSendChanges();
 
         for (int i = 0; i < this.crafters.size(); ++i) {
             ICrafting icrafting = (ICrafting)this.crafters.get(i);
-            if (this.lastPower != this.aim.getEnergyStored()) {
+            if (this.lastPower != this.aim.getEnergyStored())
                 icrafting.sendProgressBarUpdate(this, 0, this.aim.getEnergyStored());
-            }
+
+             if (this.lastProgress != this.aim.processedPercent)
+                icrafting.sendProgressBarUpdate(this, 1, this.aim.processedPercent);
+
         }
 
         this.lastPower = this.aim.getEnergyStored();
+        this.lastProgress = this.aim.processedPercent;
     }
 
     @SideOnly(Side.CLIENT)
     @Override
     public void updateProgressBar(int i, int j) {
-        if (i ==0) aim.setEnergyStored(j);
+        switch(i) {
+            case 0:
+                this.aim.setEnergyStored(j);
+                break;
+            case 1:
+                this.aim.processedPercent = j;
+                break;
+        }
     }
 
 }

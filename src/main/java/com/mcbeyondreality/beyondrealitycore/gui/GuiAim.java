@@ -9,6 +9,7 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
+import scala.Int;
 import scala.collection.parallel.ParIterableLike;
 
 import java.util.ArrayList;
@@ -35,15 +36,21 @@ public class GuiAim extends GuiContainer {
        this.mc.getTextureManager().bindTexture(backgroundimage);
         drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
 
-        //draw powerbar
+        //draw power bar
         int power = (int) this.tileAim.getPowerScaled();
+
+        int progress = this.tileAim.processedPercent == 0 ? 23 : Math.round(((this.tileAim.processedPercent / 100F) * 23));
+        //int progress = Math.round(((this.tileAim.processedPercent / 100F) * 23));
         drawTexturedModalRect(guiLeft + 11 , guiTop + (71 - power), 176, 88 - power, 17, power);
+        //draw progress bar
+        drawTexturedModalRect(guiLeft + 78 , guiTop + 35, 176 , 14, 23 - progress, 16 );
     }
 
     @Override
     public void drawGuiContainerForegroundLayer(int i, int j) {
         String s1 = "Usage: 80 RF/T";
         String s2 =  Integer.toString(tileAim.getEnergyStored()) + "/" + Integer.toString(this.tileAim.MAXENERGY);
+        String s3 = "Progress: " + Integer.toString((100 - tileAim.processedPercent)) + "%";
         this.fontRendererObj.drawString(s1, this.xSize / 2 - this.fontRendererObj.getStringWidth(s1) / 2, 6, 0x000000);
 
         int k = (this.width - this.xSize) /2;
@@ -53,6 +60,15 @@ public class GuiAim extends GuiContainer {
                 List list = new ArrayList();
                 list.add(s2);
                 this.drawHoveringText(list, (int)mouseX - k, (int)mouseY - l, this.fontRendererObj);
+            }
+        }
+        if (tileAim.processedPercent != 0) {
+            if (mouseX > guiLeft + 80 && mouseX < guiLeft + 100) {
+                if (mouseY > guiTop + 32 && mouseY < guiTop + 50) {
+                    List list = new ArrayList();
+                    list.add(s3);
+                    this.drawHoveringText(list, (int) mouseX - k, (int) mouseY - l, this.fontRendererObj);
+                }
             }
         }
     }

@@ -4,10 +4,9 @@ import cofh.api.energy.EnergyStorage;
 import cofh.api.energy.IEnergyHandler;
 import com.mcbeyondreality.beyondrealitycore.data.AIMMachineRecipe;
 import com.mcbeyondreality.beyondrealitycore.handlers.AIMMachineRecipeHandler;
-import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -21,6 +20,8 @@ public class TileAim extends TileEntity implements IEnergyHandler, IInventory {
     protected EnergyStorage energy = new EnergyStorage(MAXENERGY, 80, 0);
     private ItemStack[] inventory;
     public long processedRF = 0;
+    public long totalRF = 0;
+    public int processedPercent = 0;
     public boolean isBurning = false;
 
 
@@ -43,6 +44,8 @@ public class TileAim extends TileEntity implements IEnergyHandler, IInventory {
         }
         energy.readFromNBT(tag);
         this.processedRF = tag.getLong("processedRF");
+        this.totalRF = tag.getLong("totalRF");
+        this.processedPercent = tag.getInteger("processedPercent");
     }
 
     @Override
@@ -62,6 +65,9 @@ public class TileAim extends TileEntity implements IEnergyHandler, IInventory {
         }
         tag.setTag("ItemsAim", list);
         tag.setLong("processedRF", this.processedRF);
+        tag.setLong("totalRF", this.totalRF);
+        tag.setInteger("processedPercent", this.processedPercent);
+
         energy.writeToNBT(tag);
     }
 
@@ -72,7 +78,7 @@ public class TileAim extends TileEntity implements IEnergyHandler, IInventory {
 
     @Override
     public int extractEnergy(ForgeDirection from, int maxExtract, boolean simulate) {
-        return 0;
+        return energy.extractEnergy(maxExtract, simulate);
     }
 
     @Override
@@ -126,22 +132,6 @@ public class TileAim extends TileEntity implements IEnergyHandler, IInventory {
     @Override
     public void setInventorySlotContents(int slot, ItemStack itemstack) {
         inventory[slot] = itemstack;
-
-        if(itemstack != null && itemstack.stackSize > getInventoryStackLimit()) {
-            itemstack.stackSize = getInventoryStackLimit();
-        }
-        super.markDirty();
-
-        if (inventory[0] != null && this.processedRF == 0) {
-            for(AIMMachineRecipe aim: AIMMachineRecipeHandler.aim) {
-                String blocks[] = aim.input.split(":");
-                Block block = GameRegistry.findBlock(blocks[0], blocks[1]);
-                if (itemstack.getUnlocalizedName().equalsIgnoreCase(block.getUnlocalizedName()))
-                    processedRF = aim.rf;
-
-            }
-
-        }
     }
 
     @Override
@@ -166,26 +156,16 @@ public class TileAim extends TileEntity implements IEnergyHandler, IInventory {
 
     @Override
     public void openInventory() {
-
     }
 
     @Override
     public void closeInventory() {
-
     }
 
     @Override
     public boolean isItemValidForSlot(int slot, ItemStack itemstack) {
-        for(AIMMachineRecipe aim: AIMMachineRecipeHandler.aim) {
-            String blocks[] = aim.input.split(":");
-            Block block = GameRegistry.findBlock(blocks[0], blocks[1]);
-            if (itemstack.getUnlocalizedName().equalsIgnoreCase(block.getUnlocalizedName())) {
-                return true;
-            }
-        }
-        return false;
+        return true;
     }
-
 
     public float getPowerScaled() {
 
@@ -200,46 +180,40 @@ public class TileAim extends TileEntity implements IEnergyHandler, IInventory {
         energy.setEnergyStored(i);
     }
 
-    private ItemStack canTransform() {
-        if (this.inventory[0] != null) {
-
-            for (AIMMachineRecipe aim : AIMMachineRecipeHandler.aim) {
-                String blocks[] = aim.input.split(":");
-
-                Block block = GameRegistry.findBlock(blocks[0], blocks[1]);
-                if (this.inventory[0].getUnlocalizedName().equalsIgnoreCase(block.getUnlocalizedName())) {
-                    String blockoutput[] = aim.output.split(":");
-                    Block output = GameRegistry.findBlock(blockoutput[0], blockoutput[1]);
-                    ItemStack itemstack = new ItemStack(output);
-
-                    if (this.inventory[1] == null) return itemstack;
-                    if(!this.inventory[1].isItemEqual(itemstack)) return null;
-                    int result = this.inventory[0].stackSize + itemstack.stackSize;
-                    if (this.inventory[0].getMaxStackSize() < result) return null;
-                    return itemstack;
-                }
-            }
-        }
-
-        return null;
-    }
-
     @Override
     public void updateEntity() {
 
-        if (this.processedRF > 0) {
-            long totalRF = this.energy.getEnergyStored();
-            long usedRF = Math.min(Math.min(totalRF, this.processedRF), 80);
-            processedRF -= usedRF;
-            energy.setEnergyStored((int) (totalRF - usedRF));
+        super.updateEntity();
+        if(worldObj.isRemote) return;
+        ItemStack output = null;
+        long requiredRF = 0;
+
+        if (inventory[0] != null) {
+            for (AIMMachineRecipe aim : AIMMachineRecipeHandler.aim) {
+
+                Item item = (Item) Item.itemRegistry.getObject(aim.input);
+                if (this.inventory[0].getUnlocalizedName().equalsIgnoreCase(item.getUnlocalizedName())) {
+                    output = new ItemStack((Item) Item.itemRegistry.getObject(aim.output));
+                    requiredRF = aim.rf;
+                } else return;
+            }
         }
+        if (this.inventory[0] != null && this.processedRF == 0) processedRF = requiredRF;
 
-        if (!this.worldObj.isRemote) {
+        if (this.processedRF > 0) {
+            if (this.inventory[0] == null)  {
+                this.processedRF = 0;
+                this.processedPercent = 0;
+                return;
+            }
+            totalRF = this.energy.getEnergyStored();
+            long usedRF = Math.min(Math.min(totalRF, this.processedRF), 80);
+            this.processedRF -= usedRF;
+            this.energy.setEnergyStored((int) (totalRF - usedRF));
+            this.processedPercent = Math.round(((float) processedRF / requiredRF) * 100);
+
+        }
             if (this.processedRF <= 0 && inventory[0] != null) {
-
-                ItemStack output = this.canTransform();
-
-                if (output == null) return;
 
                 if (this.inventory[1] == null) {
                     this.inventory[1] = output.copy();
@@ -252,8 +226,12 @@ public class TileAim extends TileEntity implements IEnergyHandler, IInventory {
                 if (this.inventory[0].stackSize <= 0) {
                     this.inventory[0] = null;
                 }
-                this.markDirty();
+                this.processedPercent = 0;
+                super.markDirty();
+
+
             }
-        }
+
     }
+
 }

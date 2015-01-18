@@ -39,11 +39,11 @@ public class AIMMachineRecipeHandler {
             rootElement.appendChild(recipe);
 
             Element input = doc.createElement("input");
-            input.appendChild(doc.createTextNode("minecraft:ice"));
+            input.appendChild(doc.createTextNode("minecraft:apple"));
             recipe.appendChild(input);
 
             Element output = doc.createElement("output");
-            output.appendChild(doc.createTextNode("minecraft:apple"));
+            output.appendChild(doc.createTextNode("minecraft:stick"));
             recipe.appendChild(output);
 
             Element rf = doc.createElement("rf");
