@@ -18,8 +18,9 @@ public class CustomOreBlockHandler {
     public static Block blockAim, blockAimActive;
 
     public static void init() {
-        blockAim = new BlockAim().setBlockName("beyondrealitycore:blockAim").setCreativeTab(BeyondRealityCore.tabBeyondReality);
-        //blockAimActive = new BlockAim().setBlockName("beyondrealitycore:blockAimActive").setLightLevel(1F);
+        blockAimActive = new BlockAim(true).setBlockName("beyondrealitycore:blockAimActive").setLightLevel(10F);
+        blockAim = new BlockAim(false).setBlockName("beyondrealitycore:blockAim").setCreativeTab(BeyondRealityCore.tabBeyondReality);
+
 
         //Normal Ore Blocks
         oreApatite = new BRCustomOreBlock("oreApatite", "pickaxe", 2, CustomItemHandler.gemApatite, 1, 4);
@@ -58,7 +59,7 @@ public class CustomOreBlockHandler {
         tinyoreLapis = new BRCustomGravelBlock("tinyoreLapis", "shovel", 1, CustomItemHandler.tinyLapis);
         tinyoreCoal = new BRCustomGravelBlock("tinyoreCoal", "shovel", 1, CustomItemHandler.tinyCoal);
 
-        //GameRegistry.registerBlock(blockAimActive, "blockAimActive");
+        GameRegistry.registerBlock(blockAimActive, "blockAimActive");
         GameRegistry.registerBlock(blockAim, "blockAim");
         GameRegistry.registerBlock(oreApatite, "oreApatite");
         GameRegistry.registerBlock(oreCopper, "oreCopper");

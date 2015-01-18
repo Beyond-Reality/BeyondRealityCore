@@ -1,14 +1,17 @@
 package com.mcbeyondreality.beyondrealitycore.blocks;
 
 import com.mcbeyondreality.beyondrealitycore.BeyondRealityCore;
+import com.mcbeyondreality.beyondrealitycore.handlers.CustomOreBlockHandler;
 import com.mcbeyondreality.beyondrealitycore.tileentity.TileAim;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
@@ -20,17 +23,19 @@ public class BlockAim extends BlockContainer {
     @SideOnly(Side.CLIENT)
     private IIcon top, front;
 
-    public BlockAim() {
+    public boolean isRunning = false;
+
+    public BlockAim(boolean isRunning) {
         super(Material.rock);
         this.setHardness(10000.0F);
-
+        this.isRunning = isRunning;
     }
 
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister iconregister) {
         this.blockIcon = iconregister.registerIcon("beyondrealitycore:aim_side");
-        //this.front = iconregister.registerIcon(this.isBurning2 ? "beyondrealitycore:aim_front_on" : "beyondrealitycore:aim_front_off");
-        this.front = iconregister.registerIcon("beyondrealitycore:aim_front_off");
+        this.front = iconregister.registerIcon(isRunning ? "beyondrealitycore:aim_front_on" : "beyondrealitycore:aim_front_off");
+        //this.front = iconregister.registerIcon("beyondrealitycore:aim_front_off");
         this.top = iconregister.registerIcon("beyondrealitycore:aim_top");
     }
 
@@ -76,5 +81,35 @@ public class BlockAim extends BlockContainer {
             }
 
         return true;
+    }
+
+
+    public static void updateFurnaceBlockState(boolean active, World world, int x, int y, int z)
+    {
+        int l = world.getBlockMetadata(x, y, z);
+        TileEntity tileentity = world.getTileEntity(x, y, z);
+
+        if (active)
+        {
+            world.setBlock(x, y, z, CustomOreBlockHandler.blockAimActive);
+        }
+        else
+        {
+            world.setBlock(x, y, z, CustomOreBlockHandler.blockAim);
+        }
+
+        //field_149934_M = false;
+        world.setBlockMetadataWithNotify(x, y, z, l, 2);
+
+        if (tileentity != null)
+        {
+            tileentity.validate();
+            world.setTileEntity(x, y, z, tileentity);
+        }
+    }
+
+    @Override
+    public void breakBlock(World world, int x, int y, int z, Block block, int metadata) {
+        super.breakBlock(world, x, y, z, block, metadata);
     }
 }

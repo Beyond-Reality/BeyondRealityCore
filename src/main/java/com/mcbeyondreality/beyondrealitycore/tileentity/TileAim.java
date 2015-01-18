@@ -2,6 +2,7 @@ package com.mcbeyondreality.beyondrealitycore.tileentity;
 
 import cofh.api.energy.EnergyStorage;
 import cofh.api.energy.IEnergyHandler;
+import com.mcbeyondreality.beyondrealitycore.blocks.BlockAim;
 import com.mcbeyondreality.beyondrealitycore.data.AIMMachineRecipe;
 import com.mcbeyondreality.beyondrealitycore.handlers.AIMMachineRecipeHandler;
 import net.minecraft.entity.player.EntityPlayer;
@@ -198,12 +199,16 @@ public class TileAim extends TileEntity implements IEnergyHandler, IInventory {
                 } else return;
             }
         }
-        if (this.inventory[0] != null && this.processedRF == 0) processedRF = requiredRF;
+        if (this.inventory[0] != null && this.processedRF == 0) {
+            processedRF = requiredRF;
+            BlockAim.updateFurnaceBlockState(true, this.worldObj, this.xCoord, this.yCoord, this.zCoord);
+        }
 
         if (this.processedRF > 0) {
             if (this.inventory[0] == null)  {
                 this.processedRF = 0;
                 this.processedPercent = 0;
+                BlockAim.updateFurnaceBlockState(false, this.worldObj, this.xCoord, this.yCoord, this.zCoord);
                 return;
             }
             totalRF = this.energy.getEnergyStored();
@@ -227,6 +232,7 @@ public class TileAim extends TileEntity implements IEnergyHandler, IInventory {
                     this.inventory[0] = null;
                 }
                 this.processedPercent = 0;
+                BlockAim.updateFurnaceBlockState(false, this.worldObj, this.xCoord, this.yCoord, this.zCoord);
                 super.markDirty();
 
 
