@@ -11,29 +11,29 @@ public class CraftingHandler {
 
         GameRegistry.addRecipe(new ItemStack(CustomItemHandler.gemApatite),
                 "xx", "xx", 'x', new ItemStack(CustomItemHandler.tinyApatite));
-        GameRegistry.addRecipe(new ItemStack(CustomOreBlockHandler.oreCopper),
+        GameRegistry.addRecipe(new ItemStack(CustomBlockHandler.oreCopper),
                 "xx", "xx", 'x', new ItemStack(CustomItemHandler.tinyCopper));
-        GameRegistry.addRecipe(new ItemStack(CustomOreBlockHandler.oreTin),
+        GameRegistry.addRecipe(new ItemStack(CustomBlockHandler.oreTin),
                 "xx", "xx", 'x', new ItemStack(CustomItemHandler.tinyTin));
-        GameRegistry.addRecipe(new ItemStack(CustomOreBlockHandler.oreLead),
+        GameRegistry.addRecipe(new ItemStack(CustomBlockHandler.oreLead),
                 "xx", "xx", 'x', new ItemStack(CustomItemHandler.tinyLead));
-        GameRegistry.addRecipe(new ItemStack(CustomOreBlockHandler.oreSilver),
+        GameRegistry.addRecipe(new ItemStack(CustomBlockHandler.oreSilver),
                 "xx", "xx", 'x', new ItemStack(CustomItemHandler.tinySilver));
-        GameRegistry.addRecipe(new ItemStack(CustomOreBlockHandler.oreNickel),
+        GameRegistry.addRecipe(new ItemStack(CustomBlockHandler.oreNickel),
                 "xx", "xx", 'x', new ItemStack(CustomItemHandler.tinyNickel));
-        GameRegistry.addRecipe(new ItemStack(CustomOreBlockHandler.oreAluminium),
+        GameRegistry.addRecipe(new ItemStack(CustomBlockHandler.oreAluminium),
                 "xx", "xx", 'x', new ItemStack(CustomItemHandler.tinyAluminium));
-        GameRegistry.addRecipe(new ItemStack(CustomOreBlockHandler.orePlatinum),
+        GameRegistry.addRecipe(new ItemStack(CustomBlockHandler.orePlatinum),
                 "xx", "xx", 'x', new ItemStack(CustomItemHandler.tinyPlatinum));
-        GameRegistry.addRecipe(new ItemStack(CustomOreBlockHandler.oreCadmium),
+        GameRegistry.addRecipe(new ItemStack(CustomBlockHandler.oreCadmium),
                 "xx", "xx", 'x', new ItemStack(CustomItemHandler.tinyCadmium));
-        GameRegistry.addRecipe(new ItemStack(CustomOreBlockHandler.oreIndium),
+        GameRegistry.addRecipe(new ItemStack(CustomBlockHandler.oreIndium),
                 "xx", "xx", 'x', new ItemStack(CustomItemHandler.tinyIndium));
-        GameRegistry.addRecipe(new ItemStack(CustomOreBlockHandler.oreMagnetite),
+        GameRegistry.addRecipe(new ItemStack(CustomBlockHandler.oreMagnetite),
                 "xx", "xx", 'x', new ItemStack(CustomItemHandler.tinyMagnetite));
-        GameRegistry.addRecipe(new ItemStack(CustomOreBlockHandler.oreUranium),
+        GameRegistry.addRecipe(new ItemStack(CustomBlockHandler.oreUranium),
                 "xx", "xx", 'x', new ItemStack(CustomItemHandler.tinyUranium));
-        GameRegistry.addRecipe(new ItemStack(CustomOreBlockHandler.oreZinc),
+        GameRegistry.addRecipe(new ItemStack(CustomBlockHandler.oreZinc),
                 "xx", "xx", 'x', new ItemStack(CustomItemHandler.tinyZinc));
         GameRegistry.addRecipe(new ItemStack(Blocks.iron_ore),
                 "xx", "xx", 'x', new ItemStack(CustomItemHandler.tinyIron));

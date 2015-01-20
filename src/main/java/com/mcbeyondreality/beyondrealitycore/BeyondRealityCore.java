@@ -10,7 +10,6 @@ import com.mcbeyondreality.beyondrealitycore.notification.NotificationTickHandle
 import com.mcbeyondreality.beyondrealitycore.proxy.CommonProxy;
 import com.mcbeyondreality.beyondrealitycore.tileentity.TileAim;
 import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -19,7 +18,6 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
-import cpw.mods.fml.common.network.FMLEventChannel;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
@@ -70,9 +68,6 @@ public class BeyondRealityCore {
         ServerCommandManager manager = (ServerCommandManager) command;
         manager.registerCommand(new CommandGetUUID());
         manager.registerCommand(new CommandToggleToolRightClick());
-        //FMLEventChannel net = NetworkRegistry.INSTANCE.newEventDrivenChannel("beyondrealitycore");
-        //NetworkCon = net;
-
     }
 
     public static CreativeTabs tabBeyondReality = new CreativeTabs("tabBeyondReality") {
@@ -154,11 +149,15 @@ public class BeyondRealityCore {
 
         if(ConfigHandler.enableOreBlocks) {
             CustomItemHandler.init();
-            CustomOreBlockHandler.init();
+            CustomBlockHandler.initOre();
         }
 
         if(ConfigHandler.enableCustomBlocks) {
             CustomBlockHandler.init();
+        }
+
+        if(ConfigHandler.enableAIM) {
+            CustomBlockHandler.initAIM();
         }
 
         MinecraftForge.EVENT_BUS.register(new BeyondRealityCoreEvent());
@@ -174,7 +173,7 @@ public class BeyondRealityCore {
     @EventHandler
     public void init(FMLInitializationEvent event) {
         if(ConfigHandler.enableOreBlocks) {
-            CustomOreBlockHandler.oreDictInit();
+            CustomBlockHandler.oreDictInit();
             CraftingHandler.init();
         }
 

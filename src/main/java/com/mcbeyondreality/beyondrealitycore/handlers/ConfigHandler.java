@@ -9,8 +9,8 @@ public class ConfigHandler {
 
     public static Configuration config;
     public static String[] bannedEnderBlocks, bannedNetherBlocks, rightClickWhiteList, bottomLeftBranding, menuSayings;
-    public static int aggrorangeEnd, aggrorangeNether, customBlocksCount;
-    public static boolean fastLeafDecay, rightClick, enableOreBlocks, enableCustomBlocks;
+    public static int aggrorangeEnd, aggrorangeNether, customBlocksCount, unbreakableBlocksCount;
+    public static boolean fastLeafDecay, rightClick, enableOreBlocks, enableCustomBlocks, enableUnbreakableBlocks, enableAIM;
     public static String strMainMenuBackground, strMainMenuTitle;
 
     public static void init() {
@@ -41,6 +41,9 @@ public class ConfigHandler {
         enableOreBlocks = config.get("Custom Blocks", "Enable Ore Blocks?", false).getBoolean();
         enableCustomBlocks = config.get("Custom Blocks", "Enable Custom Blocks?", false).getBoolean();
         customBlocksCount = config.get("Custom Blocks", "Number of custom blocks", 1).getInt();
+        enableUnbreakableBlocks = config.get("Custom Blocks", "Enable Unbreakable Blocks?", false).getBoolean();
+        unbreakableBlocksCount = config.get("Custom Blocks", "Number of Unbreakable blocks", 1).getInt();
+        enableAIM = config.get("Custom Blocks", "Enable AIM?", false).getBoolean();
         config.save();
 
     }
