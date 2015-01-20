@@ -3,7 +3,9 @@ package com.mcbeyondreality.beyondrealitycore.handlers;
 import com.mcbeyondreality.beyondrealitycore.BeyondRealityCore;
 import com.mcbeyondreality.beyondrealitycore.blocks.*;
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraft.block.Block;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
 import java.util.ArrayList;
@@ -12,12 +14,12 @@ import java.util.List;
 public class CustomBlockHandler {
     public static List<Block> blocks = new ArrayList<Block>();
     public static Block dimGuardKiller;
-    static Block oreApatite, oreCopper, oreTin, oreLead, oreSilver, oreNickel, oreAluminium, orePlatinum;
-    static Block oreCadmium, oreIndium, oreUranium, oreZinc, oreMagnetite;
-    static Block gemApatite, tinyoreApatite, tinyoreCopper, tinyoreTin, tinyoreLead, tinyoreSilver, tinyoreNickel, tinyoreAluminium;
-    static Block tinyorePlatinum, tinyoreCadmium, tinyoreIndium, tinyoreMagnetite, tinyoreUranium, tinyoreZinc;
-    static Block tinyoreIron, tinyoreGold, tinyoreDiamond, tinyoreEmerald, tinyoreRedstone, tinyoreLapis, tinyoreCoal;
-    public static Block blockAim, blockAimActive;
+    public static Block oreApatite, oreCopper, oreTin, oreLead, oreSilver, oreNickel, oreAluminium, orePlatinum;
+    public static Block oreCadmium, oreIndium, oreUranium, oreZinc, oreMagnetite;
+    public static Block gemApatite, tinyoreApatite, tinyoreCopper, tinyoreTin, tinyoreLead, tinyoreSilver, tinyoreNickel, tinyoreAluminium;
+    public static Block tinyorePlatinum, tinyoreCadmium, tinyoreIndium, tinyoreMagnetite, tinyoreUranium, tinyoreZinc;
+    public static Block tinyoreIron, tinyoreGold, tinyoreDiamond, tinyoreEmerald, tinyoreRedstone, tinyoreLapis, tinyoreCoal;
+    public static Block blockAim, blockAimActive, blockUnbreakable;
 
     public static void init() {
         dimGuardKiller = new BlockDimGuardKiller();
@@ -129,5 +131,18 @@ public class CustomBlockHandler {
 
         GameRegistry.registerBlock(blockAimActive, "blockAimActive");
         GameRegistry.registerBlock(blockAim, "blockAim");
+    }
+
+    public static void initUnbreakable(int amount) {
+
+        blockUnbreakable = new BlockUnbreakable();
+
+        GameRegistry.registerBlock(blockUnbreakable, MultiBlockUnbreakable.class, "blockUnbreakable");
+
+        for (int x = 0; x < amount; x++) {
+            ItemStack multiBlockStack = new ItemStack(blockUnbreakable, 1, x);
+            //LanguageRegistry.addName(multiBlockStack, ConfigHandler.unBreakableNames[x]);
+        }
+
     }
 }

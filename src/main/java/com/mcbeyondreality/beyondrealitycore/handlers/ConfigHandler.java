@@ -42,7 +42,7 @@ public class ConfigHandler {
         enableCustomBlocks = config.get("Custom Blocks", "Enable Custom Blocks?", false).getBoolean();
         customBlocksCount = config.get("Custom Blocks", "Number of custom blocks", 1).getInt();
         enableUnbreakableBlocks = config.get("Custom Blocks", "Enable Unbreakable Blocks?", false).getBoolean();
-        unbreakableBlocksCount = config.get("Custom Blocks", "Number of Unbreakable blocks", 1).getInt();
+        unbreakableBlocksCount = config.get("Custom Blocks", "Number of Unbreakable blocks (1-16)", 1).getInt();
         enableAIM = config.get("Custom Blocks", "Enable AIM?", false).getBoolean();
         config.save();
 

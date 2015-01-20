@@ -160,6 +160,10 @@ public class BeyondRealityCore {
             CustomBlockHandler.initAIM();
         }
 
+        if(ConfigHandler.enableUnbreakableBlocks) {
+            CustomBlockHandler.initUnbreakable(ConfigHandler.unbreakableBlocksCount);
+        }
+
         MinecraftForge.EVENT_BUS.register(new BeyondRealityCoreEvent());
         MinecraftForge.EVENT_BUS.register(new RightClickEvent());
         MinecraftForge.EVENT_BUS.register(new LeafDecayEvent());
