@@ -47,6 +47,8 @@ import java.net.URL;
 
 public class BeyondRealityCore {
 
+    //TODO - Add thaumcraft aspects to ore
+
     @Instance("beyondrealitycore")
     public static BeyondRealityCore instance;
 

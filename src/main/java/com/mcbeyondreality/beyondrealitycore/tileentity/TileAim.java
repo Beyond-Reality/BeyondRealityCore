@@ -24,6 +24,9 @@ public class TileAim extends TileEntity implements IEnergyHandler, IInventory {
     public long totalRF = 0;
     public int processedPercent = 0;
     public boolean isBurning = false;
+    protected ItemStack input = null;
+    protected ItemStack output = null;
+    protected long requiredRF = 0;
 
 
     public TileAim() {
@@ -181,33 +184,43 @@ public class TileAim extends TileEntity implements IEnergyHandler, IInventory {
         energy.setEnergyStored(i);
     }
 
-    @Override
-    public void updateEntity() {
-
-        super.updateEntity();
-        if(worldObj.isRemote) return;
-        ItemStack output = null;
-        long requiredRF = 0;
+    private boolean isValid() {
 
         if (inventory[0] != null) {
             for (AIMMachineRecipe aim : AIMMachineRecipeHandler.aim) {
 
                 Item item = (Item) Item.itemRegistry.getObject(aim.input);
                 if (this.inventory[0].getUnlocalizedName().equalsIgnoreCase(item.getUnlocalizedName())) {
-                    output = new ItemStack((Item) Item.itemRegistry.getObject(aim.output));
-                    requiredRF = aim.rf;
-                } else return;
+                    this.input = this.inventory[0];
+                    this.output = new ItemStack((Item) Item.itemRegistry.getObject(aim.output));
+                    this.requiredRF = aim.rf;
+                    return true;
+                }
             }
         }
+        return false;
+    }
+
+    @Override
+    public void updateEntity() {
+
+        super.updateEntity();
+        if(worldObj.isRemote) return;
+
         if (this.inventory[0] != null && this.processedRF == 0) {
+            if (!isValid()) return;
             processedRF = requiredRF;
             BlockAim.updateFurnaceBlockState(true, this.worldObj, this.xCoord, this.yCoord, this.zCoord);
         }
 
         if (this.processedRF > 0) {
-            if (this.inventory[0] == null)  {
+
+            if (this.inventory[0] == null || !this.inventory[0].getItem().getUnlocalizedName().equals(this.input.getItem().getUnlocalizedName()))  {
                 this.processedRF = 0;
                 this.processedPercent = 0;
+                this.input = null;
+                this.output = null;
+                this.requiredRF = 0;
                 BlockAim.updateFurnaceBlockState(false, this.worldObj, this.xCoord, this.yCoord, this.zCoord);
                 return;
             }
