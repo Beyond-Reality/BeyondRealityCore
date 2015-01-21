@@ -23,7 +23,6 @@ public class TileAim extends TileEntity implements IEnergyHandler, IInventory {
     public long processedRF = 0;
     public long totalRF = 0;
     public int processedPercent = 0;
-    public boolean isBurning = false;
     protected ItemStack input = null;
     protected ItemStack output = null;
     protected long requiredRF = 0;
@@ -194,7 +193,13 @@ public class TileAim extends TileEntity implements IEnergyHandler, IInventory {
                     this.input = this.inventory[0];
                     this.output = new ItemStack((Item) Item.itemRegistry.getObject(aim.output));
                     this.requiredRF = aim.rf;
-                    return true;
+
+                    //if (this.inventory[1] != null || this.inventory[1].getItem() != this.output.getItem() ||
+                            //!(this.inventory[1].stackSize < this.output.getMaxStackSize()) ) return false;
+                    if (this.inventory[1] == null) return true;
+                    if (this.inventory[1].isItemEqual(this.output) &&
+                            this.inventory[1].stackSize < this.output.getMaxStackSize()) return true;
+                    return false;
                 }
             }
         }
@@ -215,7 +220,7 @@ public class TileAim extends TileEntity implements IEnergyHandler, IInventory {
 
         if (this.processedRF > 0) {
 
-            if (this.inventory[0] == null || !this.inventory[0].getItem().getUnlocalizedName().equals(this.input.getItem().getUnlocalizedName()))  {
+            if (this.inventory[0] == null || !this.inventory[0].isItemEqual(this.input))  {
                 this.processedRF = 0;
                 this.processedPercent = 0;
                 this.input = null;
