@@ -92,4 +92,22 @@ item.beyondrealitycore:tinyEmerald.name=Emerald Ore Chunks
 item.beyondrealitycore:tinyRedstone.name=Redstone Ore Chunks
 item.beyondrealitycore:tinyLapis.name=Lapis Ore Chunks
 item.beyondrealitycore:tinyCoal.name=Coal Ore Chunks
+
 tile.beyondrealitycore:blockAim.name=Invigorating Core
+
+tile.beyondreality:unbreakableBlock_0.name=TempleBlock
+tile.beyondreality:unbreakableBlock_1.name=TempleBlock1
+tile.beyondreality:unbreakableBlock_2.name=TempleBlock2
+tile.beyondreality:unbreakableBlock_3.name=TempleBlock3
+tile.beyondreality:unbreakableBlock_4.name=TempleBlock4
+tile.beyondreality:unbreakableBlock_5.name=TempleBlock5
+tile.beyondreality:unbreakableBlock_6.name=TempleBlock6
+tile.beyondreality:unbreakableBlock_7.name=TempleBlock7
+tile.beyondreality:unbreakableBlock_8.name=TempleBlock8
+tile.beyondreality:unbreakableBlock_9.name=TempleBlock9
+tile.beyondreality:unbreakableBlock_10.name=TempleBlock10
+tile.beyondreality:unbreakableBlock_11.name=TempleBlock11
+tile.beyondreality:unbreakableBlock_12.name=TempleBlock12
+tile.beyondreality:unbreakableBlock_13.name=TempleBlock13
+tile.beyondreality:unbreakableBlock_14.name=TempleBlock14
+tile.beyondreality:unbreakableBlock_15.name=TempleBlock15
