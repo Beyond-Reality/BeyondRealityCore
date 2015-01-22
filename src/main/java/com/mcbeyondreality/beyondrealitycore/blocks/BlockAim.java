@@ -28,6 +28,7 @@ public class BlockAim extends BlockContainer {
         super(Material.rock);
         //this.setHardness(10000.0F);
         this.setBlockUnbreakable();
+        this.setResistance(2000.0F);
         this.isRunning = isRunning;
     }
 

@@ -23,6 +23,7 @@ public class BlockUnbreakable extends Block {
         this.setBlockName("beyondreality:unbreakableBlock");
         this.setCreativeTab(BeyondRealityCore.tabBeyondReality);
         this.setBlockUnbreakable();
+        this.setResistance(2000.0F);
     }
 
 /*    @SideOnly(Side.CLIENT)
