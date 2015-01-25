@@ -161,7 +161,7 @@ public class BeyondRealityCore {
         }
 
         if(ConfigHandler.enableUnbreakableBlocks) {
-            CustomBlockHandler.initUnbreakable(ConfigHandler.unbreakableBlocksCount);
+            CustomBlockHandler.initUnbreakable();
         }
 
         MinecraftForge.EVENT_BUS.register(new BeyondRealityCoreEvent());
