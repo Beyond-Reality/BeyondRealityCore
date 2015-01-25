@@ -30,3 +30,4 @@ gradlew.bat
 .gradle/2.0/taskArtifacts/cache.properties
 .project
 Thumbs.db
+*.xml
