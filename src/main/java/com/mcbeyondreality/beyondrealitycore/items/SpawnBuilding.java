@@ -16,7 +16,7 @@ public class SpawnBuilding extends Item {
         this.setUnlocalizedName("beyondrealitycore:itemSpawnBuilding");
         this.setTextureName("beyondrealitycore:spawnbuilding");
         this.setCreativeTab(BeyondRealityCore.tabBeyondReality);
-        //this.setMaxStackSize(1);
+        this.setMaxStackSize(1);
     }
 
     @Override
@@ -36,8 +36,15 @@ public class SpawnBuilding extends Item {
             }*/
 
             WorldGenStructures.generateStructureRandomly(world, world.rand, structureInfo, x, z, false);
+            if (!player.capabilities.isCreativeMode) {
+                itemstack.stackSize = 0;
+                player.inventory.mainInventory[player.inventory.currentItem] = null;
+            }
+
+
+            return true;
         }
 
-        return false;
+
     }
 }
