@@ -45,8 +45,6 @@ import java.net.URL;
 
 public class BeyondRealityCore {
 
-    //TODO - Add thaumcraft aspects to ore
-
     @Instance("beyondrealitycore")
     public static BeyondRealityCore instance;
 
@@ -147,8 +145,9 @@ public class BeyondRealityCore {
             }
         }
 
+        CustomItemHandler.init();
+
         if(ConfigHandler.enableOreBlocks) {
-            CustomItemHandler.init();
             CustomBlockHandler.initOre();
         }
 
@@ -182,7 +181,8 @@ public class BeyondRealityCore {
         }
 
         NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
-        GameRegistry.registerTileEntity(TileAim.class, "beyondrealitycore:tileAim");
+        if (ConfigHandler.enableAIM)
+            GameRegistry.registerTileEntity(TileAim.class, "beyondrealitycore:tileAim");
     }
 
     @EventHandler

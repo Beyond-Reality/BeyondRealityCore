@@ -93,6 +93,8 @@ item.beyondrealitycore:tinyRedstone.name=Redstone Ore Chunks
 item.beyondrealitycore:tinyLapis.name=Lapis Ore Chunks
 item.beyondrealitycore:tinyCoal.name=Coal Ore Chunks
 
+item.beyondrealitycore:itemSpawnBuilding.name=Spawn Building Generator
+
 tile.beyondrealitycore:blockAim.name=Invigorating Core
 
 tile.beyondreality:unbreakableBlock_0.name=TempleBlock

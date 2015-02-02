@@ -10,8 +10,8 @@ public class ConfigHandler {
     public static Configuration config;
     public static String[] bannedEnderBlocks, bannedNetherBlocks, rightClickWhiteList, bottomLeftBranding, menuSayings;
     public static int aggrorangeEnd, aggrorangeNether, customBlocksCount, unbreakableBlocksCount;
-    public static boolean fastLeafDecay, rightClick, enableOreBlocks, enableCustomBlocks, enableUnbreakableBlocks, enableAIM;
-    public static String strMainMenuBackground, strMainMenuTitle;
+    public static boolean customOreItems, spawnBuilding, fastLeafDecay, rightClick, enableOreBlocks, enableCustomBlocks, enableUnbreakableBlocks, enableAIM;
+    public static String strMainMenuBackground, strMainMenuTitle, spawnBuildingName;
 
     public static void init() {
 
@@ -44,6 +44,10 @@ public class ConfigHandler {
         enableUnbreakableBlocks = config.get("Custom Blocks", "Enable Unbreakable Blocks?", false).getBoolean();
         unbreakableBlocksCount = config.get("Custom Blocks", "Number of Unbreakable blocks (1-16)", 1).getInt();
         enableAIM = config.get("Custom Blocks", "Enable AIM?", false).getBoolean();
+
+        spawnBuilding = config.get("Items", "Enable Spawn Building Item? (Requires RecurrentComplex)", false).getBoolean();
+        spawnBuildingName = config.get("Items", "Name of schematic to spawn", "test").getString();
+        customOreItems = config.get("Items", "Enable Custom Ore Items?", false).getBoolean();
         config.save();
 
     }
