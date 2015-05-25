@@ -84,6 +84,8 @@ public class RightClickEvent {
     @SubscribeEvent
     public void onToolTip(ItemTooltipEvent event)
     {
+        if (event.entity == null) return;
+
         if (BannedBlocksForDimension.isBlockBanned(event.entity.dimension, event.itemStack.getItem().getUnlocalizedName())) {
             event.toolTip.add(GuiColor.RED + "Banned in this Dimension");
         }
