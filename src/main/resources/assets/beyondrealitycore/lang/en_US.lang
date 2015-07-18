@@ -70,6 +70,8 @@ tile.beyondrealitycore:tinyoreRedstone.name=Sparse Redstone Ore
 tile.beyondrealitycore:tinyoreLapis.name=Sparse Lapis Ore
 tile.beyondrealitycore:tinyoreCoal.name=Sparse Coal Ore
 
+tile.beyondrealitycore:chair=Chair
+
 item.beyondrealitycore:gemApatite.name=Apatite
 item.beyondrealitycore:tinyApatite.name=Apatite Ore Chunks
 item.beyondrealitycore:tinyCopper.name=Copper Ore Chunks

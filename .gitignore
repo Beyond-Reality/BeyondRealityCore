@@ -31,3 +31,5 @@ gradlew.bat
 .project
 Thumbs.db
 *.xml
+out/*
+libs/*

@@ -1,5 +1,6 @@
 package com.mcbeyondreality.beyondrealitycore;
 
+import com.mcbeyondreality.beyondrealitycore.blocks.BlockChair;
 import com.mcbeyondreality.beyondrealitycore.commands.CommandGetUUID;
 import com.mcbeyondreality.beyondrealitycore.commands.CommandToggleToolRightClick;
 import com.mcbeyondreality.beyondrealitycore.event.BeyondRealityCoreEvent;
@@ -8,6 +9,7 @@ import com.mcbeyondreality.beyondrealitycore.event.RightClickEvent;
 import com.mcbeyondreality.beyondrealitycore.handlers.*;
 import com.mcbeyondreality.beyondrealitycore.notification.NotificationTickHandler;
 import com.mcbeyondreality.beyondrealitycore.proxy.CommonProxy;
+import com.mcbeyondreality.beyondrealitycore.renderer.ItemChairRenderer;
 import com.mcbeyondreality.beyondrealitycore.tileentity.TileAim;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
@@ -29,6 +31,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.server.MinecraftServer;
+import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
 import org.apache.commons.io.FileUtils;
 import org.xml.sax.SAXException;
@@ -44,6 +47,7 @@ import java.net.URL;
 
 
 public class BeyondRealityCore {
+    public static BlockChair chair[];
 
     @Instance("beyondrealitycore")
     public static BeyondRealityCore instance;
@@ -123,6 +127,15 @@ public class BeyondRealityCore {
             e.printStackTrace();
         } catch (SAXException e) {
             e.printStackTrace();
+        }
+
+        chair = new BlockChair[ConfigHandler.chairs];
+
+        for(int i = 0; i < chair.length; i++) {
+            chair[i] = new BlockChair(i);
+            GameRegistry.registerBlock(chair[i], "chair:" + i);
+            if(event.getSide() == Side.CLIENT)
+                MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(chair[i]), new ItemChairRenderer());
         }
 
         pngTitle = new File("config/BeyondRealityCore/images", ConfigHandler.strMainMenuTitle);

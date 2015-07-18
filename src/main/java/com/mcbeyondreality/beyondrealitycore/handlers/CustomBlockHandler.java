@@ -74,6 +74,7 @@ public class CustomBlockHandler {
         tinyoreLapis = new BRCustomGravelBlock("tinyoreLapis", "shovel", 1, CustomItemHandler.tinyLapis);
         tinyoreCoal = new BRCustomGravelBlock("tinyoreCoal", "shovel", 1, CustomItemHandler.tinyCoal);
 
+
         GameRegistry.registerBlock(oreApatite, "oreApatite");
         GameRegistry.registerBlock(oreCopper, "oreCopper");
         GameRegistry.registerBlock(oreTin, "oreTin");
@@ -108,6 +109,7 @@ public class CustomBlockHandler {
         GameRegistry.registerBlock(tinyoreRedstone, "tinyoreRedstone");
         GameRegistry.registerBlock(tinyoreLapis, "tinyoreLapis");
         GameRegistry.registerBlock(tinyoreCoal, "tinyoreCoal");
+
 
         //register thaumcraft aspects
         ThaumcraftApi.registerObjectTag(new ItemStack(CustomBlockHandler.oreApatite), (new AspectList()).add(Aspect.CROP, 2).add(Aspect.EARTH, 1));
