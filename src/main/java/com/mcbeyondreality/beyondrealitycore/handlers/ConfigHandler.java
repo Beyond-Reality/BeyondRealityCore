@@ -12,6 +12,7 @@ public class ConfigHandler {
     public static int aggrorangeEnd, aggrorangeNether, customBlocksCount, unbreakableBlocksCount;
     public static boolean customOreItems, spawnBuilding, fastLeafDecay, rightClick, enableOreBlocks, enableCustomBlocks, enableUnbreakableBlocks, enableAIM;
     public static String strMainMenuBackground, strMainMenuTitle, spawnBuildingName;
+    public static int chairs;
 
     public static void init() {
 
@@ -48,6 +49,8 @@ public class ConfigHandler {
         spawnBuilding = config.get("Items", "Enable Spawn Building Item? (Requires RecurrentComplex)", false).getBoolean();
         spawnBuildingName = config.get("Items", "Name of schematic to spawn", "test").getString();
         customOreItems = config.get("Items", "Enable Custom Ore Items?", false).getBoolean();
+
+        chairs = config.getInt("Chair Total", "How many chairs", 1, 0, 1000, "X amount");
         config.save();
 
     }

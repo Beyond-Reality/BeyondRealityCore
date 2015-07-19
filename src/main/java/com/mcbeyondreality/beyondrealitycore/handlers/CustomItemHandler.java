@@ -1,7 +1,6 @@
 package com.mcbeyondreality.beyondrealitycore.handlers;
 
 import com.mcbeyondreality.beyondrealitycore.items.BRCustomItem;
-import com.mcbeyondreality.beyondrealitycore.items.SpawnBuilding;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.item.Item;
 
@@ -10,7 +9,6 @@ public class CustomItemHandler {
     static Item gemApatite, tinyApatite, tinyCopper, tinyTin, tinyLead, tinySilver, tinyNickel, tinyAluminium;
     static Item tinyPlatinum, tinyCadmium, tinyIndium, tinyMagnetite, tinyUranium, tinyZinc;
     static Item tinyIron, tinyGold, tinyDiamond, tinyEmerald, tinyRedstone, tinyLapis, tinyCoal;
-    static Item spawnBuilding;
 
     public static void init() {
 
@@ -59,12 +57,5 @@ public class CustomItemHandler {
             GameRegistry.registerItem(tinyLapis, "tinyLapis");
             GameRegistry.registerItem(tinyCoal, "tinyCoal");
         }
-
-        if (ConfigHandler.spawnBuilding) {
-            spawnBuilding = new SpawnBuilding();
-
-            GameRegistry.registerItem(spawnBuilding, "spawnBuilding");
-        }
-
     }
 }
