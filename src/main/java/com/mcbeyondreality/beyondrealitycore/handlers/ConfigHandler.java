@@ -12,7 +12,7 @@ public class ConfigHandler {
     public static int aggrorangeEnd, aggrorangeNether, customBlocksCount, unbreakableBlocksCount;
     public static boolean customOreItems, spawnBuilding, fastLeafDecay, rightClick, enableOreBlocks, enableCustomBlocks, enableUnbreakableBlocks, enableAIM;
     public static String strMainMenuBackground, strMainMenuTitle, spawnBuildingName;
-    public static int chairs;
+    public static int chairs, items;
 
     public static void init() {
 
@@ -51,8 +51,9 @@ public class ConfigHandler {
         customOreItems = config.get("Items", "Enable Custom Ore Items?", false).getBoolean();
 
         chairs = config.getInt("Chair Total", "How many chairs", 1, 0, 1000, "X amount");
-        config.save();
+        items = config.getInt("Item Total", "How many items", 1, 0, 1000, "X amount");
 
+        config.save();
     }
 
 

@@ -7,6 +7,7 @@ import com.mcbeyondreality.beyondrealitycore.event.BeyondRealityCoreEvent;
 import com.mcbeyondreality.beyondrealitycore.event.LeafDecayEvent;
 import com.mcbeyondreality.beyondrealitycore.event.RightClickEvent;
 import com.mcbeyondreality.beyondrealitycore.handlers.*;
+import com.mcbeyondreality.beyondrealitycore.items.BRCustomItem;
 import com.mcbeyondreality.beyondrealitycore.notification.NotificationTickHandler;
 import com.mcbeyondreality.beyondrealitycore.proxy.CommonProxy;
 import com.mcbeyondreality.beyondrealitycore.renderer.ItemChairRenderer;
@@ -49,6 +50,7 @@ import java.net.URL;
 
 public class BeyondRealityCore {
     public static BlockChair chair[];
+    public static BRCustomItem items[];
 
     @Instance("beyondrealitycore")
     public static BeyondRealityCore instance;
@@ -139,6 +141,11 @@ public class BeyondRealityCore {
                 MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(chair[i]), new ItemChairRenderer());
         }
         GameRegistry.registerTileEntity(TileEntityChair.class, "chairTile");
+
+        items = new BRCustomItem[ConfigHandler.items];
+        for(int i = 0; i < items.length; i++) {
+            items[i] = new BRCustomItem("item" + i);
+        }
 
         pngTitle = new File("config/BeyondRealityCore/images", ConfigHandler.strMainMenuTitle);
         if(!pngTitle.exists()) {
