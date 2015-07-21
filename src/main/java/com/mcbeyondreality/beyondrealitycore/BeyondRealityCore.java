@@ -11,6 +11,7 @@ import com.mcbeyondreality.beyondrealitycore.notification.NotificationTickHandle
 import com.mcbeyondreality.beyondrealitycore.proxy.CommonProxy;
 import com.mcbeyondreality.beyondrealitycore.renderer.ItemChairRenderer;
 import com.mcbeyondreality.beyondrealitycore.tileentity.TileAim;
+import com.mcbeyondreality.beyondrealitycore.tileentity.TileEntityChair;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -137,6 +138,7 @@ public class BeyondRealityCore {
             if(event.getSide() == Side.CLIENT)
                 MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(chair[i]), new ItemChairRenderer());
         }
+        GameRegistry.registerTileEntity(TileEntityChair.class, "chairTile");
 
         pngTitle = new File("config/BeyondRealityCore/images", ConfigHandler.strMainMenuTitle);
         if(!pngTitle.exists()) {
