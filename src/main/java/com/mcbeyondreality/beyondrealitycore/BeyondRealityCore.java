@@ -145,6 +145,7 @@ public class BeyondRealityCore {
         items = new BRCustomItem[ConfigHandler.items];
         for(int i = 0; i < items.length; i++) {
             items[i] = new BRCustomItem("item" + i);
+            GameRegistry.registerItem(items[i], "item" + i);
         }
 
         pngTitle = new File("config/BeyondRealityCore/images", ConfigHandler.strMainMenuTitle);
