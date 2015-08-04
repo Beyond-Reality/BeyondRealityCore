@@ -135,7 +135,7 @@ tile.beyondrealitycore:chair:15.name=Extra Trees Bees
 tile.beyondrealitycore:chair:16.name=Genetics 
 tile.beyondrealitycore:chair:17.name=BuildCraft 
 tile.beyondrealitycore:chair:18.name=BuildCraft Additions  
-tile.beyondrealitycore:chair:19.name=Thaumic Gates 
+tile.beyondrealitycore:chair:19.name=Botania 
 tile.beyondrealitycore:chair:20.name=Logistics Pipes 
 tile.beyondrealitycore:chair:21.name=Applied Energistics 
 tile.beyondrealitycore:chair:22.name=Immersive Engineering 
@@ -191,7 +191,9 @@ tile.beyondrealitycore:chair:71.name=YeGamolChattels
 tile.beyondrealitycore:chair:72.name=AutoPackager
 tile.beyondrealitycore:chair:73.name=Forbidden Magic
 tile.beyondrealitycore:chair:74.name=TerraSteel
-
+tile.beyondrealitycore:chair:75.name=Applied Thaumic
+tile.beyondrealitycore:chair:76.name=SF Art
+tile.beyondrealitycore:chair:77.name=AE2 Stuff
 
 item.beyondrealitycore:item0.name=NetherPortal Key
 item.beyondrealitycore:item1.name=EndPortal Key
