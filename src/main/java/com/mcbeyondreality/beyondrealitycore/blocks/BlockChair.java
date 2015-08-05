@@ -37,6 +37,7 @@ public class BlockChair extends BlockContainer {
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
         super.onBlockActivated(world, x, y, z, player, par6, par7, par8, par9);
+        setOnBlock(world, x, y, z, player, 9 * 0.0625);
         return sitOnBlock(world, x, y, z, player, 9 * 0.0625);
     }
 
