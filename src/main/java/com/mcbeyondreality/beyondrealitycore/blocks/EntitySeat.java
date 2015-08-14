@@ -3,6 +3,7 @@ package com.mcbeyondreality.beyondrealitycore.blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+import org.lwjgl.input.Keyboard;
 
 public class EntitySeat extends Entity {
     public int blockPosX;
@@ -52,7 +53,7 @@ public class EntitySeat extends Entity {
 
     @Override
     public double getMountedYOffset() {
-        return this.height * 0.0D;
+        return this.height * 30.5D;
     }
 
     @Override
@@ -66,8 +67,14 @@ public class EntitySeat extends Entity {
             if (this.riddenByEntity == null | this.worldObj.isAirBlock(blockPosX, blockPosY, blockPosZ)) {
                 this.setDead();
             }
+            super.onEntityUpdate();
+        } else {
+            if(Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) { //Stupid work around because I'm tired of dealing with it
+                this.setDead();
+            }
         }
     }
+
 
     @Override
     protected void entityInit() {}
