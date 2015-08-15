@@ -15,6 +15,7 @@ public class BlockChair extends BlockContainer {
 
     public BlockChair(int i) {
         super(Material.iron);
+		setHardness(-1F);
         setBlockName("beyondrealitycore:chair:" + i);
         setCreativeTab(BeyondRealityCore.tabBeyondReality);
     }
