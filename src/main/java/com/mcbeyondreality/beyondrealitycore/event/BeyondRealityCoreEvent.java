@@ -26,7 +26,8 @@ public class BeyondRealityCoreEvent {
          * Dirty hack to prevent breaking chairs.  Sneaking while creative will let you continue
          * to break these, if needed.
          */
-        if (!event.getPlayer().isSneaking()) {
+        if (event.getPlayer() == null ||
+            !(event.getPlayer().isSneaking() && event.getPlayer().capabilities.isCreativeMode)) {
             for (int i = 0; i < BeyondRealityCore.chair.length; ++i) {
                 if (event.block == BeyondRealityCore.chair[i]) {
                     event.setCanceled(true);
