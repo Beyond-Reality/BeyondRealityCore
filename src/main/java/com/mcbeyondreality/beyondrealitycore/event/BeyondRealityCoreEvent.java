@@ -19,85 +19,101 @@ import java.util.List;
 ;
 
 public class BeyondRealityCoreEvent {
-	
-	@SubscribeEvent
-	public void onBlockDestroyedByPlayer(BreakEvent event)
-	{
-		UniqueIdentifier blockName = GameRegistry.findUniqueIdentifierFor(event.block);
-		String blockID = blockName.modId + ":" + blockName.name;
-		
-		if(event.getPlayer().dimension == 1)
-		{
-			for(int i = 0; i < ConfigHandler.bannedEnderBlocks.length; i++) {
-				String splitBlocks[] = ConfigHandler.bannedEnderBlocks[i].toString().split(":");
-				
-				if (splitBlocks.length == 2) {
-					if (blockID.toString().equalsIgnoreCase(ConfigHandler.bannedEnderBlocks[i])) {
-						angerEndermen(event.getPlayer(), event.world, event.x, event.y, event.z);
-					}
-				} else {
-					String blockNameID = blockID + ":" + event.blockMetadata;
-					if (blockNameID.toString().equalsIgnoreCase(ConfigHandler.bannedEnderBlocks[i]))
-						angerEndermen(event.getPlayer(), event.world, event.x, event.y, event.z);
-				}
-				
-			}
-		} else if(event.getPlayer().dimension == -1) {
-		
-			for(int i = 0; i < ConfigHandler.bannedNetherBlocks.length; i++) {
-				String splitBlocks[] = ConfigHandler.bannedNetherBlocks[i].toString().split(":");
-				
-				if (splitBlocks.length == 2) {
-					if (blockID.toString().equalsIgnoreCase(ConfigHandler.bannedNetherBlocks[i])) {
-						angerPigmen(event.getPlayer(), event.world, event.x, event.y, event.z);
-					}
-				} else {
-					String blockNameID = blockID + ":" + event.blockMetadata;
-					if (blockNameID.toString().equalsIgnoreCase(ConfigHandler.bannedNetherBlocks[i]))
-						angerPigmen(event.getPlayer(), event.world, event.x, event.y, event.z);
-				}
-				
-			}
-			
-		} 
-	}
-	
-	
-	private void angerEndermen(EntityPlayer player, World world, int x, int y,
-			int z) {
-		int aggroRange = ConfigHandler.aggrorangeEnd;
-		List<?> list = world.getEntitiesWithinAABB(
-				EntityEnderman.class,
-				AxisAlignedBB.getBoundingBox(x - aggroRange, y - aggroRange, z
-						- aggroRange, x + aggroRange + 1, y + aggroRange + 1, z
-						+ aggroRange + 1));
-		for (int j = 0; j < list.size(); j++) {
-			Entity entity1 = (Entity) list.get(j);
-			if (entity1 instanceof EntityEnderman) {
-				EntityEnderman entityendermen = (EntityEnderman) entity1;
-				entityendermen.attackEntityFrom(
-						DamageSource.causePlayerDamage(player), 0);
-			}
-		}
-	}
 
-	private void angerPigmen(EntityPlayer player, World world, int x, int y,
-			int z) {
+    @SubscribeEvent
+    public void onBlockDestroyedByPlayer(BreakEvent event) {
+        /**
+         * Dirty hack to prevent breaking chairs.  Sneaking while creative will let you continue
+         * to break these, if needed.
+         */
+        if (!event.getPlayer().isSneaking()) {
+            for (int i = 0; i < BeyondRealityCore.chair.length; ++i) {
+                if (event.block == BeyondRealityCore.chair[i]) {
+                    event.setCanceled(true);
+                    return;
+                }
+            }
+        }
 
-		int aggroRange = ConfigHandler.aggrorangeNether;
-		List<EntityPigZombie> list = world.getEntitiesWithinAABB(
-				EntityPigZombie.class,
-				AxisAlignedBB.getBoundingBox(x - aggroRange, y - aggroRange, z
-						- aggroRange, x + aggroRange + 1, y + aggroRange + 1, z
-						+ aggroRange + 1));
-		for (int j = 0; j < list.size(); j++) {
-			Entity entity1 = (Entity) list.get(j);
-			if (entity1 instanceof EntityPigZombie) {
-				EntityPigZombie entitypigmen = (EntityPigZombie) entity1;
-				entitypigmen.attackEntityFrom(
-						DamageSource.causePlayerDamage(player), 0);
-			}
-		}
-	}
+
+        UniqueIdentifier blockName = GameRegistry.findUniqueIdentifierFor(event.block);
+        String blockID = blockName.modId + ":" + blockName.name;
+
+        if (event.getPlayer().dimension == 1) {
+            for (int i = 0; i < ConfigHandler.bannedEnderBlocks.length; i++) {
+                String splitBlocks[] = ConfigHandler.bannedEnderBlocks[i].toString().split(":");
+
+                if (splitBlocks.length == 2) {
+                    if (blockID.toString().equalsIgnoreCase(ConfigHandler.bannedEnderBlocks[i])) {
+                        angerEndermen(event.getPlayer(), event.world, event.x, event.y, event.z);
+                    }
+                } else {
+                    String blockNameID = blockID + ":" + event.blockMetadata;
+                    if (blockNameID.toString().equalsIgnoreCase(ConfigHandler.bannedEnderBlocks[i])) {
+                        angerEndermen(event.getPlayer(), event.world, event.x, event.y, event.z);
+                    }
+                }
+
+            }
+        } else if (event.getPlayer().dimension == -1) {
+
+            for (int i = 0; i < ConfigHandler.bannedNetherBlocks.length; i++) {
+                String splitBlocks[] = ConfigHandler.bannedNetherBlocks[i].toString().split(":");
+
+                if (splitBlocks.length == 2) {
+                    if (blockID.toString().equalsIgnoreCase(ConfigHandler.bannedNetherBlocks[i])) {
+                        angerPigmen(event.getPlayer(), event.world, event.x, event.y, event.z);
+                    }
+                } else {
+                    String blockNameID = blockID + ":" + event.blockMetadata;
+                    if (blockNameID.toString().equalsIgnoreCase(ConfigHandler.bannedNetherBlocks[i])) {
+                        angerPigmen(event.getPlayer(), event.world, event.x, event.y, event.z);
+                    }
+                }
+
+            }
+
+        }
+    }
+
+
+    private void angerEndermen(EntityPlayer player, World world, int x, int y,
+                               int z) {
+        int aggroRange = ConfigHandler.aggrorangeEnd;
+        List<?> list = world.getEntitiesWithinAABB(
+                EntityEnderman.class,
+                AxisAlignedBB.getBoundingBox(x - aggroRange, y - aggroRange, z
+                                                                             - aggroRange,
+                        x + aggroRange + 1, y + aggroRange + 1, z
+                                                                + aggroRange + 1));
+        for (int j = 0; j < list.size(); j++) {
+            Entity entity1 = (Entity) list.get(j);
+            if (entity1 instanceof EntityEnderman) {
+                EntityEnderman entityendermen = (EntityEnderman) entity1;
+                entityendermen.attackEntityFrom(
+                        DamageSource.causePlayerDamage(player), 0);
+            }
+        }
+    }
+
+    private void angerPigmen(EntityPlayer player, World world, int x, int y,
+                             int z) {
+
+        int aggroRange = ConfigHandler.aggrorangeNether;
+        List<EntityPigZombie> list = world.getEntitiesWithinAABB(
+                EntityPigZombie.class,
+                AxisAlignedBB.getBoundingBox(x - aggroRange, y - aggroRange, z
+                                                                             - aggroRange,
+                        x + aggroRange + 1, y + aggroRange + 1, z
+                                                                + aggroRange + 1));
+        for (int j = 0; j < list.size(); j++) {
+            Entity entity1 = (Entity) list.get(j);
+            if (entity1 instanceof EntityPigZombie) {
+                EntityPigZombie entitypigmen = (EntityPigZombie) entity1;
+                entitypigmen.attackEntityFrom(
+                        DamageSource.causePlayerDamage(player), 0);
+            }
+        }
+    }
 }
 
