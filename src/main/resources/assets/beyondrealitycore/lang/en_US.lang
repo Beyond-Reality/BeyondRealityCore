@@ -195,8 +195,8 @@ tile.beyondrealitycore:chair:75.name=Applied Thaumic
 tile.beyondrealitycore:chair:76.name=SF Art
 tile.beyondrealitycore:chair:77.name=AE2 Stuff
 
-item.beyondrealitycore:item0.name=Broken NetherPortal Key
-item.beyondrealitycore:item1.name=Broken EndPortal Key
+item.beyondrealitycore:item0.name=Broken Nether Key
+item.beyondrealitycore:item1.name=Broken End Key
 item.beyondrealitycore:item2.name=Exceptional Tech Augmentation
 item.beyondrealitycore:item3.name=Advanced Tech Augmentation
 item.beyondrealitycore:item4.name=Passive Tech Augmentation
