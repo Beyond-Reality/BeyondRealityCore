@@ -36,6 +36,15 @@ public class BeyondRealityCoreEvent {
             }
         }
 
+        /*
+         * Hack to stop HQM doors from being broken
+         */
+        if (event.getPlayer() != null && !event.getPlayer().capabilities.isCreativeMode) {
+            if (event.block.getUnlocalizedName().equals("tile.hqm:quest_portal")) {
+                event.setCanceled(true);
+                return;
+            }
+        }
 
         UniqueIdentifier blockName = GameRegistry.findUniqueIdentifierFor(event.block);
         String blockID = blockName.modId + ":" + blockName.name;
