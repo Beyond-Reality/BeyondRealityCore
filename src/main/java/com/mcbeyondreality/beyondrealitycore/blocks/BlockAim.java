@@ -56,11 +56,6 @@ public class BlockAim extends BlockContainer {
     }
 
     @Override
-    public boolean canHarvestBlock(EntityPlayer player, int meta) {
-        return false;
-    }
-
-    @Override
     public boolean hasTileEntity(int metadata) {
         return true;
     }
