@@ -26,8 +26,7 @@ public class BlockAim extends BlockContainer {
 
     public BlockAim(boolean isRunning) {
         super(Material.rock);
-        //this.setHardness(10000.0F);
-        this.setResistance(3.0F);
+        this.setHardness(3.0F);
         this.isRunning = isRunning;
     }
 
@@ -99,10 +98,5 @@ public class BlockAim extends BlockContainer {
             tileentity.validate();
             world.setTileEntity(x, y, z, tileentity);
         }
-    }
-
-    @Override
-    public void breakBlock(World world, int x, int y, int z, Block block, int metadata) {
-        super.breakBlock(world, x, y, z, block, metadata);
     }
 }
