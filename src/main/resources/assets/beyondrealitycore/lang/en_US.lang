@@ -115,6 +115,10 @@ tile.beyondreality:unbreakableBlock_12.name=TempleBlock12
 tile.beyondreality:unbreakableBlock_13.name=TempleBlock13
 tile.beyondreality:unbreakableBlock_14.name=TempleBlock14
 tile.beyondreality:unbreakableBlock_15.name=TempleBlock15
+tile.beyondreality:unbreakableBlock_16.name=MapTL
+tile.beyondreality:unbreakableBlock_17.name=MapTR
+tile.beyondreality:unbreakableBlock_18.name=MapBL
+tile.beyondreality:unbreakableBlock_19.name=MapBR
 
 tile.beyondrealitycore:chair:0.name=Tinkers Basic 
 tile.beyondrealitycore:chair:1.name=Road Blocks 
