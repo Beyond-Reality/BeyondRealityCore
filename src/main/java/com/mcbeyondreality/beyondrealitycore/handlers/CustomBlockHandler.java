@@ -21,7 +21,7 @@ public class CustomBlockHandler {
     public static Block gemApatite, tinyoreApatite, tinyoreCopper, tinyoreTin, tinyoreLead, tinyoreSilver, tinyoreNickel, tinyoreAluminium;
     public static Block tinyorePlatinum, tinyoreCadmium, tinyoreIndium, tinyoreMagnetite, tinyoreUranium, tinyoreZinc;
     public static Block tinyoreIron, tinyoreGold, tinyoreDiamond, tinyoreEmerald, tinyoreRedstone, tinyoreLapis, tinyoreCoal;
-    public static Block blockAim, blockAimActive, blockUnbreakable;
+    public static Block blockAim, blockAimActive, blockUnbreakable, blockUnbreakable1;
 
     public static void init() {
         dimGuardKiller = new BlockDimGuardKiller();
@@ -199,8 +199,9 @@ public class CustomBlockHandler {
     public static void initUnbreakable() {
 
         blockUnbreakable = new BlockUnbreakable();
-
+        blockUnbreakable1 = new BlockUnbreakable1();
         GameRegistry.registerBlock(blockUnbreakable, MultiBlockUnbreakable.class, "blockUnbreakable");
+        GameRegistry.registerBlock(blockUnbreakable1, MultiBlockUnbreakable.class, "blockUnbreakable1");
 
         /*for (int x = 0; x < amount; x++) {
             ItemStack multiBlockStack = new ItemStack(blockUnbreakable, 1, x);

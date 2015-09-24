@@ -9,7 +9,7 @@ public class ConfigHandler {
 
     public static Configuration config;
     public static String[] bannedEnderBlocks, bannedNetherBlocks, rightClickWhiteList, bottomLeftBranding, menuSayings;
-    public static int aggrorangeEnd, aggrorangeNether, customBlocksCount, unbreakableBlocksCount;
+    public static int aggrorangeEnd, aggrorangeNether, customBlocksCount, unbreakableBlocksCount, unbreakableBlocksCount1;
     public static boolean customOreItems, spawnBuilding, fastLeafDecay, rightClick, enableOreBlocks, enableCustomBlocks, enableUnbreakableBlocks, enableAIM;
     public static String strMainMenuBackground, strMainMenuTitle, spawnBuildingName;
     public static int chairs, items;
@@ -44,6 +44,7 @@ public class ConfigHandler {
         customBlocksCount = config.get("Custom Blocks", "Number of custom blocks", 1).getInt();
         enableUnbreakableBlocks = config.get("Custom Blocks", "Enable Unbreakable Blocks?", false).getBoolean();
         unbreakableBlocksCount = config.get("Custom Blocks", "Number of Unbreakable blocks (1-16)", 1).getInt();
+        unbreakableBlocksCount1 = config.get("Custom Blocks", "Number of Unbreakable blocks(SecondSet) (1-16)", 1).getInt();
         enableAIM = config.get("Custom Blocks", "Enable AIM?", false).getBoolean();
 
         spawnBuilding = config.get("Items", "Enable Spawn Building Item? (Requires RecurrentComplex)", false).getBoolean();
