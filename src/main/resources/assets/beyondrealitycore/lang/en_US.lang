@@ -115,10 +115,11 @@ tile.beyondreality:unbreakableBlock_12.name=TempleBlock12
 tile.beyondreality:unbreakableBlock_13.name=TempleBlock13
 tile.beyondreality:unbreakableBlock_14.name=TempleBlock14
 tile.beyondreality:unbreakableBlock_15.name=TempleBlock15
-tile.beyondreality:unbreakableBlock_16.name=MapTL
-tile.beyondreality:unbreakableBlock_17.name=MapTR
-tile.beyondreality:unbreakableBlock_18.name=MapBL
-tile.beyondreality:unbreakableBlock_19.name=MapBR
+
+tile.beyondreality:unbreakableBlock1_0.name=MapTL
+tile.beyondreality:unbreakableBlock1_1.name=MapTR
+tile.beyondreality:unbreakableBlock1_2.name=MapBL
+tile.beyondreality:unbreakableBlock1_3.name=MapBR
 
 tile.beyondrealitycore:chair:0.name=Tinkers Basic 
 tile.beyondrealitycore:chair:1.name=Road Blocks 
@@ -158,7 +159,7 @@ tile.beyondrealitycore:chair:34.name=RfTools Advance
 tile.beyondrealitycore:chair:35.name=Pneumatic Craft
 tile.beyondrealitycore:chair:36.name=MagnetiCraft 
 tile.beyondrealitycore:chair:37.name=QuantumStorage / Flux-pad's / Simply Labels
-tile.beyondrealitycore:chair:38.name=Not In Use
+tile.beyondrealitycore:chair:38.name=Computronics
 tile.beyondrealitycore:chair:39.name=Matter OverDrive 
 tile.beyondrealitycore:chair:40.name=Tesseracts 
 tile.beyondrealitycore:chair:41.name=Advanced Generators 
