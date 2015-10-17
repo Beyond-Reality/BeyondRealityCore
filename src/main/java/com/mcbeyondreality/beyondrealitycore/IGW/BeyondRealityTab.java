@@ -15,8 +15,36 @@ public class BeyondRealityTab extends BaseWikiTab {
     public BeyondRealityTab() {
         itemRenderer = new RenderItem();
         itemRenderer.setRenderManager(RenderManager.instance);
-        pageEntries.add("changelog");
-        pageEntries.add("Tutorial");
+        pageEntries.add("page1");
+        pageEntries.add("page2");
+		pageEntries.add("page3");
+		pageEntries.add("page4");
+		pageEntries.add("page5");
+		pageEntries.add("page6");
+		pageEntries.add("page7");
+		pageEntries.add("page8");
+		pageEntries.add("page9");
+		pageEntries.add("page10");
+		pageEntries.add("page11");
+		pageEntries.add("page12");
+		pageEntries.add("page13");
+		pageEntries.add("page14");
+		pageEntries.add("page15");
+		pageEntries.add("page16");
+		pageEntries.add("page17");
+		pageEntries.add("page18");
+		pageEntries.add("page19");
+		pageEntries.add("page20");
+		pageEntries.add("page21");
+		pageEntries.add("page22");
+		pageEntries.add("page23");
+		pageEntries.add("page24");
+		pageEntries.add("page25");
+		pageEntries.add("page26");
+		pageEntries.add("page27");
+		pageEntries.add("page28");
+		pageEntries.add("page29");
+		pageEntries.add("page30");
     }
 
     @Override
