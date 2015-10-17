@@ -118,6 +118,7 @@ public class BeyondRealityCore {
 
 
         proxy.register();
+        proxy.registerHandlers();
 
         ConfigHandler.init();
         try {
