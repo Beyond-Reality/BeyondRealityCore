@@ -11,16 +11,17 @@ buildscript {
             name = "sonatype"
             url = "https://oss.sonatype.org/content/repositories/snapshots/"
         }
-
-        maven {
-            name = "IGW"
-            url = "http://maven.k-4u.nl/"
-        }
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
     }
+}
 
+repositories {
+    maven {
+        name = "IGW"
+        url = "http://maven.k-4u.nl/"
+    }
 }
 
 apply plugin: 'forge'
@@ -37,10 +38,6 @@ version = "${config.minecraft_version}-${config.mod_version}"
 group= "com.mcbeyondreality.beyondrealitycore" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "beyondrealitycore"
 
-    dependencies {
-        compile "igwmod:IGW-Mod-1.7.10-1.1.9-29-userdev.jar "
-    }
-
 minecraft {
     version = config.minecraft_version + "-" + config.forge_version
 
@@ -48,6 +45,10 @@ minecraft {
     replace "@VERSION@", "${config.mod_version}"
 	
     runDir = "eclipse"
+}
+
+dependencies{
+    compile "igwmod:IGW-Mod-1.7.10:1.1.9-29:userdev"
 }
 
 processResources
