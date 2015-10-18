@@ -3,7 +3,7 @@ package com.mcbeyondreality.beyondrealitycore.proxy;
 import com.mcbeyondreality.beyondrealitycore.tiles.TileDimGuardKiller;
 import cpw.mods.fml.common.registry.GameRegistry;
 
-public abstract class CommonProxy {
+public class CommonProxy {
 
     public void register() {
 

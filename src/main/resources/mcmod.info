@@ -11,6 +11,6 @@
   "logoFile": "",
   "screenshots": [],
   "dependencies": ["IGWMod"],
-  "requiredMods: ["IGWMod"]
+  "requiredMods": ["IGWMod"]
 }
 ]
