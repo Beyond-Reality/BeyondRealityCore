@@ -2,16 +2,23 @@ package com.mcbeyondreality.beyondrealitycore.blocks;
 
 import com.mcbeyondreality.beyondrealitycore.BeyondRealityCore;
 import com.mcbeyondreality.beyondrealitycore.tileentity.TileEntityChair;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
 import java.util.List;
 
 public class BlockChair extends BlockContainer {
+
+    @SideOnly(Side.CLIENT)
+    private IIcon icon;
 
     public BlockChair(int i) {
         super(Material.iron);
@@ -20,9 +27,18 @@ public class BlockChair extends BlockContainer {
         setCreativeTab(BeyondRealityCore.tabBeyondReality);
     }
 
-    @Override
+    @SideOnly(Side.CLIENT)
+    public void registerBlockIcons(IIconRegister iconregister) {
+        this.icon = iconregister.registerIcon("beyondrealitycore:lock");
+    }
+
+    public IIcon getIcon(int side, int meta) {
+        return this.icon;
+    }
+
+    /*@Override
     public int getRenderType() {
-        return -1;
+        return 3;
     }
 
     @Override
@@ -32,8 +48,8 @@ public class BlockChair extends BlockContainer {
 
     @Override
     public boolean renderAsNormalBlock() {
-        return false;
-    }
+        return true;
+    }*/
 
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {

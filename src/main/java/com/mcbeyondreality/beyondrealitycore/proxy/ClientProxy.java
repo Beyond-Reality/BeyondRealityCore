@@ -9,7 +9,7 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public void register() {
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityChair.class, new ChairRenderer());
+        //ClientRegistry.bindTileEntitySpecialRenderer(TileEntityChair.class, new ChairRenderer());
     }
 
     @Override

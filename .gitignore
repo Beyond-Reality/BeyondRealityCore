@@ -32,4 +32,4 @@ gradlew.bat
 Thumbs.db
 *.xml
 out/*
-libs/*
+lib/*

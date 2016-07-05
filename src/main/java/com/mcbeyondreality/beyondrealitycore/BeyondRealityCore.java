@@ -138,8 +138,8 @@ public class BeyondRealityCore {
         for(int i = 0; i < chair.length; i++) {
             chair[i] = new BlockChair(i);
             GameRegistry.registerBlock(chair[i], "chair:" + i);
-            if(event.getSide() == Side.CLIENT)
-                MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(chair[i]), new ItemChairRenderer());
+            /*if(event.getSide() == Side.CLIENT)
+                MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(chair[i]), new ItemChairRenderer());*/
         }
         GameRegistry.registerTileEntity(TileEntityChair.class, "chairTile");
 

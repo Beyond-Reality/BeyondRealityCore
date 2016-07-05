@@ -6,10 +6,10 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 
 public class TileEntityChair extends TileEntity {
-    @Override
+    /*@Override
     @SideOnly(Side.CLIENT)
     public AxisAlignedBB getRenderBoundingBox() {
         AxisAlignedBB box = super.getRenderBoundingBox();
         return box.expand(50, 50, 50);
-    }
+    }*/
 }
