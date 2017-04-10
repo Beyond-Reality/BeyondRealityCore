@@ -1,0 +1,7 @@
+itemGroup.brMaterial=Beyond Reality Materials
+
+tile.beyondreality:oreiron.name=Iron ore
+tile.beyondreality:sparseiron.name=Iron sparse
+item.beyondreality:dustiron.name=Iron dust
+item.beyondreality:nuggetiron.name=Iron nugget
+item.beyondreality:ingotiron.name=Iron ingot

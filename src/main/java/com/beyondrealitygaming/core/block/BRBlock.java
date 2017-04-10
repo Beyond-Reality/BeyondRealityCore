@@ -10,6 +10,7 @@ public class BRBlock extends Block {
         super(material);
         setUnlocalizedName("beyondreality:" + name);
         setRegistryName("beyondreality", name);
+        setHardness(3.0F);
         setCreativeTab(tabs);
     }
 }

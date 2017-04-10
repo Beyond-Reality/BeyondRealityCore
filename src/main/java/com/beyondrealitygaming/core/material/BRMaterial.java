@@ -23,6 +23,7 @@ public class BRMaterial {
     public static List<BRMaterial> materialList = new ArrayList<BRMaterial>();
 
     private BRBlock ore;
+    private BRItemBlock oreItem;
     private BRBlock sparse;
     private BRItem sparseItem;
     private BRItem dust;
@@ -38,7 +39,7 @@ public class BRMaterial {
         };
         if (createOre) {
             GameRegistry.register(ore = new BRBlock(Material.ROCK, "ore" + type, materialTab));
-            GameRegistry.register(new BRItemBlock(ore, materialTab));
+            GameRegistry.register(oreItem = new BRItemBlock(ore, materialTab));
         }
         if (createSparse) {
             GameRegistry.register(sparse = new BRBlock(Material.ROCK, "sparse" + type, materialTab));
@@ -58,6 +59,10 @@ public class BRMaterial {
     }
 
     public void registerModels(){
-        if (ore != null) Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(ore),0, new ModelResourceLocation(new ResourceLocation(ore.getRegistryName().toString().toLowerCase()), "inventory"));
+        if (ore != null){
+            ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ore),0, new ModelResourceLocation(new ResourceLocation(ore.getRegistryName().toString().toLowerCase()), "inventory"));
+            //Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(ore),0, new ModelResourceLocation(new ResourceLocation(ore.getRegistryName().toString().toLowerCase()), "inventory"));
+            //Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(oreItem,0, new ModelResourceLocation(new ResourceLocation(ore.getRegistryName().toString().toLowerCase()), "normal"));
+        }
     }
 }
