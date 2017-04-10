@@ -60,9 +60,7 @@ public class BRMaterial {
 
     public void registerModels(){
         if (ore != null){
-            ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ore),0, new ModelResourceLocation(new ResourceLocation(ore.getRegistryName().toString().toLowerCase()), "inventory"));
-            //Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(ore),0, new ModelResourceLocation(new ResourceLocation(ore.getRegistryName().toString().toLowerCase()), "inventory"));
-            //Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(oreItem,0, new ModelResourceLocation(new ResourceLocation(ore.getRegistryName().toString().toLowerCase()), "normal"));
+            Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(ore),0, new ModelResourceLocation(new ResourceLocation(ore.getRegistryName().toString().toLowerCase()), "inventory"));
         }
     }
 }
