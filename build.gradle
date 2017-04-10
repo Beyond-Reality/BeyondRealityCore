@@ -3,8 +3,8 @@ import static jdk.nashorn.internal.objects.NativeRegExp.compile
 buildscript {
     repositories {
         mavenCentral()
+        jcenter()
         maven {
-            name = "forge"
             url = "http://files.minecraftforge.net/maven"
         }
         maven {
@@ -13,18 +13,18 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.2-SNAPSHOT'
     }
 }
 
 repositories {
-    maven {
-        name = "IGW"
-        url = "http://maven.k-4u.nl/"
-    }
+//    maven {
+//        name = "IGW"
+//        url = "http://maven.k-4u.nl/"
+//    }
 }
 
-apply plugin: 'forge'
+apply plugin: 'net.minecraftforge.gradle.forge'
 
 ext.configFile = file "build.properties"
 
@@ -45,10 +45,12 @@ minecraft {
     replace "@VERSION@", "${config.mod_version}"
 	
     runDir = "eclipse"
+
+    mappings = "snapshot_20161220"
 }
 
 dependencies{
-    compile "igwmod:IGW-Mod-1.7.10:1.1.9-29:userdev"
+//    compile "igwmod:IGW-Mod-1.7.10:1.1.9-29:userdev"
 }
 
 processResources
