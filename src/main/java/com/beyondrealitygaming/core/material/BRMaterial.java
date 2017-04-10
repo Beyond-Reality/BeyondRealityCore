@@ -23,7 +23,6 @@ public class BRMaterial {
     public static List<BRMaterial> materialList = new ArrayList<BRMaterial>();
 
     private BRBlock ore;
-    private BRItemBlock oreItem;
     private BRBlock sparse;
     private BRItem sparseItem;
     private BRItem dust;
@@ -39,7 +38,7 @@ public class BRMaterial {
         };
         if (createOre) {
             GameRegistry.register(ore = new BRBlock(Material.ROCK, "ore" + type, materialTab));
-            GameRegistry.register(oreItem = new BRItemBlock(ore, materialTab));
+            GameRegistry.register(new BRItemBlock(ore, materialTab));
         }
         if (createSparse) {
             GameRegistry.register(sparse = new BRBlock(Material.ROCK, "sparse" + type, materialTab));
