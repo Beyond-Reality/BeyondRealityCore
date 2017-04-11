@@ -38,13 +38,13 @@ public class BRMaterial {
         new BRMaterial("tin", true, true, true,true,true);
         new BRMaterial("uranium", true, true, true,true,true);
         new BRMaterial("zinc", true, true, true,true,true);
-        new BRMaterial("coal", false, true, true,false,false);
-        new BRMaterial("diamond", false, true, true,true,false);
-        new BRMaterial("emerald", false, true, true,true,false);
-        new BRMaterial("gold", false, true, true,false,false);
-        new BRMaterial("iron", false, true, true,false,false);
-        new BRMaterial("lapis", false, true, true,true,false);
-        new BRMaterial("redstone", false,true,false, false,false);
+        new BRMaterial("coal", false, true, true,false,false, Blocks.COAL_ORE);
+        new BRMaterial("diamond", false, true, true,true,false,Blocks.DIAMOND_ORE);
+        new BRMaterial("emerald", false, true, true,true,false, Blocks.EMERALD_ORE);
+        new BRMaterial("gold", false, true, true,false,false, Blocks.GOLD_ORE);
+        new BRMaterial("iron", false, true, true,false,false,Blocks.IRON_ORE);
+        new BRMaterial("lapis", false, true, true,true,false, Blocks.LAPIS_ORE);
+        new BRMaterial("redstone", false,true,false, false,false, Blocks.REDSTONE_ORE);
     }
 
     private BRBlock ore;
@@ -54,7 +54,7 @@ public class BRMaterial {
     private BRItem nugget;
     private BRItem ingot;
 
-    public BRMaterial(String type, boolean createOre, boolean createSparse, boolean createDust, boolean createNugget, boolean createIngot) {
+    public BRMaterial(String type, boolean createOre, boolean createSparse, boolean createDust, boolean createNugget, boolean createIngot, Block sparseRecipe) {
         if (materialTab == null) materialTab = new CreativeTabs("brMaterial") {
             @Override
             public ItemStack getTabIconItem() {
@@ -70,7 +70,7 @@ public class BRMaterial {
             GameRegistry.register(new BRItemBlock(sparse, materialTab));
             GameRegistry.register(sparseItem = new BRItem("tiny"+type,materialTab));
             sparse.setDrop(sparseItem);
-            GameRegistry.addRecipe(new ItemStack(ore), new Object[] {"##", "##", '#',sparseItem});
+            GameRegistry.addRecipe(new ItemStack(Item.getItemFromBlock(sparseRecipe == null ? ore : sparseRecipe)), new Object[] {"##", "##", '#',sparseItem});
         }
         if (createDust) {
             GameRegistry.register(dust = new BRItem("dust" + type, materialTab));
@@ -82,6 +82,9 @@ public class BRMaterial {
             GameRegistry.register(ingot = new BRItem("ingot" + type, materialTab));
         }
         materialList.add(this);
+    }
+    public BRMaterial(String type, boolean createOre, boolean createSparse, boolean createDust, boolean createNugget, boolean createIngot) {
+        this(type,createOre,createSparse,createDust,createNugget,createIngot,null);
     }
 
     public void registerModels(){
