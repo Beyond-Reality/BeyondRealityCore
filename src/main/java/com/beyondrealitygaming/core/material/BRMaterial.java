@@ -1,8 +1,10 @@
 package com.beyondrealitygaming.core.material;
 
 import com.beyondrealitygaming.core.block.BRBlock;
+import com.beyondrealitygaming.core.block.BROre;
 import com.beyondrealitygaming.core.item.BRItem;
 import com.beyondrealitygaming.core.item.BRItemBlock;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -22,8 +24,31 @@ public class BRMaterial {
     public static CreativeTabs materialTab;
     public static List<BRMaterial> materialList = new ArrayList<BRMaterial>();
 
+    public static void registerMaterials(){
+        new BRMaterial("aluminium", true, true, true,true,true);
+        new BRMaterial("apatite", true, true, true,true,true);
+        new BRMaterial("cadmium", true, true, true,true,true);
+        new BRMaterial("copper", true, true, true,true,true);
+        new BRMaterial("indium", true, true, true,true,true);
+        new BRMaterial("lead", true, true, true,true,true);
+        new BRMaterial("magnetite", true, true, true,true,true);
+        new BRMaterial("nickel", true, true, true,true,true);
+        new BRMaterial("platinum", true, true, true,true,true);
+        new BRMaterial("silver", true, true, true,true,true);
+        new BRMaterial("tin", true, true, true,true,true);
+        new BRMaterial("uranium", true, true, true,true,true);
+        new BRMaterial("zinc", true, true, true,true,true);
+        new BRMaterial("coal", false, true, true,false,false);
+        new BRMaterial("diamond", false, true, true,true,false);
+        new BRMaterial("emerald", false, true, true,true,false);
+        new BRMaterial("gold", false, true, true,false,false);
+        new BRMaterial("iron", false, true, true,false,false);
+        new BRMaterial("lapis", false, true, true,true,false);
+        new BRMaterial("redstone", false,true,false, false,false);
+    }
+
     private BRBlock ore;
-    private BRBlock sparse;
+    private BROre sparse;
     private BRItem sparseItem;
     private BRItem dust;
     private BRItem nugget;
@@ -41,9 +66,11 @@ public class BRMaterial {
             GameRegistry.register(new BRItemBlock(ore, materialTab));
         }
         if (createSparse) {
-            GameRegistry.register(sparse = new BRBlock(Material.ROCK, "sparse" + type, materialTab));
+            GameRegistry.register(sparse = new BROre(Material.ROCK, "sparse" + type, materialTab));
             GameRegistry.register(new BRItemBlock(sparse, materialTab));
-            GameRegistry.register(sparseItem = new BRItem("sparseItem"+type,materialTab));
+            GameRegistry.register(sparseItem = new BRItem("tiny"+type,materialTab));
+            sparse.setDrop(sparseItem);
+            GameRegistry.addRecipe(new ItemStack(ore), new Object[] {"##", "##", '#',sparseItem});
         }
         if (createDust) {
             GameRegistry.register(dust = new BRItem("dust" + type, materialTab));
@@ -58,8 +85,19 @@ public class BRMaterial {
     }
 
     public void registerModels(){
-        if (ore != null){
-            Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(ore),0, new ModelResourceLocation(new ResourceLocation(ore.getRegistryName().toString().toLowerCase()), "inventory"));
+        if (ore != null) registerBlockModel(ore);
+        if (sparse != null) {
+            registerBlockModel(sparse);
+            registerItem(sparseItem);
         }
+    }
+
+    public void registerBlockModel(Block block){
+        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(block),0, new ModelResourceLocation(new ResourceLocation(block.getRegistryName().toString().toLowerCase()), "normal"));
+        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block),0,new ModelResourceLocation(new ResourceLocation(block.getRegistryName().toString().toLowerCase()),"inventory"));
+    }
+
+    public void registerItem(Item item){
+        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item,0, new ModelResourceLocation(new ResourceLocation(item.getRegistryName().toString().toLowerCase()), "inventory"));
     }
 }

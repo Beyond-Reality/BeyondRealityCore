@@ -9,7 +9,7 @@ public class BRItemBlock extends ItemBlock {
     public BRItemBlock(Block block, CreativeTabs tabs) {
         super(block);
         setUnlocalizedName(block.getUnlocalizedName());
-        setRegistryName(block.getRegistryName());
+        setRegistryName(block.getRegistryName().toString());
         setCreativeTab(tabs);
     }
 }

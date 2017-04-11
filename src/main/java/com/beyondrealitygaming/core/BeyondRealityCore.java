@@ -1,5 +1,6 @@
 package com.beyondrealitygaming.core;
 
+import com.beyondrealitygaming.core.item.BRItem;
 import com.beyondrealitygaming.core.material.BRMaterial;
 import com.beyondrealitygaming.core.proxy.CommonProxy;
 import net.minecraftforge.fml.common.Mod;
@@ -22,13 +23,12 @@ public class BeyondRealityCore {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        new BRMaterial("iron", true, true, true, true,true);
-
+        BRMaterial.registerMaterials();
     }
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
-        proxy.preInit();
+        proxy.init();
     }
 
     @Mod.EventHandler
