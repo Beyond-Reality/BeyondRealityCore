@@ -14,7 +14,10 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.event.entity.player.PlayerDropsEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.OreDictionary;
+import org.apache.commons.lang3.text.WordUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,26 +28,42 @@ public class BRMaterial {
     public static List<BRMaterial> materialList = new ArrayList<BRMaterial>();
 
     public static void registerMaterials(){
-        new BRMaterial("aluminium", true, true, true,true,true);
-        new BRMaterial("apatite", true, true, true,true,true);
-        new BRMaterial("cadmium", true, true, true,true,true);
-        new BRMaterial("copper", true, true, true,true,true);
-        new BRMaterial("indium", true, true, true,true,true);
-        new BRMaterial("lead", true, true, true,true,true);
-        new BRMaterial("magnetite", true, true, true,true,true);
-        new BRMaterial("nickel", true, true, true,true,true);
-        new BRMaterial("platinum", true, true, true,true,true);
-        new BRMaterial("silver", true, true, true,true,true);
-        new BRMaterial("tin", true, true, true,true,true);
-        new BRMaterial("uranium", true, true, true,true,true);
-        new BRMaterial("zinc", true, true, true,true,true);
-        new BRMaterial("coal", false, true, true,false,false, Blocks.COAL_ORE);
-        new BRMaterial("diamond", false, true, true,true,false,Blocks.DIAMOND_ORE);
-        new BRMaterial("emerald", false, true, true,true,false, Blocks.EMERALD_ORE);
-        new BRMaterial("gold", false, true, true,false,false, Blocks.GOLD_ORE);
-        new BRMaterial("iron", false, true, true,false,false,Blocks.IRON_ORE);
-        new BRMaterial("lapis", false, true, true,true,false, Blocks.LAPIS_ORE);
-        new BRMaterial("redstone", false,true,false, false,false, Blocks.REDSTONE_ORE);
+//        new BRMaterial("aluminium", true, true, true,true,true);
+//        new BRMaterial("apatite", true, true, true,true,true);
+//        new BRMaterial("cadmium", true, true, true,true,true);
+//        new BRMaterial("copper", true, true, true,true,true);
+//        new BRMaterial("indium", true, true, true,true,true);
+//        new BRMaterial("lead", true, true, true,true,true);
+//        new BRMaterial("magnetite", true, true, true,true,true);
+//        new BRMaterial("nickel", true, true, true,true,true);
+//        new BRMaterial("platinum", true, true, true,true,true);
+//        new BRMaterial("silver", true, true, true,true,true);
+//        new BRMaterial("tin", true, true, true,true,true);
+//        new BRMaterial("uranium", true, true, true,true,true);
+        new BRMaterial("ruby", true, true, false,false,false);
+        new BRMaterial("tin", true, true, false,false,false);
+        new BRMaterial("copper", true, true, false,false,false);
+        new BRMaterial("nickel", true, true, false,false,false);
+        new BRMaterial("platinum", true, true, false,false,false);
+        new BRMaterial("lead", true, true, false,false,false);
+        new BRMaterial("sapphire", true, true, false,false,false);
+        new BRMaterial("iridium", true, true, false,false,false);
+        new BRMaterial("silver", true, true, false,false,false);
+        new BRMaterial("peridot", true, true, false,false,false);
+        new BRMaterial("coal", false, true, false,false,false, Blocks.COAL_ORE);
+        new BRMaterial("diamond", false, true, false,false,false,Blocks.DIAMOND_ORE);
+        new BRMaterial("emerald", false, true, false,false,false, Blocks.EMERALD_ORE);
+        new BRMaterial("gold", false, true, false,false,false, Blocks.GOLD_ORE);
+        new BRMaterial("iron", false, true,false,false,false,Blocks.IRON_ORE);
+        new BRMaterial("lapis", false, true, false,false,false,Blocks.LAPIS_ORE);
+        new BRMaterial("redstone", false,true,false,false,false,Blocks.REDSTONE_ORE);
+        new BRMaterial("thorium", true, true, false,false,false);
+        new BRMaterial("uranium", true, true, false,false,false);
+        new BRMaterial("boron", true, true, false,false,false);
+        new BRMaterial("lithium", true, true, false,false,false);
+        new BRMaterial("magnesium", true, true, false,false,false);
+        new BRMaterial("bauxite", true, true, false,false,false);
+        new BRMaterial("tungsten", true, true, false,false,false);
     }
 
     private BRBlock ore;
@@ -64,6 +83,7 @@ public class BRMaterial {
         if (createOre) {
             GameRegistry.register(ore = new BRBlock(Material.ROCK, "ore" + type, materialTab));
             GameRegistry.register(new BRItemBlock(ore, materialTab));
+            OreDictionary.registerOre("ore"+ WordUtils.capitalize(type),ore);
         }
         if (createSparse) {
             GameRegistry.register(sparse = new BROre(Material.ROCK, "sparse" + type, materialTab));
