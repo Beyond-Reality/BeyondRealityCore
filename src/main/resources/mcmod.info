@@ -2,12 +2,12 @@
 {
   "modid": "beyondreality",
   "name": "Beyond Reality Core",
-  "description": "Capes and things for Beyond Reality modpack.",
-  "version": "",
+  "description": "Added features for the Beyond Reality ModPacks.",
+  "version": "11.11.2-2.0.0-BETA",
   "mcversion": "1.11.2-13.20.0.2228",
-  "url": "http://www.beyondrealitypack.com",
+  "url": "https://github.com/Beyond-Reality/BeyondRealityCore",
   "updateUrl": "",
-  "authorList": ["Dyonovan", "pauljoda", "Dominance"],
+  "authorList": ["Dyonovan", "pauljoda", "Dominance", "Buuz135"],
   "logoFile": "",
   "screenshots": [],
 }
