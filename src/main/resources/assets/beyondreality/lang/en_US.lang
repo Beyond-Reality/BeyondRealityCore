@@ -1,7 +1,115 @@
 itemGroup.brMaterial=Beyond Reality Materials
 
+tile.beyondreality:oreruby.name=Ruby ore
+tile.beyondreality:sparseruby.name=Sparse ruby
+item.beyondreality:tinyruby.name=Tiny ruby
+tile.beyondreality:sporadicruby.name=Sporadic ruby
+
+tile.beyondreality:oretin.name=Tin ore
+tile.beyondreality:sparsetin.name=Sparse tin
+item.beyondreality:tinytin.name=Tiny tin
+tile.beyondreality:sporadictin.name=Sporadic tin
+
+tile.beyondreality:orecopper.name=Copper ore
+tile.beyondreality:sparsecopper.name=Sparse copper
+item.beyondreality:tinycopper.name=Tiny copper
+tile.beyondreality:sporadiccopper.name=Sporadic copper
+
+tile.beyondreality:orenickel.name=Nickel ore
+tile.beyondreality:sparsenickel.name=Sparse nickel
+item.beyondreality:tinynickel.name=Tiny nickel
+tile.beyondreality:sporadicnickel.name=Sporadic nickel
+
+tile.beyondreality:oreplatinum.name=Platinum ore
+tile.beyondreality:sparseplatinum.name=Sparse platinum
+item.beyondreality:tinyplatinum.name=Tiny platinum
+tile.beyondreality:sporadicplatinum.name=Sporadic platinum
+
+tile.beyondreality:orelead.name=Lead ore
+tile.beyondreality:sparselead.name=Sparse lead
+item.beyondreality:tinylead.name=Tiny lead
+tile.beyondreality:sporadiclead.name=Sporadic lead
+
+tile.beyondreality:oresapphire.name=Sapphire ore
+tile.beyondreality:sparsesapphire.name=Sparse sapphire
+item.beyondreality:tinysapphire.name=Tiny sapphire
+tile.beyondreality:sporadicsapphire.name=Sporadic sapphire
+
+tile.beyondreality:oreiridium.name=Iridium ore
+tile.beyondreality:sparseiridium.name=Sparse iridium
+item.beyondreality:tinyiridium.name=Tiny iridium
+tile.beyondreality:sporadiciridium.name=Sporadic iridium
+
+tile.beyondreality:oresilver.name=Silver ore
+tile.beyondreality:sparsesilver.name=Sparse silver
+item.beyondreality:tinysilver.name=Tiny silver
+tile.beyondreality:sporadicsilver.name=Sporadic silver
+
+tile.beyondreality:oreperidot.name=Peridot ore
+tile.beyondreality:sparseperidot.name=Sparse peridot
+item.beyondreality:tinyperidot.name=Tiny peridot
+tile.beyondreality:sporadicperidot.name=Sporadic peridot
+
+tile.beyondreality:sparsecoal.name=Sparse coal
+item.beyondreality:tinycoal.name=Tiny coal
+tile.beyondreality:sporadiccoal.name=Sporadic coal
+
+tile.beyondreality:sparsediamond.name=Sparse diamond
+item.beyondreality:tinydiamond.name=Tiny diamond
+tile.beyondreality:sporadicdiamond.name=Sporadic diamond
+
+tile.beyondreality:sparseemerald.name=Sparse emerald
+item.beyondreality:tinyemerald.name=Tiny emerald
+tile.beyondreality:sporadicemerald.name=Sporadic emerald
+
+tile.beyondreality:sparsegold.name=Sparse gold
+item.beyondreality:tinygold.name=Tiny gold
+tile.beyondreality:sporadicgold.name=Sporadic gold
+
 tile.beyondreality:oreiron.name=Iron ore
-tile.beyondreality:sparseiron.name=Iron sparse
-item.beyondreality:dustiron.name=Iron dust
-item.beyondreality:nuggetiron.name=Iron nugget
-item.beyondreality:ingotiron.name=Iron ingot
+tile.beyondreality:sparseiron.name=Sparse iron
+item.beyondreality:tinyiron.name=Tiny iron
+tile.beyondreality:sporadiciron.name=Sporadic iron
+
+tile.beyondreality:sparselapis.name=Sparse lapis
+item.beyondreality:tinylapis.name=Tiny lapis
+tile.beyondreality:sporadiclapis.name=Sporadic lapis
+
+tile.beyondreality:sparseredstone.name=Sparse redstone
+item.beyondreality:tinyredstone.name=Tiny redstone
+tile.beyondreality:sporadicredstone.name=Sporadic redstone
+
+tile.beyondreality:orethorium.name=Thorium ore
+tile.beyondreality:sparsethorium.name=Sparse thorium
+item.beyondreality:tinythorium.name=Tiny thorium
+tile.beyondreality:sporadicthorium.name=Sporadic thorium
+
+tile.beyondreality:oreuranium.name=Uranium ore
+tile.beyondreality:sparseuranium.name=Sparse uranium
+item.beyondreality:tinyuranium.name=Tiny uranium
+tile.beyondreality:sporadicuranium.name=Sporadic uranium
+
+tile.beyondreality:oreboron.name=Boron ore
+tile.beyondreality:sparseboron.name=Sparse boron
+item.beyondreality:tinyboron.name=Tiny boron
+tile.beyondreality:sporadicboron.name=Sporadic boron
+
+tile.beyondreality:orelithium.name=Lithium ore
+tile.beyondreality:sparselithium.name=Sparse lithium
+item.beyondreality:tinylithium.name=Tiny lithium
+tile.beyondreality:sporadiclithium.name=Sporadic lithium
+
+tile.beyondreality:oremagnesium.name=Magnesium ore
+tile.beyondreality:sparsemagnesium.name=Sparse magnesium
+item.beyondreality:tinymagnesium.name=Tiny magnesium
+tile.beyondreality:sporadicmagnesium.name=Sporadic magnesium
+
+tile.beyondreality:orebauxite.name=Bauxite ore
+tile.beyondreality:sparsebauxite.name=Sparse bauxite
+item.beyondreality:tinybauxite.name=Tiny bauxite
+tile.beyondreality:sporadicbauxite.name=Sporadic bauxite
+
+tile.beyondreality:oretungsten.name=Tungsten ore
+tile.beyondreality:sparsetungsten.name=Sparse tungsten
+item.beyondreality:tinytungsten.name=Tiny tungsten
+tile.beyondreality:sporadictungsten.name=Sporadic tungsten

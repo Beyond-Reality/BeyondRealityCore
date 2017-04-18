@@ -28,52 +28,39 @@ public class BRMaterial {
     public static List<BRMaterial> materialList = new ArrayList<BRMaterial>();
 
     public static void registerMaterials(){
-//        new BRMaterial("aluminium", true, true, true,true,true);
-//        new BRMaterial("apatite", true, true, true,true,true);
-//        new BRMaterial("cadmium", true, true, true,true,true);
-//        new BRMaterial("copper", true, true, true,true,true);
-//        new BRMaterial("indium", true, true, true,true,true);
-//        new BRMaterial("lead", true, true, true,true,true);
-//        new BRMaterial("magnetite", true, true, true,true,true);
-//        new BRMaterial("nickel", true, true, true,true,true);
-//        new BRMaterial("platinum", true, true, true,true,true);
-//        new BRMaterial("silver", true, true, true,true,true);
-//        new BRMaterial("tin", true, true, true,true,true);
-//        new BRMaterial("uranium", true, true, true,true,true);
-        new BRMaterial("ruby", true, true, false,false,false);
-        new BRMaterial("tin", true, true, false,false,false);
-        new BRMaterial("copper", true, true, false,false,false);
-        new BRMaterial("nickel", true, true, false,false,false);
-        new BRMaterial("platinum", true, true, false,false,false);
-        new BRMaterial("lead", true, true, false,false,false);
-        new BRMaterial("sapphire", true, true, false,false,false);
-        new BRMaterial("iridium", true, true, false,false,false);
-        new BRMaterial("silver", true, true, false,false,false);
-        new BRMaterial("peridot", true, true, false,false,false);
-        new BRMaterial("coal", false, true, false,false,false, Blocks.COAL_ORE);
-        new BRMaterial("diamond", false, true, false,false,false,Blocks.DIAMOND_ORE);
-        new BRMaterial("emerald", false, true, false,false,false, Blocks.EMERALD_ORE);
-        new BRMaterial("gold", false, true, false,false,false, Blocks.GOLD_ORE);
-        new BRMaterial("iron", false, true,false,false,false,Blocks.IRON_ORE);
-        new BRMaterial("lapis", false, true, false,false,false,Blocks.LAPIS_ORE);
-        new BRMaterial("redstone", false,true,false,false,false,Blocks.REDSTONE_ORE);
-        new BRMaterial("thorium", true, true, false,false,false);
-        new BRMaterial("uranium", true, true, false,false,false);
-        new BRMaterial("boron", true, true, false,false,false);
-        new BRMaterial("lithium", true, true, false,false,false);
-        new BRMaterial("magnesium", true, true, false,false,false);
-        new BRMaterial("bauxite", true, true, false,false,false);
-        new BRMaterial("tungsten", true, true, false,false,false);
+        new BRMaterial("ruby", true, true, true);
+        new BRMaterial("tin", true, true, true);
+        new BRMaterial("copper", true, true, true);
+        new BRMaterial("nickel", true, true, true);
+        new BRMaterial("platinum", true, true, true);
+        new BRMaterial("lead", true, true, true);
+        new BRMaterial("sapphire", true, true, true);
+        new BRMaterial("iridium", true, true, true);
+        new BRMaterial("silver", true, true, true);
+        new BRMaterial("peridot", true, true, true);
+        new BRMaterial("coal", false, true, true, Blocks.COAL_ORE);
+        new BRMaterial("diamond", false, true, true,Blocks.DIAMOND_ORE);
+        new BRMaterial("emerald", false, true, true, Blocks.EMERALD_ORE);
+        new BRMaterial("gold", false, true, true, Blocks.GOLD_ORE);
+        new BRMaterial("iron", false, true, true,Blocks.IRON_ORE);
+        new BRMaterial("lapis", false, true, true,Blocks.LAPIS_ORE);
+        new BRMaterial("redstone", false,true, true,Blocks.REDSTONE_ORE);
+        new BRMaterial("thorium", true, true, true);
+        new BRMaterial("uranium", true, true, true);
+        new BRMaterial("boron", true, true, true);
+        new BRMaterial("lithium", true, true, true);
+        new BRMaterial("magnesium", true, true, true);
+        new BRMaterial("bauxite", true, true, true);
+        new BRMaterial("tungsten", true, true, true);
     }
 
     private BRBlock ore;
     private BROre sparse;
     private BRItem sparseItem;
-    private BRItem dust;
-    private BRItem nugget;
-    private BRItem ingot;
+    private BROre sporadic;
 
-    public BRMaterial(String type, boolean createOre, boolean createSparse, boolean createDust, boolean createNugget, boolean createIngot, Block sparseRecipe) {
+
+    public BRMaterial(String type, boolean createOre, boolean createSparse, boolean createSporadic, Block sparseRecipe) {
         if (materialTab == null) materialTab = new CreativeTabs("brMaterial") {
             @Override
             public ItemStack getTabIconItem() {
@@ -86,25 +73,21 @@ public class BRMaterial {
             OreDictionary.registerOre("ore"+ WordUtils.capitalize(type),ore);
         }
         if (createSparse) {
-            GameRegistry.register(sparse = new BROre(Material.ROCK, "sparse" + type, materialTab));
+            GameRegistry.register(sparse = new BROre(Material.ROCK, "sparse" + type, materialTab,1,3));
             GameRegistry.register(new BRItemBlock(sparse, materialTab));
             GameRegistry.register(sparseItem = new BRItem("tiny"+type,materialTab));
             sparse.setDrop(sparseItem);
             GameRegistry.addRecipe(new ItemStack(Item.getItemFromBlock(sparseRecipe == null ? ore : sparseRecipe)), new Object[] {"##", "##", '#',sparseItem});
         }
-        if (createDust) {
-            GameRegistry.register(dust = new BRItem("dust" + type, materialTab));
-        }
-        if (createNugget) {
-            GameRegistry.register(nugget = new BRItem("nugget" + type, materialTab));
-        }
-        if (createIngot) {
-            GameRegistry.register(ingot = new BRItem("ingot" + type, materialTab));
+        if (createSporadic){
+            GameRegistry.register(sporadic = new BROre(Material.ROCK, "sporadic" + type, materialTab, 3, 6));
+            GameRegistry.register(new BRItemBlock(sporadic, materialTab));
+            sparse.setDrop(sparseItem);
         }
         materialList.add(this);
     }
-    public BRMaterial(String type, boolean createOre, boolean createSparse, boolean createDust, boolean createNugget, boolean createIngot) {
-        this(type,createOre,createSparse,createDust,createNugget,createIngot,null);
+    public BRMaterial(String type, boolean createOre, boolean createSparse, boolean createSporadic) {
+        this(type,createOre,createSparse,createSporadic,null);
     }
 
     public void registerModels(){
@@ -112,6 +95,9 @@ public class BRMaterial {
         if (sparse != null) {
             registerBlockModel(sparse);
             registerItem(sparseItem);
+        }
+        if (sporadic != null){
+            registerBlockModel(sporadic);
         }
     }
 
