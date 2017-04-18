@@ -73,14 +73,14 @@ public class BRMaterial {
             OreDictionary.registerOre("ore"+ WordUtils.capitalize(type),ore);
         }
         if (createSparse) {
-            GameRegistry.register(sparse = new BROre(Material.ROCK, "sparse" + type, materialTab));
+            GameRegistry.register(sparse = new BROre(Material.ROCK, "sparse" + type, materialTab,1,3));
             GameRegistry.register(new BRItemBlock(sparse, materialTab));
             GameRegistry.register(sparseItem = new BRItem("tiny"+type,materialTab));
             sparse.setDrop(sparseItem);
             GameRegistry.addRecipe(new ItemStack(Item.getItemFromBlock(sparseRecipe == null ? ore : sparseRecipe)), new Object[] {"##", "##", '#',sparseItem});
         }
         if (createSporadic){
-            GameRegistry.register(sporadic = new BROre(Material.ROCK, "sporadic" + type, materialTab));
+            GameRegistry.register(sporadic = new BROre(Material.ROCK, "sporadic" + type, materialTab, 3, 6));
             GameRegistry.register(new BRItemBlock(sporadic, materialTab));
             sparse.setDrop(sparseItem);
         }

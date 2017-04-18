@@ -11,9 +11,13 @@ import java.util.Random;
 public class BROre extends BRBlock {
 
     private Item drop;
+    private int minDrop;
+    private int maxDrop;
 
-    public BROre(Material material, String name, CreativeTabs tabs) {
+    public BROre(Material material, String name, CreativeTabs tabs, int minDrop, int maxDrop) {
         super(material, name, tabs);
+        this.minDrop = minDrop;
+        this.maxDrop = maxDrop;
     }
 
     public void setDrop(Item drop) {
@@ -25,12 +29,9 @@ public class BROre extends BRBlock {
         return drop == null ? Item.getItemFromBlock(this) : drop;
     }
 
-    public int quantityDroppedWithBonus(int fortune, Random random) {
-        return this.quantityDropped(random) + random.nextInt(fortune + 1);
-    }
 
     public int quantityDropped(Random random)
     {
-        return 1;
+        return minDrop+new Random().nextInt(maxDrop-minDrop+1);
     }
 }
