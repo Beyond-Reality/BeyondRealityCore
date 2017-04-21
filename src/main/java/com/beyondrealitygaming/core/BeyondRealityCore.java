@@ -1,6 +1,6 @@
 package com.beyondrealitygaming.core;
 
-import com.beyondrealitygaming.core.item.BRItem;
+
 import com.beyondrealitygaming.core.material.BRMaterial;
 import com.beyondrealitygaming.core.proxy.CommonProxy;
 import net.minecraftforge.fml.common.Mod;
@@ -9,9 +9,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
-@Mod(name = "Beyond Reality Core", modid = "beyondreality", version = "@VERSION@")
-
-
+@Mod(name = "Beyond Reality Core", modid = "beyondreality", version = "2.0.2")
 public class BeyondRealityCore {
 
     @Mod.Instance("beyondreality")

@@ -82,7 +82,7 @@ public class BRMaterial {
         if (createSporadic){
             GameRegistry.register(sporadic = new BROre(Material.ROCK, "sporadic" + type, materialTab, 3, 6));
             GameRegistry.register(new BRItemBlock(sporadic, materialTab));
-            sparse.setDrop(sparseItem);
+            sporadic.setDrop(sparseItem);
         }
         materialList.add(this);
     }
