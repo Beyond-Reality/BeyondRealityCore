@@ -29,9 +29,9 @@ public class BROre extends BRBlock {
         return drop == null ? Item.getItemFromBlock(this) : drop;
     }
 
-
+    @Override
     public int quantityDropped(Random random)
     {
-        return minDrop+new Random().nextInt(maxDrop-minDrop+1);
+        return minDrop+random.nextInt(maxDrop-minDrop+1);
     }
 }
