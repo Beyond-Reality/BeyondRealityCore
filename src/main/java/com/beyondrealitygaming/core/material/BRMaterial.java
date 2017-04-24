@@ -78,11 +78,13 @@ public class BRMaterial {
             GameRegistry.register(sparseItem = new BRItem("tiny"+type,materialTab));
             sparse.setDrop(sparseItem);
             GameRegistry.addRecipe(new ItemStack(Item.getItemFromBlock(sparseRecipe == null ? ore : sparseRecipe)), new Object[] {"##", "##", '#',sparseItem});
+            OreDictionary.registerOre("oreSparse"+WordUtils.capitalize(type),sparse);
         }
         if (createSporadic){
             GameRegistry.register(sporadic = new BROre(Material.ROCK, "sporadic" + type, materialTab, 3, 6));
             GameRegistry.register(new BRItemBlock(sporadic, materialTab));
             sporadic.setDrop(sparseItem);
+            OreDictionary.registerOre("oreSporadic"+WordUtils.capitalize(type),sporadic);
         }
         materialList.add(this);
     }
