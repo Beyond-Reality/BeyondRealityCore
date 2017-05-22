@@ -8,16 +8,14 @@ import net.minecraft.entity.player.EnumPlayerModelParts;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
-import org.lwjgl.Sys;
 
 import java.util.HashMap;
 
 public class CapeRendererLayer implements LayerRenderer<AbstractClientPlayer> {
 
     private RenderPlayer renderPlayer;
-    private HashMap<String,CapeInfo> capeInfoHashMap;
+    private HashMap<String, CapeInfo> capeInfoHashMap;
 
     public CapeRendererLayer(RenderPlayer renderPlayer) {
         this.renderPlayer = renderPlayer;
@@ -26,8 +24,8 @@ public class CapeRendererLayer implements LayerRenderer<AbstractClientPlayer> {
 
     @Override
     public void doRenderLayer(AbstractClientPlayer entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
-        if (!capeInfoHashMap.containsKey(entitylivingbaseIn.getName())){
-            capeInfoHashMap.put(entitylivingbaseIn.getName(),CapeInfo.getPlayerCape(entitylivingbaseIn.getName()));
+        if (!capeInfoHashMap.containsKey(entitylivingbaseIn.getName())) {
+            capeInfoHashMap.put(entitylivingbaseIn.getName(), CapeInfo.getPlayerCape(entitylivingbaseIn.getName()));
         }
         CapeInfo info = capeInfoHashMap.get(entitylivingbaseIn.getName());
         if (entitylivingbaseIn.hasPlayerInfo() && !entitylivingbaseIn.isInvisible() && entitylivingbaseIn.isWearing(EnumPlayerModelParts.CAPE) && info != null) {

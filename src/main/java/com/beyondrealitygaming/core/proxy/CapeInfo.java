@@ -16,8 +16,9 @@ public class CapeInfo {
 
     public static CapeInfo[] capeInfos;
 
-    public static CapeInfo getPlayerCape(String name){
-        for (CapeInfo capeInfo : capeInfos) if (Arrays.asList(capeInfo.getPlayerNames()).contains(name))return capeInfo;
+    public static CapeInfo getPlayerCape(String name) {
+        for (CapeInfo capeInfo : capeInfos)
+            if (Arrays.asList(capeInfo.getPlayerNames()).contains(name)) return capeInfo;
         return null;
     }
 
@@ -42,8 +43,8 @@ public class CapeInfo {
         return resourceLocation;
     }
 
-    public void downloadCape(){
-        resourceLocation = new ResourceLocation("beyondreality",name);
+    public void downloadCape() {
+        resourceLocation = new ResourceLocation("beyondreality", name);
         TextureManager manager = Minecraft.getMinecraft().getTextureManager();
         ITextureObject textureObject = manager.getTexture(resourceLocation);
         IImageBuffer imageBuffer = new IImageBuffer() {
@@ -57,13 +58,13 @@ public class CapeInfo {
                 BufferedImage src = image;
                 int srcWidth = src.getWidth();
                 int srcHeight = src.getHeight();
-                while ((imageWidth < srcWidth) || (imageHeight < srcHeight)){
+                while ((imageWidth < srcWidth) || (imageHeight < srcHeight)) {
                     imageWidth *= 2;
-                    imageHeight *=2;
+                    imageHeight *= 2;
                 }
-                BufferedImage bufferedImage = new BufferedImage(imageWidth,imageHeight,2);
+                BufferedImage bufferedImage = new BufferedImage(imageWidth, imageHeight, 2);
                 Graphics graphics = bufferedImage.getGraphics();
-                graphics.drawImage(image,0,0,null);
+                graphics.drawImage(image, 0, 0, null);
                 graphics.dispose();
                 return bufferedImage;
             }
@@ -73,8 +74,8 @@ public class CapeInfo {
 
             }
         };
-        ThreadDownloadImageData texture = new ThreadDownloadImageData(null,url,null,imageBuffer);
-        manager.loadTexture(resourceLocation,texture);
+        ThreadDownloadImageData texture = new ThreadDownloadImageData(null, url, null, imageBuffer);
+        manager.loadTexture(resourceLocation, texture);
     }
 
 }

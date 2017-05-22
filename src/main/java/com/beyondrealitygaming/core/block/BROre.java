@@ -3,7 +3,6 @@ package com.beyondrealitygaming.core.block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 
 import java.util.Random;
@@ -30,8 +29,7 @@ public class BROre extends BRBlock {
     }
 
     @Override
-    public int quantityDropped(Random random)
-    {
-        return minDrop+random.nextInt(maxDrop-minDrop+1);
+    public int quantityDropped(Random random) {
+        return minDrop + random.nextInt(maxDrop - minDrop + 1);
     }
 }

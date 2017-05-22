@@ -18,10 +18,10 @@ buildscript {
 }
 
 repositories {
-//    maven {
-//        name = "IGW"
-//        url = "http://maven.k-4u.nl/"
-//    }
+    ivy {
+        name "BuildCraft"
+        artifactPattern "http://www.mod-buildcraft.com/releases/BuildCraft/[revision]/[module]-[revision](-[classifier]).[ext]"
+    }
 }
 
 apply plugin: 'net.minecraftforge.gradle.forge'
@@ -50,7 +50,7 @@ minecraft {
 }
 
 dependencies{
-//    compile "igwmod:IGW-Mod-1.7.10:1.1.9-29:userdev"
+    deobfCompile name: "buildcraft", version: "7.99.3"
 }
 
 processResources

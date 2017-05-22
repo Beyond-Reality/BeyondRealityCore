@@ -14,7 +14,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.event.entity.player.PlayerDropsEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 import org.apache.commons.lang3.text.WordUtils;
@@ -27,7 +26,7 @@ public class BRMaterial {
     public static CreativeTabs materialTab;
     public static List<BRMaterial> materialList = new ArrayList<BRMaterial>();
 
-    public static void registerMaterials(){
+    public static void registerMaterials() {
         new BRMaterial("ruby", true, true, true);
         new BRMaterial("tin", true, true, true);
         new BRMaterial("copper", true, true, true);
@@ -39,12 +38,12 @@ public class BRMaterial {
         new BRMaterial("silver", true, true, true);
         new BRMaterial("peridot", true, true, true);
         new BRMaterial("coal", false, true, true, Blocks.COAL_ORE);
-        new BRMaterial("diamond", false, true, true,Blocks.DIAMOND_ORE);
+        new BRMaterial("diamond", false, true, true, Blocks.DIAMOND_ORE);
         new BRMaterial("emerald", false, true, true, Blocks.EMERALD_ORE);
         new BRMaterial("gold", false, true, true, Blocks.GOLD_ORE);
-        new BRMaterial("iron", false, true, true,Blocks.IRON_ORE);
-        new BRMaterial("lapis", false, true, true,Blocks.LAPIS_ORE);
-        new BRMaterial("redstone", false,true, true,Blocks.REDSTONE_ORE);
+        new BRMaterial("iron", false, true, true, Blocks.IRON_ORE);
+        new BRMaterial("lapis", false, true, true, Blocks.LAPIS_ORE);
+        new BRMaterial("redstone", false, true, true, Blocks.REDSTONE_ORE);
         new BRMaterial("thorium", true, true, true);
         new BRMaterial("uranium", true, true, true);
         new BRMaterial("boron", true, true, true);
@@ -70,45 +69,46 @@ public class BRMaterial {
         if (createOre) {
             GameRegistry.register(ore = new BRBlock(Material.ROCK, "ore" + type, materialTab));
             GameRegistry.register(new BRItemBlock(ore, materialTab));
-            OreDictionary.registerOre("ore"+ WordUtils.capitalize(type),ore);
+            OreDictionary.registerOre("ore" + WordUtils.capitalize(type), ore);
         }
         if (createSparse) {
-            GameRegistry.register(sparse = new BROre(Material.ROCK, "sparse" + type, materialTab,1,3));
+            GameRegistry.register(sparse = new BROre(Material.ROCK, "sparse" + type, materialTab, 1, 3));
             GameRegistry.register(new BRItemBlock(sparse, materialTab));
-            GameRegistry.register(sparseItem = new BRItem("tiny"+type,materialTab));
+            GameRegistry.register(sparseItem = new BRItem("tiny" + type, materialTab));
             sparse.setDrop(sparseItem);
-            GameRegistry.addRecipe(new ItemStack(Item.getItemFromBlock(sparseRecipe == null ? ore : sparseRecipe)), new Object[] {"##", "##", '#',sparseItem});
-            OreDictionary.registerOre("oreSparse"+WordUtils.capitalize(type),sparse);
+            GameRegistry.addRecipe(new ItemStack(Item.getItemFromBlock(sparseRecipe == null ? ore : sparseRecipe)), new Object[]{"##", "##", '#', sparseItem});
+            OreDictionary.registerOre("oreSparse" + WordUtils.capitalize(type), sparse);
         }
-        if (createSporadic){
+        if (createSporadic) {
             GameRegistry.register(sporadic = new BROre(Material.ROCK, "sporadic" + type, materialTab, 3, 6));
             GameRegistry.register(new BRItemBlock(sporadic, materialTab));
             sporadic.setDrop(sparseItem);
-            OreDictionary.registerOre("oreSporadic"+WordUtils.capitalize(type),sporadic);
+            OreDictionary.registerOre("oreSporadic" + WordUtils.capitalize(type), sporadic);
         }
         materialList.add(this);
     }
+
     public BRMaterial(String type, boolean createOre, boolean createSparse, boolean createSporadic) {
-        this(type,createOre,createSparse,createSporadic,null);
+        this(type, createOre, createSparse, createSporadic, null);
     }
 
-    public void registerModels(){
+    public void registerModels() {
         if (ore != null) registerBlockModel(ore);
         if (sparse != null) {
             registerBlockModel(sparse);
             registerItem(sparseItem);
         }
-        if (sporadic != null){
+        if (sporadic != null) {
             registerBlockModel(sporadic);
         }
     }
 
-    public void registerBlockModel(Block block){
-        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(block),0, new ModelResourceLocation(new ResourceLocation(block.getRegistryName().toString().toLowerCase()), "normal"));
-        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block),0,new ModelResourceLocation(new ResourceLocation(block.getRegistryName().toString().toLowerCase()),"inventory"));
+    public void registerBlockModel(Block block) {
+        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(block), 0, new ModelResourceLocation(new ResourceLocation(block.getRegistryName().toString().toLowerCase()), "normal"));
+        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), 0, new ModelResourceLocation(new ResourceLocation(block.getRegistryName().toString().toLowerCase()), "inventory"));
     }
 
-    public void registerItem(Item item){
-        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item,0, new ModelResourceLocation(new ResourceLocation(item.getRegistryName().toString().toLowerCase()), "inventory"));
+    public void registerItem(Item item) {
+        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, 0, new ModelResourceLocation(new ResourceLocation(item.getRegistryName().toString().toLowerCase()), "inventory"));
     }
 }

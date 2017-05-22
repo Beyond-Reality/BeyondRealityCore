@@ -7,8 +7,8 @@ public class TooltipEvent {
 
 
     @SubscribeEvent
-    public void onTooltip(ItemTooltipEvent event){
-        if (!event.getItemStack().isEmpty() && event.getItemStack().getItem().getRegistryName().getResourcePath().contains("tiny")){
+    public void onTooltip(ItemTooltipEvent event) {
+        if (!event.getItemStack().isEmpty() && event.getItemStack().getItem().getRegistryName().getResourcePath().contains("tiny")) {
             event.getToolTip().add("Craft in a 2x2 to get a full ore");
         }
     }
