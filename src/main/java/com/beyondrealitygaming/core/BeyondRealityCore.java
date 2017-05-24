@@ -33,10 +33,6 @@ public class BeyondRealityCore {
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) throws IOException {
         proxy.postInit();
-//        if (true){
-//            System.out.println("-----------------------------------Loading BC Recipes");
-//            BuildcraftRecipeRegistry.assemblyRecipes.addRecipe(new AssemblyRecipe("test", 1000, ImmutableSet.<StackDefinition>builder().add(ArrayStackFilter.definition(Items.SADDLE)).build() ,new ItemStack(Items.STICK)));
-//        }
     }
 
 }
