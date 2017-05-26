@@ -16,7 +16,6 @@ public class PlayerInEvent {
             new Thread(() -> {
                 try {
                     Thread.sleep(5000);
-                    System.out.println("sending miau");
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
