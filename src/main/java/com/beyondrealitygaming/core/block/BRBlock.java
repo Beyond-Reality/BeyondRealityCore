@@ -9,7 +9,7 @@ public class BRBlock extends Block {
     public BRBlock(Material material, String name, CreativeTabs tabs) {
         super(material);
         setUnlocalizedName("beyondreality:" + name);
-        setRegistryName("beyondreality", name);
+        if (name != null) setRegistryName("beyondreality", name);
         setHardness(3.0F);
         setCreativeTab(tabs);
     }

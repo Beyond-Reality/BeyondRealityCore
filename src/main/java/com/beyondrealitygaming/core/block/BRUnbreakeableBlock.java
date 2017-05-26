@@ -5,7 +5,7 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
@@ -21,10 +21,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BRUnbreakeableBlock extends BRBlock {
 
-    public static final PropertyInteger TYPE = PropertyInteger.create("type",0,15);
+    public static final PropertyInteger TYPE = PropertyInteger.create("type", 0, 15);
 
-    public BRUnbreakeableBlock(String name) {
-        super(Material.ROCK,name, CreativeTabs.BUILDING_BLOCKS);
+    private String name;
+
+    public BRUnbreakeableBlock(String name, CreativeTabs creativeTabs) {
+        super(Material.ROCK, name, creativeTabs);
+        this.name = name;
         this.setDefaultState(this.blockState.getBaseState().withProperty(TYPE, 0));
         setBlockUnbreakable();
         setHardness(6000000000F);
@@ -42,7 +45,7 @@ public class BRUnbreakeableBlock extends BRBlock {
 
     @Override
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this,  new IProperty[] {TYPE});
+        return new BlockStateContainer(this, new IProperty[]{TYPE});
     }
 
     @SideOnly(Side.CLIENT)
@@ -52,17 +55,17 @@ public class BRUnbreakeableBlock extends BRBlock {
         }
     }
 
-    public void registerModels(){
-        for (int x : TYPE.getAllowedValues()){
-            Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(this), x, new ModelResourceLocation(new ResourceLocation(this.getRegistryName().toString().toLowerCase()), "normal"));
-            ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), x, new ModelResourceLocation(new ResourceLocation(this.getRegistryName().toString().toLowerCase()), "inventory"));
+    public void registerModels() {
+        for (int x : TYPE.getAllowedValues()) {
+            //Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(this), x, new ModelResourceLocation(new ResourceLocation(this.getRegistryName().toString().toLowerCase()), "normal"));
+            ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), x, new ModelResourceLocation(this.getRegistryName(), "inventory"));
         }
     }
 
     @Override
     public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
         super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
-        worldIn.setBlockState(pos,state.withProperty(TYPE,stack.getMetadata()));
+        worldIn.setBlockState(pos, state.withProperty(TYPE, stack.getMetadata()));
     }
 
 }

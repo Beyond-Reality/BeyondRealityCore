@@ -8,11 +8,6 @@
     "uvlock": true
   },
   "variants": {
-    "normal": [
-      {
-        "model": "beyondreality:pedestal"
-      }
-    ],
     "inventory": [
       {
         "model": "beyondreality:pedestal",

@@ -12,4 +12,10 @@ public class BRItemBlock extends ItemBlock {
         setRegistryName(block.getRegistryName().toString());
         setCreativeTab(tabs);
     }
+
+    @Override
+    public int getMetadata(int damage) {
+        return damage;
+    }
+
 }

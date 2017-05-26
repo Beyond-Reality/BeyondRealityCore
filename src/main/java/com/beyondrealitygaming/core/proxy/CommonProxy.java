@@ -17,6 +17,7 @@ import com.google.common.collect.ImmutableSet;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -36,6 +37,13 @@ public class CommonProxy {
 
     public static File configFolder;
     public static List<BRPedestal> pedestalList = new ArrayList<>();
+    public static List<BRUnbreakeableBlock> unbreakeableBlocks = new ArrayList<>();
+    public static CreativeTabs buildingBlocks = new CreativeTabs("brBuildingBlocks") {
+        @Override
+        public ItemStack getTabIconItem() {
+            return new ItemStack(Blocks.BRICK_BLOCK);
+        }
+    };
 
     public void preInit(FMLPreInitializationEvent event) throws IOException {
         BRMaterial.registerMaterials();
@@ -45,16 +53,22 @@ public class CommonProxy {
         if (!configFile.exists()) configFile.createNewFile();
         Configuration configuration = new Configuration(configFile);
         for (int i = 0; i < configuration.getInt("amountOfPedestals", Configuration.CATEGORY_GENERAL, 1, 0, 5, "The amount of pedestal multiplied by 16 that will be generated"); ++i) {
-            BRPedestal pedestal = new BRPedestal("pedestal" + i);
+            BRPedestal pedestal = new BRPedestal("pedestal" + i, buildingBlocks);
             GameRegistry.register(pedestal);
-            GameRegistry.register(new BRItemBlock(pedestal,CreativeTabs.BUILDING_BLOCKS).setHasSubtypes(true));
+            GameRegistry.register(new BRItemBlock(pedestal, buildingBlocks).setHasSubtypes(true));
             pedestalList.add(pedestal);
+        }
+        for (int i = 0; i < configuration.getInt("amountOfUnbreakeableBlocks", Configuration.CATEGORY_GENERAL, 1, 0, Integer.MAX_VALUE, "The amount of unbreakeable blocks multiplied by 16 that will be generated"); ++i) {
+            BRUnbreakeableBlock block = new BRUnbreakeableBlock("unbreakeable" + i, buildingBlocks);
+            GameRegistry.register(block);
+            GameRegistry.register(new ItemBlock(block).setHasSubtypes(true).setCreativeTab(buildingBlocks), block.getRegistryName());
+            unbreakeableBlocks.add(block);
         }
         configuration.save();
     }
 
     public void init() {
-        MinecraftForge.EVENT_BUS.register(new PlayerInEvent());
+
     }
 
     public void postInit() throws IOException {

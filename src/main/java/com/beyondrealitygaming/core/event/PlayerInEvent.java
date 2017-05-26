@@ -2,7 +2,6 @@ package com.beyondrealitygaming.core.event;
 
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;

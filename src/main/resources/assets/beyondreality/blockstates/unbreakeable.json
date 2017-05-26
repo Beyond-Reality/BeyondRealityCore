@@ -1,0 +1,74 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "textures": {
+      "particle": "blocks/bedrock",
+      "all": "blocks/stone"
+    },
+    "model": "beyondreality:block",
+    "uvlock": true
+  },
+  "variants": {
+    "normal": [
+      {
+        "model": "beyondreality:block"
+      }
+    ],
+    "inventory": [
+      {
+        "model": "beyondreality:block",
+        "transform": "forge:default-block"
+      }
+    ],
+    "type": {
+      "0": {
+        "model": "beyondreality:block"
+      },
+      "1": {
+        "model": "beyondreality:block"
+      },
+      "2": {
+        "model": "beyondreality:block"
+      },
+      "3": {
+        "model": "beyondreality:block"
+      },
+      "4": {
+        "model": "beyondreality:block"
+      },
+      "5": {
+        "model": "beyondreality:block"
+      },
+      "6": {
+        "model": "beyondreality:block"
+      },
+      "7": {
+        "model": "beyondreality:block"
+      },
+      "8": {
+        "model": "beyondreality:block"
+      },
+      "9": {
+        "model": "beyondreality:block"
+      },
+      "10": {
+        "model": "beyondreality:block"
+      },
+      "11": {
+        "model": "beyondreality:block"
+      },
+      "12": {
+        "model": "beyondreality:block"
+      },
+      "13": {
+        "model": "beyondreality:block"
+      },
+      "14": {
+        "model": "beyondreality:block"
+      },
+      "15": {
+        "model": "beyondreality:block"
+      }
+    }
+  }
+}
