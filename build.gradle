@@ -34,6 +34,12 @@ configFile.withReader {
     project.ext.config = new ConfigSlurper().parse prop
 }
 
+sourceCompatibility = "1.8"
+targetCompatibility = "1.8" // Need this here so eclipse task generates correctly.
+compileJava {
+    sourceCompatibility = targetCompatibility = "1.8"
+}
+
 version = "${config.minecraft_version}-${config.mod_version}"
 group= "com.mcbeyondreality.beyondrealitycore" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "beyondrealitycore"

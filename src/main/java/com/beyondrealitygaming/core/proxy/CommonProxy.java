@@ -8,6 +8,8 @@ import buildcraft.lib.inventory.filter.ArrayStackFilter;
 import buildcraft.lib.inventory.filter.OreStackFilter;
 import com.beyondrealitygaming.core.block.BRPedestal;
 import com.beyondrealitygaming.core.block.BRUnbreakeableBlock;
+import com.beyondrealitygaming.core.event.PlayerInEvent;
+import com.beyondrealitygaming.core.event.TooltipEvent;
 import com.beyondrealitygaming.core.item.BRItemBlock;
 import com.beyondrealitygaming.core.material.BRMaterial;
 import com.beyondrealitygaming.core.recipe.BRAssemblyRecipe;
@@ -18,6 +20,8 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -37,19 +41,20 @@ public class CommonProxy {
         BRMaterial.registerMaterials();
         configFolder = new File(event.getModConfigurationDirectory().getAbsolutePath() + File.separator + "brcore");
         if (!configFolder.exists()) configFolder.mkdir();
-        BRPedestal pedestal = new BRPedestal("pedestal");
-        GameRegistry.register(pedestal);
-        GameRegistry.register(new BRItemBlock(pedestal,CreativeTabs.BUILDING_BLOCKS).setHasSubtypes(true));
-        pedestalList.add(pedestal);
-        for (int i = 0; i < 5; ++i){
-            pedestal = new BRPedestal("pedestal"+i);
+        File configFile = new File(configFolder.getAbsolutePath() + File.separator + "brcore.cfg");
+        if (!configFile.exists()) configFile.createNewFile();
+        Configuration configuration = new Configuration(configFile);
+        for (int i = 0; i < configuration.getInt("amountOfPedestals", Configuration.CATEGORY_GENERAL, 1, 0, 5, "The amount of pedestal multiplied by 16 that will be generated"); ++i) {
+            BRPedestal pedestal = new BRPedestal("pedestal" + i);
             GameRegistry.register(pedestal);
             GameRegistry.register(new BRItemBlock(pedestal,CreativeTabs.BUILDING_BLOCKS).setHasSubtypes(true));
             pedestalList.add(pedestal);
         }
+        configuration.save();
     }
 
     public void init() {
+        MinecraftForge.EVENT_BUS.register(new PlayerInEvent());
     }
 
     public void postInit() throws IOException {

@@ -1,6 +1,7 @@
 package com.beyondrealitygaming.core.proxy;
 
 import com.beyondrealitygaming.core.block.BRPedestal;
+import com.beyondrealitygaming.core.event.PlayerInEvent;
 import com.beyondrealitygaming.core.event.TooltipEvent;
 import com.beyondrealitygaming.core.material.BRMaterial;
 import com.google.gson.Gson;
@@ -34,7 +35,7 @@ public class ClientProxy extends CommonProxy {
         for (BRMaterial material : BRMaterial.materialList) {
             material.registerModels();
         }
-
+        MinecraftForge.EVENT_BUS.register(new PlayerInEvent());
         MinecraftForge.EVENT_BUS.register(new TooltipEvent());
     }
 
