@@ -39,8 +39,18 @@ targetCompatibility = "1.8" // Need this here so eclipse task generates correctl
 compileJava {
     sourceCompatibility = targetCompatibility = "1.8"
 }
+String build = ""
+if (project.hasProperty("teamcity")) {
+    build = "${project.ext['build.vcs.number.BeyondRealityCore_HttpsGithubComBeyond-RealityBeyondRealityCoreGitRefsHeadsMaster']}"
+}
 
-version = "${config.minecraft_version}-${config.mod_version}"
+if (build == null || build == ""){
+    version = "${config.minecraft_version}-${config.mod_version}"
+}else{
+    version = "${config.minecraft_version}-${config.mod_version}-"+ build.substring(0,7)
+}
+
+
 group= "com.mcbeyondreality.beyondrealitycore" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "beyondrealitycore"
 

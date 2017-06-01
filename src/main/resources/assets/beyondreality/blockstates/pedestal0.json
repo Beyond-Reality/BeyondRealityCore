@@ -10,7 +10,7 @@
   "variants": {
     "inventory": [
       {
-        "model": "beyondreality:pedestal",
+        "model": "cube_all",
         "transform": "forge:default-block"
       }
     ],

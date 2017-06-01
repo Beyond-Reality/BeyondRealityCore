@@ -8,9 +8,6 @@ import buildcraft.lib.inventory.filter.ArrayStackFilter;
 import buildcraft.lib.inventory.filter.OreStackFilter;
 import com.beyondrealitygaming.core.block.BRPedestal;
 import com.beyondrealitygaming.core.block.BRUnbreakeableBlock;
-import com.beyondrealitygaming.core.event.PlayerInEvent;
-import com.beyondrealitygaming.core.event.TooltipEvent;
-import com.beyondrealitygaming.core.item.BRItemBlock;
 import com.beyondrealitygaming.core.material.BRMaterial;
 import com.beyondrealitygaming.core.recipe.BRAssemblyRecipe;
 import com.google.common.collect.ImmutableSet;
@@ -21,7 +18,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -55,13 +51,23 @@ public class CommonProxy {
         for (int i = 0; i < configuration.getInt("amountOfPedestals", Configuration.CATEGORY_GENERAL, 1, 0, 5, "The amount of pedestal multiplied by 16 that will be generated"); ++i) {
             BRPedestal pedestal = new BRPedestal("pedestal" + i, buildingBlocks);
             GameRegistry.register(pedestal);
-            GameRegistry.register(new BRItemBlock(pedestal, buildingBlocks).setHasSubtypes(true));
+            GameRegistry.register(new ItemBlock(pedestal) {
+                @Override
+                public String getUnlocalizedName(ItemStack stack) {
+                    return getUnlocalizedName() + "." + stack.getItemDamage();
+                }
+            }.setCreativeTab(buildingBlocks).setRegistryName(pedestal.getRegistryName()).setHasSubtypes(true));
             pedestalList.add(pedestal);
         }
         for (int i = 0; i < configuration.getInt("amountOfUnbreakeableBlocks", Configuration.CATEGORY_GENERAL, 1, 0, Integer.MAX_VALUE, "The amount of unbreakeable blocks multiplied by 16 that will be generated"); ++i) {
             BRUnbreakeableBlock block = new BRUnbreakeableBlock("unbreakeable" + i, buildingBlocks);
             GameRegistry.register(block);
-            GameRegistry.register(new ItemBlock(block).setHasSubtypes(true).setCreativeTab(buildingBlocks), block.getRegistryName());
+            GameRegistry.register(new ItemBlock(block) {
+                @Override
+                public String getUnlocalizedName(ItemStack stack) {
+                    return getUnlocalizedName() + "." + stack.getItemDamage();
+                }
+            }.setHasSubtypes(true).setCreativeTab(buildingBlocks), block.getRegistryName());
             unbreakeableBlocks.add(block);
         }
         configuration.save();
