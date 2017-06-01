@@ -41,7 +41,7 @@ compileJava {
 }
 String build = ""
 if (project.hasProperty("teamcity")) {
-    build = "${project.ext['build.vcs.number.BeyondRealityCore_HttpsGithubComBeyond-RealityBeyondRealityCoreGitRefsHeadsMaster']}"
+    build = System.getenv("BUILD_NUMBER")
 }
 
 if (build == null || build == ""){
