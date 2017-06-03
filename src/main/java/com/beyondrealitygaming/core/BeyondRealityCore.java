@@ -1,6 +1,5 @@
 package com.beyondrealitygaming.core;
 
-
 import com.beyondrealitygaming.core.proxy.CommonProxy;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;

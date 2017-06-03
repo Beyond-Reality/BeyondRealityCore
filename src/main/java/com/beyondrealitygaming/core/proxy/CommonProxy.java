@@ -42,13 +42,12 @@ public class CommonProxy {
     };
 
     public void preInit(FMLPreInitializationEvent event) throws IOException {
-        BRMaterial.registerMaterials();
         configFolder = new File(event.getModConfigurationDirectory().getAbsolutePath() + File.separator + "brcore");
         if (!configFolder.exists()) configFolder.mkdir();
         File configFile = new File(configFolder.getAbsolutePath() + File.separator + "brcore.cfg");
         if (!configFile.exists()) configFile.createNewFile();
         Configuration configuration = new Configuration(configFile);
-        for (int i = 0; i < configuration.getInt("amountOfPedestals", Configuration.CATEGORY_GENERAL, 1, 0, 5, "The amount of pedestal multiplied by 16 that will be generated"); ++i) {
+        for (int i = 0; i < configuration.getInt("amountOfPedestals", Configuration.CATEGORY_GENERAL, 1, 0, Integer.MAX_VALUE, "The amount of pedestal multiplied by 16 that will be generated"); ++i) {
             BRPedestal pedestal = new BRPedestal("pedestal" + i, buildingBlocks);
             GameRegistry.register(pedestal);
             GameRegistry.register(new ItemBlock(pedestal) {
@@ -71,6 +70,8 @@ public class CommonProxy {
             unbreakeableBlocks.add(block);
         }
         configuration.save();
+        File materials = new File(configFolder.getAbsolutePath() + File.separator + "materials.json");
+        if (materials.exists()) BRMaterial.registerMaterials(materials);
     }
 
     public void init() {

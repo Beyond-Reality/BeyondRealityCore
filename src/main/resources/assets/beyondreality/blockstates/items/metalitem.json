@@ -1,0 +1,60 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "beyondreality:item",
+    "transform": "forge:default-item"
+  },
+  "variants": {
+    "type": {
+      "sparse": {
+        "textures": {
+          "layer0": "beyondreality:items/metal_sparse",
+          "layer1": "beyondreality:items/metal_sparse_overlay"
+        }
+      },
+      "chunk": {
+        "textures": {
+          "layer0": "beyondreality:items/metal_chunk",
+          "layer1": "beyondreality:items/metal_chunk_overlay"
+        }
+      },
+      "ingot": {
+        "textures": {
+          "layer0": "beyondreality:items/metal_ingot"
+        }
+      },
+      "nugget": {
+        "textures": {
+          "layer0": "beyondreality:items/metal_nugget"
+        }
+      },
+      "dust": {
+        "textures": {
+          "layer0": "beyondreality:items/metal_dust"
+        }
+      },
+      "tiny_dust": {
+        "textures": {
+          "layer0": "beyondreality:items/metal_tiny_dust"
+        }
+      },
+      "gem": {
+        "textures": {
+          "layer0": "beyondreality:items/gem"
+        }
+      },
+      "shard": {
+        "textures": {
+          "layer0": "beyondreality:items/gem_shard",
+          "layer1": "beyondreality:items/gem_shard"
+        }
+      },
+      "tiny_shard": {
+        "textures": {
+          "layer0": "beyondreality:items/gem_tiny_shard",
+          "layer1": "beyondreality:items/gem_tiny_shard"
+        }
+      }
+    }
+  }
+}

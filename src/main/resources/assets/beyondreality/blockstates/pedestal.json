@@ -6,16 +6,19 @@
     },
     "model": "beyondreality:pedestal",
     "uvlock": true
-
   },
   "variants": {
-    "normal": [{
-      "model": "beyondreality:pedestal"
-    }],
-    "inventory": [{
-      "model": "beyondreality:pedestal",
-      "transform": "forge:default-block"
-    }],
+    "normal": [
+      {
+        "model": "beyondreality:pedestal"
+      }
+    ],
+    "inventory": [
+      {
+        "model": "beyondreality:pedestal",
+        "transform": "forge:default-block"
+      }
+    ],
     "type": {
       "0": {
         "model": "beyondreality:pedestal"

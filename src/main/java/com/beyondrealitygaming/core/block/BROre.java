@@ -4,19 +4,23 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.util.BlockRenderLayer;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
 import java.util.Random;
 
 public class BROre extends BRBlock {
 
-    private Item drop;
-    private int minDrop;
-    private int maxDrop;
 
-    public BROre(Material material, String name, CreativeTabs tabs, int minDrop, int maxDrop) {
+    private Item drop;
+    private int color;
+
+    public BROre(Material material, String name, CreativeTabs tabs, int color, int mining) {
         super(material, name, tabs);
-        this.minDrop = minDrop;
-        this.maxDrop = maxDrop;
+        this.color = color;
+        this.setHarvestLevel("pickaxe", mining);
     }
 
     public void setDrop(Item drop) {
@@ -30,6 +34,20 @@ public class BROre extends BRBlock {
 
     @Override
     public int quantityDropped(Random random) {
-        return minDrop + random.nextInt(maxDrop - minDrop + 1);
+        return 1;
     }
+
+    public int getColor() {
+        return color;
+    }
+
+    @Override
+    @Nonnull
+    @SideOnly(Side.CLIENT)
+    public BlockRenderLayer getBlockLayer() {
+        return BlockRenderLayer.CUTOUT;
+    }
+
+
+
 }
