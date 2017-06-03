@@ -6,12 +6,18 @@ import com.beyondrealitygaming.core.block.BRUnbreakeableBlock;
 import com.beyondrealitygaming.core.event.PlayerInEvent;
 import com.beyondrealitygaming.core.item.BRColoredItem;
 import com.beyondrealitygaming.core.material.BRMaterial;
+import com.google.common.collect.Maps;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
+import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import org.apache.commons.io.FileUtils;
@@ -115,5 +121,21 @@ public class ClientProxy extends CommonProxy {
         }
     }
 
+    public static void registerBlockModel(Block block, String type) {
+        ModelLoader.setCustomStateMapper(block, blockIn -> {
+            Map<IBlockState, ModelResourceLocation> map = Maps.newHashMap();
+            map.put(blockIn.getDefaultState(), new ModelResourceLocation(new ResourceLocation("beyondreality", "blocks/metal" + type), "normal"));
+            return map;
+        });
+        ModelLoader.setCustomMeshDefinition(Item.getItemFromBlock(block), new SimpleItemMeshDefinition("blocks/metal" + type, "normal"));
+    }
 
+    public static void registerVariantItem(Item item, String type) {
+        ModelLoader.setCustomMeshDefinition(item, new SimpleItemMeshDefinition("items/metalitem", "type=" + type));
+        registerItem(item, "items/metalItem", "type=" + type);
+    }
+
+    public static void registerItem(Item item, String name, String variants) {
+        ModelLoader.registerItemVariants(item, new ModelResourceLocation(new ResourceLocation("beyondreality", name), variants));
+    }
 }

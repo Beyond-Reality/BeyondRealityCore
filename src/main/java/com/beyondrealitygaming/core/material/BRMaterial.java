@@ -3,34 +3,26 @@ package com.beyondrealitygaming.core.material;
 import com.beyondrealitygaming.core.block.BROre;
 import com.beyondrealitygaming.core.item.BRColoredItem;
 import com.beyondrealitygaming.core.item.BRItemBlock;
-import com.beyondrealitygaming.core.proxy.SimpleItemMeshDefinition;
-import com.google.common.collect.Maps;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.ShapelessRecipes;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 import org.apache.commons.lang3.text.WordUtils;
-import scala.actors.threadpool.Arrays;
 
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+
+import static com.beyondrealitygaming.core.proxy.ClientProxy.registerBlockModel;
+import static com.beyondrealitygaming.core.proxy.ClientProxy.registerVariantItem;
 
 public class BRMaterial {
 
@@ -147,23 +139,6 @@ public class BRMaterial {
         }
     }
 
-    public static void registerBlockModel(Block block, String type) {
-        ModelLoader.setCustomStateMapper(block, blockIn -> {
-            Map<IBlockState, ModelResourceLocation> map = Maps.newHashMap();
-            map.put(blockIn.getDefaultState(), new ModelResourceLocation(new ResourceLocation("beyondreality", "blocks/metal" + type), "normal"));
-            return map;
-        });
-        ModelLoader.setCustomMeshDefinition(Item.getItemFromBlock(block), new SimpleItemMeshDefinition("blocks/metal" + type, "normal"));
-    }
-
-    public static void registerVariantItem(Item item, String type) {
-        ModelLoader.setCustomMeshDefinition(item, new SimpleItemMeshDefinition("items/metalitem", "type=" + type));
-        registerItem(item, "items/metalItem", "type=" + type);
-    }
-
-    public static void registerItem(Item item, String name, String variants) {
-        ModelLoader.registerItemVariants(item, new ModelResourceLocation(new ResourceLocation("beyondreality", name), variants));
-    }
 
     public BRColoredItem getIngot() {
         return ingot;
