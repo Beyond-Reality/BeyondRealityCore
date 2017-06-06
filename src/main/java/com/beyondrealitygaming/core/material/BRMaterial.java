@@ -62,7 +62,12 @@ public class BRMaterial {
         if (info.ore) {
             GameRegistry.register(ore = new BROre(Material.ROCK, "ore" + type, materialTab, color, info.mining));
             GameRegistry.register(new BRItemBlock(ore, materialTab).setHasSubtypes(true));
-            OreDictionary.registerOre("ore" + WordUtils.capitalize(type), ore);
+            if (info.oredict == null) OreDictionary.registerOre("ore" + WordUtils.capitalize(type), ore);
+            else {
+                for (String s : info.oredict) {
+                    OreDictionary.registerOre(s, ore);
+                }
+            }
         }
         if (info.sporadic) {
             GameRegistry.register(sporadic = new BROre(Material.ROCK, "sporadic" + type, materialTab, color, info.mining));

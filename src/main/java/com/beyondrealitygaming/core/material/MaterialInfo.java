@@ -4,6 +4,7 @@ public class MaterialInfo {
 
     public String name;
     public String type;
+    public String[] oredict;
     public String color;
     public int mining;
     public boolean ore;
