@@ -8,6 +8,7 @@ import buildcraft.lib.inventory.filter.ArrayStackFilter;
 import buildcraft.lib.inventory.filter.OreStackFilter;
 import com.beyondrealitygaming.core.block.BRPedestal;
 import com.beyondrealitygaming.core.block.BRUnbreakeableBlock;
+import com.beyondrealitygaming.core.event.PlayerInEvent;
 import com.beyondrealitygaming.core.material.BRMaterial;
 import com.beyondrealitygaming.core.recipe.BRAssemblyRecipe;
 import com.google.common.collect.ImmutableSet;
@@ -18,6 +19,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -42,6 +44,7 @@ public class CommonProxy {
     };
 
     public void preInit(FMLPreInitializationEvent event) throws IOException {
+        MinecraftForge.EVENT_BUS.register(new PlayerInEvent());
         configFolder = new File(event.getModConfigurationDirectory().getAbsolutePath() + File.separator + "brcore");
         if (!configFolder.exists()) configFolder.mkdir();
         File configFile = new File(configFolder.getAbsolutePath() + File.separator + "brcore.cfg");

@@ -3,7 +3,6 @@ package com.beyondrealitygaming.core.proxy;
 import com.beyondrealitygaming.core.block.BROre;
 import com.beyondrealitygaming.core.block.BRPedestal;
 import com.beyondrealitygaming.core.block.BRUnbreakeableBlock;
-import com.beyondrealitygaming.core.event.PlayerInEvent;
 import com.beyondrealitygaming.core.item.BRColoredItem;
 import com.beyondrealitygaming.core.material.BRMaterial;
 import com.google.common.collect.Maps;
@@ -18,7 +17,6 @@ import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import org.apache.commons.io.FileUtils;
 
@@ -35,8 +33,6 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void preInit(FMLPreInitializationEvent event) throws IOException {
         super.preInit(event);
-
-        MinecraftForge.EVENT_BUS.register(new PlayerInEvent());
 
         pedestalList.forEach(BRPedestal::registerModels);
         BRMaterial.materialList.forEach(BRMaterial::registerModels);
@@ -107,7 +103,6 @@ public class ClientProxy extends CommonProxy {
                 return 0xFFFFFF;
             }, ore);
         }
-
     }
 
     private void registerColor(Item item, int color, int index) {

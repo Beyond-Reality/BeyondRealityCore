@@ -5,6 +5,10 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -13,14 +17,15 @@ import java.util.Random;
 
 public class BROre extends BRBlock {
 
-
     private Item drop;
     private int color;
+    private String type;
 
-    public BROre(Material material, String name, CreativeTabs tabs, int color, int mining) {
+    public BROre(Material material, String name, CreativeTabs tabs, int color, int mining, String type) {
         super(material, name, tabs);
         this.color = color;
         this.setHarvestLevel("pickaxe", mining);
+        this.type = type;
     }
 
     public void setDrop(Item drop) {
@@ -48,5 +53,19 @@ public class BROre extends BRBlock {
         return BlockRenderLayer.CUTOUT;
     }
 
+    @Override
+    public int getExpDrop(IBlockState state, IBlockAccess world, BlockPos pos, int fortune) {
+        Random rand = world instanceof World ? ((World) world).rand : new Random();
+        return drop == null ? 0 : MathHelper.getInt(rand, 1, 4);
+    }
 
+    @Override
+    public int quantityDropped(IBlockState state, int fortune, Random random) {
+        return 1;
+    }
+
+    @Override
+    public int quantityDroppedWithBonus(int fortune, Random random) {
+        return drop != null && type.equals("GEM") ? random.nextInt(0) :0;
+    }
 }

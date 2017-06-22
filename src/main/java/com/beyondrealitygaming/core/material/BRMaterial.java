@@ -60,7 +60,7 @@ public class BRMaterial {
         int color = (int) Long.parseLong(info.color, 16);
         //BLOCKS
         if (info.ore) {
-            GameRegistry.register(ore = new BROre(Material.ROCK, "ore" + type, materialTab, color, info.mining));
+            GameRegistry.register(ore = new BROre(Material.ROCK, "ore" + type, materialTab, color, info.mining, mat));
             GameRegistry.register(new BRItemBlock(ore, materialTab).setHasSubtypes(true));
             if (info.oredict == null) OreDictionary.registerOre("ore" + WordUtils.capitalize(type), ore);
             else {
@@ -70,13 +70,13 @@ public class BRMaterial {
             }
         }
         if (info.sporadic) {
-            GameRegistry.register(sporadic = new BROre(Material.ROCK, "sporadic" + type, materialTab, color, info.mining));
+            GameRegistry.register(sporadic = new BROre(Material.ROCK, "sporadic" + type, materialTab, color, info.mining, mat));
             GameRegistry.register(new BRItemBlock(sporadic, materialTab).setHasSubtypes(true));
             OreDictionary.registerOre("sporadic" + WordUtils.capitalize(type), sporadic);
         }
 
         if (info.sparse) {
-            GameRegistry.register(sparse = new BROre(Material.ROCK, "sparse" + type, materialTab, color, info.mining));
+            GameRegistry.register(sparse = new BROre(Material.ROCK, "sparse" + type, materialTab, color, info.mining, mat));
             GameRegistry.register(new BRItemBlock(sparse, materialTab).setHasSubtypes(true));
             OreDictionary.registerOre("sparse" + WordUtils.capitalize(type), sparse);
         }
