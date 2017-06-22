@@ -66,6 +66,6 @@ public class BROre extends BRBlock {
 
     @Override
     public int quantityDroppedWithBonus(int fortune, Random random) {
-        return drop != null  ? random.nextInt(2) : 0;
+        return quantityDropped(random) +  (drop != null  ? random.nextInt(2) : 0);
     }
 }
