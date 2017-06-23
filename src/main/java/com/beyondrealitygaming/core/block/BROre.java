@@ -61,11 +61,11 @@ public class BROre extends BRBlock {
 
     @Override
     public int quantityDropped(IBlockState state, int fortune, Random random) {
-        return 1;
+        return quantityDroppedWithBonus(fortune, random);
     }
 
     @Override
     public int quantityDroppedWithBonus(int fortune, Random random) {
-        return quantityDropped(random) +  (drop != null  ? random.nextInt(2) : 0);
+        return quantityDropped(random) +  (drop == null  ?  0: random.nextInt(fortune) );
     }
 }
