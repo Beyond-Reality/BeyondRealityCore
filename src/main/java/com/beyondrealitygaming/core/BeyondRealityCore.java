@@ -10,7 +10,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import java.io.IOException;
 
 
-@Mod(name = "Beyond Reality Core", modid = "beyondreality", version = "2.1.0")
+@Mod(name = "Beyond Reality Core", modid = "beyondreality", version = "2.2.0")
 public class BeyondRealityCore {
 
     @Mod.Instance("beyondreality")

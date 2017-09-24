@@ -3,43 +3,36 @@
   "defaults": {
     "textures": {
       "particle": "blocks/bedrock",
-      "all": "blocks/stone"
+      "all": "blocks/glass"
     },
     "model": "beyondreality:block",
     "uvlock": true
   },
   "variants": {
-    "normal": [
-      {
-        "model": "beyondreality:block"
-      }
-    ],
+    "normal": [],
     "inventory": [
-      {
-        "model": "beyondreality:block",
-        "transform": "forge:default-block",
-        "textures": {
-          "particle": "blocks/bedrock",
-          "all": "blocks/stone"
-        }
-      }
+      {"transform": "forge:default-block"}
     ],
     "type": {
       "0": {
         "textures": {
           "particle": "blocks/bedrock",
-          "all": "beyondreality:blocks/poopybrown1"
+          "all": "blocks/dirt"
         },
         "model": "beyondreality:block"
       },
       "1": {
         "textures": {
           "particle": "blocks/bedrock",
-          "all": "beyondreality:blocks/poopybrown2"
+          "all": "blocks/diamond_block"
         },
         "model": "beyondreality:block"
       },
       "2": {
+        "textures": {
+          "particle": "blocks/bedrock",
+          "all": "beyondreality:blocks/poopybrown2"
+        },
         "model": "beyondreality:block"
       },
       "3": {

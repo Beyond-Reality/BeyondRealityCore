@@ -47,13 +47,14 @@ public class BRUnbreakeableBlock extends BRBlock {
         return new BlockStateContainer(this, TYPE);
     }
 
-    @SideOnly(Side.CLIENT)
-    public void getSubBlocks(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> list) {
+    @Override
+    public void getSubBlocks(CreativeTabs itemIn, NonNullList<ItemStack> items) {
         for (int x : TYPE.getAllowedValues()) {
-            list.add(new ItemStack(itemIn, 1, x));
+            items.add(new ItemStack(this, 1, x));
         }
     }
 
+    @Override
     public void registerModels() {
         TYPE.getAllowedValues().forEach(integer -> ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), integer, new ModelResourceLocation(this.getRegistryName().toString(), "inventory")));
     }

@@ -1,6 +1,3 @@
 {
-  "parent": "block/cube_all",
-  "textures": {
-    "all": "beyondreality:blocks/oretin"
-  }
+  "parent": "block/cube_all"
 }

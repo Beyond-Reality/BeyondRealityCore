@@ -1,10 +1,7 @@
 package com.beyondrealitygaming.core.proxy;
 
-import com.beyondrealitygaming.core.block.BROre;
-import com.beyondrealitygaming.core.block.BRPedestal;
-import com.beyondrealitygaming.core.block.BRUnbreakeableBlock;
+
 import com.beyondrealitygaming.core.item.BRColoredItem;
-import com.beyondrealitygaming.core.material.BRMaterial;
 import com.google.common.collect.Maps;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
@@ -34,27 +31,11 @@ public class ClientProxy extends CommonProxy {
     public void preInit(FMLPreInitializationEvent event) throws IOException {
         super.preInit(event);
 
-        pedestalList.forEach(BRPedestal::registerModels);
-        BRMaterial.materialList.forEach(BRMaterial::registerModels);
-        unbreakeableBlocks.forEach(BRUnbreakeableBlock::registerModels);
     }
 
     @Override
     public void init() {
         super.init();
-
-        for (BRMaterial material : BRMaterial.materialList) {
-            registerColor(material.getIngot(), 0);
-            registerColor(material.getChunkItem(), 1);
-            registerColor(material.getSparseItem(), 1);
-            registerColor(material.getNugget(), 0);
-            registerColor(material.getDust(), 0);
-            registerColor(material.getTinyDust(), 0);
-            registerColor(material.getOre(), 0);
-            registerColor(material.getSporadic(), 0);
-            registerColor(material.getSparse(), 0);
-        }
-
     }
 
     @Override
@@ -84,53 +65,4 @@ public class ClientProxy extends CommonProxy {
         }
     }
 
-    private void registerColor(BRColoredItem coloredItem, int index) {
-        if (coloredItem != null) registerColor(coloredItem, coloredItem.getColor(), index);
-    }
-
-    private void registerColor(BROre ore, int index) {
-        if (ore != null) {
-            Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> {
-                if (tintIndex == index && stack.getItem().equals(Item.getItemFromBlock(ore))) {
-                    return ore.getColor();
-                }
-                return 0xFFFFFF;
-            }, ore);
-            Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler((state, worldIn, pos, tintIndex) -> {
-                if (tintIndex == index && state.getBlock().equals(ore)) {
-                    return ore.getColor();
-                }
-                return 0xFFFFFF;
-            }, ore);
-        }
-    }
-
-    private void registerColor(Item item, int color, int index) {
-        if (item != null) {
-            Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> {
-                if (tintIndex == index && stack.getItem().equals(item)) {
-                    return color;
-                }
-                return 0xFFFFFF;
-            }, item);
-        }
-    }
-
-    public static void registerBlockModel(Block block, String type) {
-        ModelLoader.setCustomStateMapper(block, blockIn -> {
-            Map<IBlockState, ModelResourceLocation> map = Maps.newHashMap();
-            map.put(blockIn.getDefaultState(), new ModelResourceLocation(new ResourceLocation("beyondreality", "blocks/metal" + type), "normal"));
-            return map;
-        });
-        ModelLoader.setCustomMeshDefinition(Item.getItemFromBlock(block), new SimpleItemMeshDefinition("blocks/metal" + type, "normal"));
-    }
-
-    public static void registerVariantItem(Item item, String type) {
-        ModelLoader.setCustomMeshDefinition(item, new SimpleItemMeshDefinition("items/metalitem", "type=" + type));
-        registerItem(item, "items/metalItem", "type=" + type);
-    }
-
-    public static void registerItem(Item item, String name, String variants) {
-        ModelLoader.registerItemVariants(item, new ModelResourceLocation(new ResourceLocation("beyondreality", name), variants));
-    }
 }
