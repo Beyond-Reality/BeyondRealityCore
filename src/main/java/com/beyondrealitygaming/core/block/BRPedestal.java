@@ -7,6 +7,8 @@ public class BRPedestal extends BRUnbreakeableBlock {
 
     public BRPedestal(String name, CreativeTabs tabs) {
         super(name, tabs);
+        this.setLightValue(1.0F);
+        this.setBlockBoubds(0.0F, 0.0F, 0.0F, 1.0F, 2.0F, 1.0F);
     }
 
     @Override
