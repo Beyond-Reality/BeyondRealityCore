@@ -4,70 +4,12 @@
     "textures": {
       "particle": "blocks/bedrock"
     },
-    "model": "beyondreality:pedestal",
-    "uvlock": true
+    "model": "beyondreality:pedestal/full"
   },
   "variants": {
-    "normal": [
-      {
-        "model": "beyondreality:pedestal"
-      }
-    ],
-    "inventory": [
-      {
-        "model": "beyondreality:pedestal",
-        "transform": "forge:default-block"
-      }
-    ],
-    "type": {
-      "0": {
-        "model": "beyondreality:pedestal"
-      },
-      "1": {
-        "model": "beyondreality:pedestal"
-      },
-      "2": {
-        "model": "beyondreality:pedestal"
-      },
-      "3": {
-        "model": "beyondreality:pedestal"
-      },
-      "4": {
-        "model": "beyondreality:pedestal"
-      },
-      "5": {
-        "model": "beyondreality:pedestal"
-      },
-      "6": {
-        "model": "beyondreality:pedestal"
-      },
-      "7": {
-        "model": "beyondreality:pedestal"
-      },
-      "8": {
-        "model": "beyondreality:pedestal"
-      },
-      "9": {
-        "model": "beyondreality:pedestal"
-      },
-      "10": {
-        "model": "beyondreality:pedestal"
-      },
-      "11": {
-        "model": "beyondreality:pedestal"
-      },
-      "12": {
-        "model": "beyondreality:pedestal"
-      },
-      "13": {
-        "model": "beyondreality:pedestal"
-      },
-      "14": {
-        "model": "beyondreality:pedestal"
-      },
-      "15": {
-        "model": "beyondreality:pedestal"
-      }
-    }
+    "down=false,up=false": { "model": "beyondreality:pedestal/full" },
+    "down=false,up=true": { "model": "beyondreality:pedestal/bottom" },
+    "down=true,up=false": { "model": "beyondreality:pedestal/top" },
+    "down=true,up=true": { "model": "beyondreality:pedestal/middle" }
   }
 }

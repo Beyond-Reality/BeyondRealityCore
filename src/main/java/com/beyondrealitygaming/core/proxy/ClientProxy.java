@@ -1,6 +1,8 @@
 package com.beyondrealitygaming.core.proxy;
 
 
+import com.beyondrealitygaming.core.block.BRBlock;
+import com.beyondrealitygaming.core.block.BRPedestal;
 import com.beyondrealitygaming.core.item.BRColoredItem;
 import com.google.common.collect.Maps;
 import com.google.gson.Gson;
@@ -9,6 +11,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.item.Item;
@@ -30,7 +33,7 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void preInit(FMLPreInitializationEvent event) throws IOException {
         super.preInit(event);
-
+        pedestalList.forEach(pedestal -> ModelLoader.setCustomStateMapper(pedestal, new StateMap.Builder().ignore(BRPedestal.TYPE).build()));
     }
 
     @Override

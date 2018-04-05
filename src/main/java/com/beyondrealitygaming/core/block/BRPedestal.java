@@ -1,46 +1,61 @@
 package com.beyondrealitygaming.core.block;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.properties.PropertyBool;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.Entity;
-import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-
-import javax.annotation.Nullable;
-import java.util.List;
 
 public class BRPedestal extends BRUnbreakeableBlock {
 
-    private static final AxisAlignedBB bounds = new AxisAlignedBB(0.0d, 0.0d, 0.0d, 1.0d, 2.0d,1.0d);
+    public static final PropertyBool DOWN = PropertyBool.create("down");
+    public static final PropertyBool UP = PropertyBool.create("up");
 
     public BRPedestal(String name, CreativeTabs tabs) {
         super(name, tabs);
+        this.setDefaultState(
+                this.blockState.getBaseState()
+                        .withProperty(DOWN, false)
+                        .withProperty(UP, false)
+        );
+    }
+
+    protected BlockStateContainer createBlockState()
+    {
+        return new BlockStateContainer(this, DOWN, UP, TYPE);
+    }
+
+    public boolean canConnectTo(IBlockAccess worldIn, BlockPos pos, EnumFacing facing) {
+        IBlockState iblockstate = worldIn.getBlockState(pos);
+        Block block = iblockstate.getBlock();
+        return block instanceof BRPedestal;
+    }
+
+    /**
+     * Get the actual Block state of this Block at the given position.
+     * This applies properties not visible in the metadata,
+     * such as pedestal UP and DOWN connections.
+     */
+    @Override
+    @Deprecated
+    public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
+    {
+        return state.withProperty(UP, canPedestalConnectTo(worldIn, pos, EnumFacing.UP))
+                .withProperty(DOWN, canPedestalConnectTo(worldIn, pos, EnumFacing.DOWN));
+    }
+
+    private boolean canPedestalConnectTo(IBlockAccess world, BlockPos pos, EnumFacing facing)
+    {
+        BlockPos other = pos.offset(facing);
+        Block block = world.getBlockState(other).getBlock();
+        return block.canBeConnectedTo(world, other, facing.getOpposite()) || canConnectTo(world, other, facing.getOpposite());
     }
 
     @Override
-    @Deprecated
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess access, BlockPos pos) {
-        return bounds;
-    }
-
-    @Deprecated
-    @SideOnly(Side.CLIENT)
-    public AxisAlignedBB getSelectedBoundingBox(IBlockState state) {
-        return bounds;
-    }
-
-    @Override
-    @Deprecated
-    public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, Entity entityIn, boolean somebool) {
-        addCollisionBoxToList(pos, entityBox, collidingBoxes, bounds);
-    }
-
-    @Override
-    public int getLightValue(IBlockState state, IBlockAccess access, BlockPos blockpos) {
+    public int getLightValue(IBlockState state, IBlockAccess access, BlockPos pos) {
         return 15;
     }
 
@@ -55,6 +70,4 @@ public class BRPedestal extends BRUnbreakeableBlock {
     public boolean isFullCube(IBlockState state) {
         return false;
     }
-
-
 }

@@ -33,6 +33,7 @@ public class BRUnbreakeableBlock extends BRBlock {
     }
 
     @Override
+    @Deprecated
     public IBlockState getStateFromMeta(int meta) {
         return this.getDefaultState().withProperty(TYPE, meta);
     }

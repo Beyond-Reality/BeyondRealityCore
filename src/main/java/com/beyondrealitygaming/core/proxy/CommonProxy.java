@@ -49,7 +49,7 @@ public class CommonProxy {
         if (!configFile.exists()) configFile.createNewFile();
         Configuration configuration = new Configuration(configFile);
         for (int i = 0; i < configuration.getInt("amountOfPedestals", Configuration.CATEGORY_GENERAL, 1, 0, Integer.MAX_VALUE, "The amount of pedestal multiplied by 16 that will be generated"); ++i) {
-            BRPedestal pedestal = new BRPedestal("pedestal" + i, buildingBlocks){
+            BRPedestal pedestal = new BRPedestal("pedestal" + i , buildingBlocks){
                 @Override
                 public void registerItem(IForgeRegistry<Item> itemIForgeRegistry) {
                     itemIForgeRegistry.register(new ItemBlock(this) {
