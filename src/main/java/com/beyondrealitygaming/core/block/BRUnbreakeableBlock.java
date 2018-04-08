@@ -15,8 +15,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BRUnbreakeableBlock extends BRBlock {
 
@@ -33,6 +31,7 @@ public class BRUnbreakeableBlock extends BRBlock {
     }
 
     @Override
+    @Deprecated
     public IBlockState getStateFromMeta(int meta) {
         return this.getDefaultState().withProperty(TYPE, meta);
     }
@@ -56,7 +55,9 @@ public class BRUnbreakeableBlock extends BRBlock {
 
     @Override
     public void registerModels() {
-        TYPE.getAllowedValues().forEach(integer -> ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), integer, new ModelResourceLocation(this.getRegistryName().toString(), "inventory")));
+        TYPE.getAllowedValues().forEach((integer) -> {
+                ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), integer, new ModelResourceLocation(this.getRegistryName().toString(), "inventory"));
+        });
     }
 
     @Override

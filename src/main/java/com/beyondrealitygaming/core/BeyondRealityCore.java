@@ -16,7 +16,10 @@ public class BeyondRealityCore {
     @Mod.Instance("beyondreality")
     public static BeyondRealityCore instance;
 
-    @SidedProxy(clientSide = "com.beyondrealitygaming.core.proxy.ClientProxy", serverSide = "com.beyondrealitygaming.core.proxy.CommonProxy")
+    @SidedProxy(
+            clientSide = "com.beyondrealitygaming.core.proxy.ClientProxy",
+            serverSide = "com.beyondrealitygaming.core.proxy.CommonProxy"
+    )
     public static CommonProxy proxy;
 
     @Mod.EventHandler

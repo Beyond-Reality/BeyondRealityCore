@@ -1,0 +1,117 @@
+{
+	"credit": "Made by leagris for Beyond Reality, with Blockbench, a free, modern block model editor by JannisX11",
+	"ambientocclusion": true,
+	"textures": {"pylon": "blocks/dragon_egg", "particle": "blocks/dragon_egg", "light": "blocks/lava_flow"},
+	"elements": [
+		{
+			"name": "PylonBase",
+			"from": [5, 15, 5],
+			"to": [11, 16, 11],
+			"rotation": {"angle": 45, "axis": "y", "origin": [8, 8, 8]},
+			"faces": {
+				"north": {"uv": [1, 0, 7, 1], "texture": "#pylon"},
+				"east": {"uv": [9, 0, 15, 1], "texture": "#pylon"},
+				"south": {"uv": [1, 0, 7, 1], "texture": "#pylon"},
+				"west": {"uv": [9, 0, 15, 1], "texture": "#pylon"},
+				"up": {"uv": [5, 5, 11, 11], "texture": "#pylon"}
+			}
+		},
+		{
+			"name": "Pylon",
+			"from": [4, 0, 4],
+			"to": [12, 15, 12],
+			"rotation": {"angle": 45, "axis": "y", "origin": [8, 10, 8]},
+			"faces": {
+				"north": {"uv": [0, 1, 8, 16], "texture": "#pylon"},
+				"east": {"uv": [8, 1, 16, 16], "texture": "#pylon"},
+				"south": {"uv": [0, 1, 8, 16], "texture": "#pylon"},
+				"west": {"uv": [8, 1, 16, 16], "texture": "#pylon"},
+				"up": {"uv": [4, 4, 12, 12], "texture": "#pylon"}
+			}
+		},
+		{
+			"name": "Light1",
+			"from": [5.5, 0, 3.5],
+			"to": [6.5, 11, 12.5],
+			"shade": false,
+			"rotation": {"angle": 45, "axis": "y", "origin": [8, 8, 8]},
+			"faces": {
+				"north": {"uv": [9.5, 5, 10.5, 16], "texture": "#light"},
+				"east": {"uv": [3.5, 5, 12.5, 16], "texture": "#light"},
+				"south": {"uv": [5.5, 5, 6.5, 16], "texture": "#light"},
+				"west": {"uv": [3.5, 5, 12.5, 16], "texture": "#light"},
+				"up": {"uv": [0, 0, 1, 9], "texture": "#light"}
+			}
+		},
+		{
+			"name": "Light2",
+			"from": [7.5, 0, 3.5],
+			"to": [8.5, 12, 12.5],
+			"shade": false,
+			"rotation": {"angle": 45, "axis": "y", "origin": [8, 8, 8]},
+			"faces": {
+				"north": {"uv": [7.5, 4, 8.5, 16], "texture": "#light"},
+				"east": {"uv": [3.5, 4, 12.5, 16], "texture": "#light"},
+				"south": {"uv": [7.5, 4, 8.5, 16], "texture": "#light"},
+				"west": {"uv": [3.5, 4, 12.5, 16], "texture": "#light"},
+				"up": {"uv": [7.5, 3.5, 8.5, 12.5], "texture": "#light"}
+			}
+		},
+		{
+			"name": "Light3",
+			"from": [9.5, 0, 3.5],
+			"to": [10.5, 11, 12.5],
+			"shade": false,
+			"rotation": {"angle": 45, "axis": "y", "origin": [8, 8, 8]},
+			"faces": {
+				"north": {"uv": [5.5, 5, 6.5, 16], "texture": "#light"},
+				"east": {"uv": [3.5, 5, 12.5, 16], "texture": "#light"},
+				"south": {"uv": [9.5, 5, 10.5, 16], "texture": "#light"},
+				"west": {"uv": [3.5, 5, 12.5, 16], "texture": "#light"},
+				"up": {"uv": [9.5, 3.5, 10.5, 12.5], "texture": "#light"}
+			}
+		},
+		{
+			"name": "Light4",
+			"from": [3.5, 0, 5.5],
+			"to": [12.5, 11, 6.5],
+			"shade": false,
+			"rotation": {"angle": 45, "axis": "y", "origin": [8, 8, 8]},
+			"faces": {
+				"north": {"uv": [3.5, 5, 12.5, 16], "texture": "#light"},
+				"east": {"uv": [9.5, 5, 10.5, 16], "texture": "#light"},
+				"south": {"uv": [3.5, 5, 12.5, 16], "texture": "#light"},
+				"west": {"uv": [5.5, 5, 6.5, 16], "texture": "#light"},
+				"up": {"uv": [3.5, 5.5, 12.5, 6.5], "texture": "#light"}
+			}
+		},
+		{
+			"name": "Light5",
+			"from": [3.5, 0, 7.5],
+			"to": [12.5, 12, 8.5],
+			"shade": false,
+			"rotation": {"angle": 45, "axis": "y", "origin": [8, 8, 8]},
+			"faces": {
+				"north": {"uv": [3.5, 4, 12.5, 16], "texture": "#light"},
+				"east": {"uv": [7.5, 4, 8.5, 16], "texture": "#light"},
+				"south": {"uv": [3.5, 4, 12.5, 16], "texture": "#light"},
+				"west": {"uv": [7.5, 4, 8.5, 16], "texture": "#light"},
+				"up": {"uv": [3.5, 7.5, 12.5, 8.5], "texture": "#light"}
+			}
+		},
+		{
+			"name": "Light6",
+			"from": [3.5, 0, 9.5],
+			"to": [12.5, 11, 10.5],
+			"shade": false,
+			"rotation": {"angle": 45, "axis": "y", "origin": [8, 8, 8]},
+			"faces": {
+				"north": {"uv": [3.5, 5, 12.5, 16], "texture": "#light"},
+				"east": {"uv": [5.5, 5, 6.5, 16], "texture": "#light"},
+				"south": {"uv": [3.5, 5, 12.5, 16], "texture": "#light"},
+				"west": {"uv": [9.5, 5, 10.5, 16], "texture": "#light"},
+				"up": {"uv": [3.5, 9.5, 12.5, 10.5], "texture": "#light"}
+			}
+		}
+	]
+}
