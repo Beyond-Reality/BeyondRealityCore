@@ -4,10 +4,6 @@ import com.beyondrealitygaming.core.block.BRPedestal;
 import com.beyondrealitygaming.core.block.BRUnbreakeableBlock;
 import com.beyondrealitygaming.core.event.PlayerInEvent;
 import com.beyondrealitygaming.core.proxy.registry.BlockRegistry;
-import com.beyondrealitygaming.core.recipe.BRAssemblyRecipe;
-import com.google.common.collect.ImmutableSet;
-import com.google.gson.Gson;
-import com.google.gson.stream.JsonReader;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
@@ -17,19 +13,20 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.registries.IForgeRegistry;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.Logger;
 
 import javax.annotation.Nullable;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CommonProxy {
 
+    public static Logger logger;
     public static File configFolder;
     public static List<BRPedestal> pedestalList = new ArrayList<>();
     public static List<BRUnbreakeableBlock> unbreakeableBlocks = new ArrayList<>();
@@ -41,6 +38,7 @@ public class CommonProxy {
     };
 
     public void preInit(FMLPreInitializationEvent event) throws IOException {
+        logger = event.getModLog();
         MinecraftForge.EVENT_BUS.register(new PlayerInEvent());
         MinecraftForge.EVENT_BUS.register(new BlockRegistry());
         configFolder = new File(event.getModConfigurationDirectory().getAbsolutePath() + File.separator + "brcore");
@@ -57,9 +55,23 @@ public class CommonProxy {
                         public String getUnlocalizedName(ItemStack stack) {
                             return getUnlocalizedName() + "." + stack.getItemDamage();
                         }
+
+                        @Override
+                        public String getItemStackDisplayName(ItemStack stack) {
+                            return "Unbreakable Pedestal Block";
+                        }
+
+                        @Override
+                        public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+                            super.addInformation(stack, worldIn, tooltip, flagIn);
+                            tooltip.add("Can be stacked vertically for higher pedestals.");
+                            tooltip.add("Type: "+stack.getItem().getRegistryName().getResourcePath().replaceAll("pedestal", ""));
+                            tooltip.add("Meta: "+stack.getItemDamage());
+                        }
                     }.setCreativeTab(buildingBlocks).setRegistryName(this.getRegistryName()).setHasSubtypes(true));
                 }
             };
+            logger.printf(Level.INFO, "adding %s to pedestalList.", pedestal.getUnlocalizedName());
             pedestalList.add(pedestal);
         }
         for (int i = 0; i < configuration.getInt("amountOfUnbreakeableBlocks", Configuration.CATEGORY_GENERAL, 1, 0, Integer.MAX_VALUE, "The amount of unbreakeable blocks multiplied by 16 that will be generated"); ++i) {

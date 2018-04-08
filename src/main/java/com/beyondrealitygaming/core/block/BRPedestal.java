@@ -4,16 +4,19 @@ import net.minecraft.block.Block;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
+import net.minecraftforge.client.model.ModelLoader;
 
 public class BRPedestal extends BRUnbreakeableBlock {
 
     public static final PropertyBool DOWN = PropertyBool.create("down");
     public static final PropertyBool UP = PropertyBool.create("up");
-
     public BRPedestal(String name, CreativeTabs tabs) {
         super(name, tabs);
         this.setDefaultState(
@@ -23,15 +26,24 @@ public class BRPedestal extends BRUnbreakeableBlock {
         );
     }
 
+    private boolean canConnectTo(IBlockAccess worldIn, BlockPos pos, EnumFacing facing) {
+        IBlockState iblockstate = worldIn.getBlockState(pos);
+        Block block = iblockstate.getBlock();
+        return block instanceof BRPedestal;
+    }
+
     protected BlockStateContainer createBlockState()
     {
         return new BlockStateContainer(this, DOWN, UP, TYPE);
     }
 
-    public boolean canConnectTo(IBlockAccess worldIn, BlockPos pos, EnumFacing facing) {
-        IBlockState iblockstate = worldIn.getBlockState(pos);
-        Block block = iblockstate.getBlock();
-        return block instanceof BRPedestal;
+    @Override
+    public void registerModels()
+    {
+        TYPE.getAllowedValues().forEach((integer) -> {
+            ModelLoader.setCustomStateMapper(this, new StateMap.Builder().ignore(TYPE).build());
+            ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), integer, new ModelResourceLocation((this.getRegistryName().toString()), "inventory"));
+        });
     }
 
     /**
