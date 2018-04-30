@@ -33,3 +33,5 @@ Thumbs.db
 *.xml
 out/*
 lib/*
+build/*
+.gradle
