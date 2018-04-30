@@ -41,12 +41,13 @@ public class ClientProxy extends CommonProxy {
     private void downloadInfoCapes() {
         try {
             File capeInfo = new File("./tempinfo.json");
-            capeInfo.createNewFile();
-            FileUtils.copyURLToFile(new URL(info), capeInfo);
-            FileReader reader = new FileReader(capeInfo);
-            CapeInfo.capeInfos = new Gson().fromJson(new JsonReader(reader), CapeInfo[].class);
-            reader.close();
-            FileUtils.forceDelete(capeInfo);
+            if (capeInfo.createNewFile()) {
+                FileUtils.copyURLToFile(new URL(info), capeInfo);
+                FileReader reader = new FileReader(capeInfo);
+                CapeInfo.capeInfos = new Gson().fromJson(new JsonReader(reader), CapeInfo[].class);
+                reader.close();
+                FileUtils.forceDelete(capeInfo);
+            }
             for (CapeInfo info : CapeInfo.capeInfos) {
                 info.downloadCape();
             }

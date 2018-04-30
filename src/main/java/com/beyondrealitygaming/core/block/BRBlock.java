@@ -14,7 +14,7 @@ public abstract class BRBlock extends Block {
 
     public static List<BRBlock> blocks = new ArrayList<>();
 
-    public BRBlock(Material material, String name, CreativeTabs tabs) {
+    BRBlock(Material material, String name, CreativeTabs tabs) {
         super(material);
         setUnlocalizedName("beyondreality:" + name);
         if (name != null) setRegistryName("beyondreality", name);

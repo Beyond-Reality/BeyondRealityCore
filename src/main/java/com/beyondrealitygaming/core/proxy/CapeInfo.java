@@ -8,6 +8,7 @@ import net.minecraft.client.renderer.texture.ITextureObject;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.util.ResourceLocation;
 
+import javax.annotation.Nonnull;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Arrays;
@@ -52,10 +53,10 @@ public class CapeInfo {
             ImageBufferDownload download = new ImageBufferDownload();
 
             @Override
-            public BufferedImage parseUserSkin(BufferedImage image) {
+            @Nonnull
+            public BufferedImage parseUserSkin(@Nonnull BufferedImage src) {
                 int imageWidth = 64;
                 int imageHeight = 32;
-                BufferedImage src = image;
                 int srcWidth = src.getWidth();
                 int srcHeight = src.getHeight();
                 while ((imageWidth < srcWidth) || (imageHeight < srcHeight)) {
@@ -64,7 +65,7 @@ public class CapeInfo {
                 }
                 BufferedImage bufferedImage = new BufferedImage(imageWidth, imageHeight, 2);
                 Graphics graphics = bufferedImage.getGraphics();
-                graphics.drawImage(image, 0, 0, null);
+                graphics.drawImage(src, 0, 0, null);
                 graphics.dispose();
                 return bufferedImage;
             }
