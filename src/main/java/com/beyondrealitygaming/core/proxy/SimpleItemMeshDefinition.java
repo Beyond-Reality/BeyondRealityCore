@@ -5,6 +5,8 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
+import javax.annotation.Nonnull;
+
 public class SimpleItemMeshDefinition implements ItemMeshDefinition {
     protected String modelName;
     protected String variants;
@@ -15,7 +17,8 @@ public class SimpleItemMeshDefinition implements ItemMeshDefinition {
     }
 
     @Override
-    public ModelResourceLocation getModelLocation(ItemStack stack) {
+    @Nonnull
+    public ModelResourceLocation getModelLocation(@Nonnull ItemStack stack) {
         return new ModelResourceLocation(new ResourceLocation("beyondreality:" + modelName), variants);
     }
 }

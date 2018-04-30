@@ -10,6 +10,7 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.MathHelper;
 
+import javax.annotation.Nonnull;
 import java.util.HashMap;
 
 public class CapeRendererLayer implements LayerRenderer<AbstractClientPlayer> {
@@ -17,13 +18,13 @@ public class CapeRendererLayer implements LayerRenderer<AbstractClientPlayer> {
     private RenderPlayer renderPlayer;
     private HashMap<String, CapeInfo> capeInfoHashMap;
 
-    public CapeRendererLayer(RenderPlayer renderPlayer) {
+    CapeRendererLayer(RenderPlayer renderPlayer) {
         this.renderPlayer = renderPlayer;
-        this.capeInfoHashMap = new HashMap<String, CapeInfo>();
+        this.capeInfoHashMap = new HashMap<>();
     }
 
     @Override
-    public void doRenderLayer(AbstractClientPlayer entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
+    public void doRenderLayer(@Nonnull AbstractClientPlayer entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
         if (!capeInfoHashMap.containsKey(entitylivingbaseIn.getName())) {
             capeInfoHashMap.put(entitylivingbaseIn.getName(), CapeInfo.getPlayerCape(entitylivingbaseIn.getName()));
         }

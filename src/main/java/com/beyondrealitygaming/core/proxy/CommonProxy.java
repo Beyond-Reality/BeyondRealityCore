@@ -1,7 +1,7 @@
 package com.beyondrealitygaming.core.proxy;
 
 import com.beyondrealitygaming.core.block.BRPedestal;
-import com.beyondrealitygaming.core.block.BRUnbreakeableBlock;
+import com.beyondrealitygaming.core.block.BRUnbreakableBlock;
 import com.beyondrealitygaming.core.event.PlayerInEvent;
 import com.beyondrealitygaming.core.proxy.registry.BlockRegistry;
 import net.minecraft.client.util.ITooltipFlag;
@@ -10,6 +10,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
@@ -18,6 +19,7 @@ import net.minecraftforge.registries.IForgeRegistry;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.io.File;
 import java.io.IOException;
@@ -29,7 +31,7 @@ public class CommonProxy {
     public static Logger logger;
     public static File configFolder;
     public static List<BRPedestal> pedestalList = new ArrayList<>();
-    public static List<BRUnbreakeableBlock> unbreakeableBlocks = new ArrayList<>();
+    public static List<BRUnbreakableBlock> unbreakableBlocks = new ArrayList<>();
     public static CreativeTabs buildingBlocks = new CreativeTabs("brBuildingBlocks") {
         @Override
         public ItemStack getTabIconItem() {
@@ -42,58 +44,92 @@ public class CommonProxy {
         MinecraftForge.EVENT_BUS.register(new PlayerInEvent());
         MinecraftForge.EVENT_BUS.register(new BlockRegistry());
         configFolder = new File(event.getModConfigurationDirectory().getAbsolutePath() + File.separator + "brcore");
-        if (!configFolder.exists()) configFolder.mkdir();
+        if (!configFolder.exists()) {
+            try {
+                if(!configFolder.mkdir()) {
+                    logger.printf(Level.ERROR, "Could not create config folder: %s", configFolder.toString());
+                }
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
         File configFile = new File(configFolder.getAbsolutePath() + File.separator + "brcore.cfg");
-        if (!configFile.exists()) configFile.createNewFile();
+        if (!configFile.exists()) {
+            try {
+                if(!configFile.createNewFile()) {
+                    logger.printf(Level.ERROR, "Could not create config file: %s", configFile.toString());
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         Configuration configuration = new Configuration(configFile);
-        for (int i = 0; i < configuration.getInt("amountOfPedestals", Configuration.CATEGORY_GENERAL, 1, 0, Integer.MAX_VALUE, "The amount of pedestal multiplied by 16 that will be generated"); ++i) {
+        for (int i = 0, amountOfPedestals = configuration.getInt("amountOfPedestals", Configuration.CATEGORY_GENERAL, 1, 0, Integer.MAX_VALUE, "The amount of pedestal multiplied by 16 that will be generated"); i < amountOfPedestals; ++i) {
             BRPedestal pedestal = new BRPedestal("pedestal" + i , buildingBlocks){
                 @Override
                 public void registerItem(IForgeRegistry<Item> itemIForgeRegistry) {
                     itemIForgeRegistry.register(new ItemBlock(this) {
                         @Override
+                        @Nonnull
                         public String getUnlocalizedName(ItemStack stack) {
                             return getUnlocalizedName() + "." + stack.getItemDamage();
                         }
 
                         @Override
-                        public String getItemStackDisplayName(ItemStack stack) {
+                        @Nonnull
+                        public String getItemStackDisplayName(@Nonnull ItemStack stack) {
                             return "Unbreakable Pedestal Block";
                         }
 
                         @Override
-                        public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+                        public void addInformation(@Nullable ItemStack stack, @Nullable World worldIn, @Nullable List<String> tooltip, @Nullable ITooltipFlag flagIn) {
                             super.addInformation(stack, worldIn, tooltip, flagIn);
-                            tooltip.add("Can be stacked vertically for higher pedestals.");
-                            tooltip.add("Type: "+stack.getItem().getRegistryName().getResourcePath().replaceAll("pedestal", ""));
-                            tooltip.add("Meta: "+stack.getItemDamage());
+                            if (tooltip != null) {
+                                tooltip.add("Can be stacked vertically for higher pedestals.");
+                                if (stack != null) {
+                                    ResourceLocation registryName = stack.getItem().getRegistryName();
+                                    if (registryName != null) {
+                                        tooltip.add("Type: "+registryName.getResourcePath().replaceAll("pedestal", ""));
+                                    }
+                                    tooltip.add("Meta: "+stack.getItemDamage());
+                                }
+                            }
                         }
-                    }.setCreativeTab(buildingBlocks).setRegistryName(this.getRegistryName()).setHasSubtypes(true));
+                    }.setCreativeTab(buildingBlocks).setRegistryName(this.getRegistryName()+"").setHasSubtypes(true));
                 }
             };
             logger.printf(Level.INFO, "adding %s to pedestalList.", pedestal.getUnlocalizedName());
             pedestalList.add(pedestal);
         }
-        for (int i = 0; i < configuration.getInt("amountOfUnbreakeableBlocks", Configuration.CATEGORY_GENERAL, 1, 0, Integer.MAX_VALUE, "The amount of unbreakeable blocks multiplied by 16 that will be generated"); ++i) {
-            BRUnbreakeableBlock block = new BRUnbreakeableBlock("unbreakeable" + i, buildingBlocks){
+        for (int i = 0, amountOfUnbreakableBlocks = configuration.getInt("amountOfUnbreakableBlocks", Configuration.CATEGORY_GENERAL, 1, 0, Integer.MAX_VALUE, "The amount of unbreakable blocks multiplied by 16 that will be generated"); i < amountOfUnbreakableBlocks; ++i) {
+            BRUnbreakableBlock block = new BRUnbreakableBlock("unbreakable" + i, buildingBlocks){
                 @Override
                 public void registerItem(IForgeRegistry<Item> itemIForgeRegistry) {
                     itemIForgeRegistry.register(new ItemBlock(this) {
                         @Override
-                        public String getItemStackDisplayName(ItemStack stack) {
-                            return "Unbreakeable Block";
+                        @Nonnull
+                        public String getItemStackDisplayName(@Nonnull ItemStack stack) {
+                            return "Unbreakable Block";
                         }
 
                         @Override
-                        public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+                        public void addInformation(@Nullable ItemStack stack, @Nullable World worldIn, @Nullable List<String> tooltip, @Nullable ITooltipFlag flagIn) {
                             super.addInformation(stack, worldIn, tooltip, flagIn);
-                            tooltip.add("Type: "+stack.getItem().getRegistryName().getResourcePath().replaceAll("unbreakeable", ""));
-                            tooltip.add("Meta: "+stack.getItemDamage());
+                            if (tooltip != null) {
+                                if (stack != null) {
+                                    ResourceLocation registryName = stack.getItem().getRegistryName();
+                                    if (registryName != null) {
+                                        tooltip.add("Type: " + registryName.getResourcePath().replaceAll("unbreakeable", ""));
+                                    }
+                                    tooltip.add("Meta: " + stack.getItemDamage());
+                                }
+                            }
                         }
-                    }.setHasSubtypes(true).setCreativeTab(buildingBlocks).setRegistryName(this.getRegistryName()));
+                    }.setHasSubtypes(true).setCreativeTab(buildingBlocks).setRegistryName(this.getRegistryName()+""));
                 }
             };
-            unbreakeableBlocks.add(block);
+            unbreakableBlocks.add(block);
         }
         configuration.save();
     }
