@@ -2,11 +2,14 @@
   "forge_marker": 1,
   "defaults": {
     "textures": {
-      "particle": "blocks/bedrock"
-    },
-    "model": "beyondreality:pedestal/full"
+      "particle": "minecraft:blocks/bedrock",
+      "pylon": "minecraft:blocks/dragon_egg",
+      "light": "minecraft:blocks/lava_flow",
+      "base": "minecraft:blocks/obsidian"
+    }
   },
   "variants": {
+    "inventory": { "model": "beyondreality:pedestal/item" },
     "down=false,up=false": { "model": "beyondreality:pedestal/full" },
     "down=false,up=true": { "model": "beyondreality:pedestal/bottom" },
     "down=true,up=false": { "model": "beyondreality:pedestal/top" },

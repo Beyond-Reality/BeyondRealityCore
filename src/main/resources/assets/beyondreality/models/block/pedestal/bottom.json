@@ -1,12 +1,6 @@
 {
 	"credit": "Made by leagris for Beyond Reality, with Blockbench, a free, modern block model editor by JannisX11",
 	"ambientocclusion": true,
-	"textures": {
-		"pylon": "blocks/dragon_egg",
-		"particle": "blocks/dragon_egg",
-		"base": "blocks/obsidian",
-		"light": "blocks/lava_flow"
-	},
 	"elements": [
 		{
 			"name": "Bottom1",

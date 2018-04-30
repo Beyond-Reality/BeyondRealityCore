@@ -16,13 +16,15 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 
-public class BRUnbreakeableBlock extends BRBlock {
+import javax.annotation.Nonnull;
 
-    public static final PropertyInteger TYPE = PropertyInteger.create("type", 0, 15);
+public class BRUnbreakableBlock extends BRBlock {
 
-    private String name;
+    static final PropertyInteger TYPE = PropertyInteger.create("type", 0, 15);
 
-    public BRUnbreakeableBlock(String name, CreativeTabs creativeTabs) {
+    protected String name;
+
+    protected BRUnbreakableBlock(String name, CreativeTabs creativeTabs) {
         super(Material.ROCK, name, creativeTabs);
         this.name = name;
         this.setDefaultState(this.blockState.getBaseState().withProperty(TYPE, 0));
@@ -32,6 +34,7 @@ public class BRUnbreakeableBlock extends BRBlock {
 
     @Override
     @Deprecated
+    @Nonnull
     public IBlockState getStateFromMeta(int meta) {
         return this.getDefaultState().withProperty(TYPE, meta);
     }
@@ -42,6 +45,7 @@ public class BRUnbreakeableBlock extends BRBlock {
     }
 
     @Override
+    @Nonnull
     protected BlockStateContainer createBlockState() {
         return new BlockStateContainer(this, TYPE);
     }
@@ -67,7 +71,8 @@ public class BRUnbreakeableBlock extends BRBlock {
     }
 
     @Override
-    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
+    @Nonnull
+    public ItemStack getPickBlock(@Nonnull IBlockState state, RayTraceResult target, @Nonnull World world, @Nonnull BlockPos pos, EntityPlayer player) {
         return new ItemStack(this, 1, getMetaFromState(state));
     }
 }

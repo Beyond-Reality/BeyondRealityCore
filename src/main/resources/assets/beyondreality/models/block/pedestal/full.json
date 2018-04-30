@@ -1,25 +1,18 @@
 {
 	"credit": "Made by leagris for Beyond Reality, with Blockbench, a free, modern block model editor by JannisX11",
 	"ambientocclusion": true,
-	"textures": {
-		"pylon": "blocks/dragon_egg",
-		"light": "blocks/lava_flow",
-		"1_pylon": "blocks/dragon_egg",
-		"particle": "blocks/dragon_egg",
-		"1_base": "blocks/obsidian"
-	},
 	"elements": [
 		{
 			"name": "Bottom1",
 			"from": [0, 0, 0],
 			"to": [16, 1, 16],
 			"faces": {
-				"north": {"uv": [16, 0, 0, 1], "texture": "#1_base"},
-				"east": {"uv": [16, 0, 15, 16], "texture": "#1_base", "rotation": 90},
-				"south": {"uv": [0, 16, 16, 15], "texture": "#1_base"},
-				"west": {"uv": [1, 0, 0, 16], "texture": "#1_base", "rotation": 270},
-				"up": {"uv": [0, 0, 16, 16], "texture": "#1_base"},
-				"down": {"uv": [16, 16, 0, 0], "texture": "#1_base", "cullface": "down"}
+				"north": {"uv": [16, 0, 0, 1], "texture": "#base"},
+				"east": {"uv": [16, 0, 15, 16], "texture": "#base", "rotation": 90},
+				"south": {"uv": [0, 16, 16, 15], "texture": "#base"},
+				"west": {"uv": [1, 0, 0, 16], "texture": "#base", "rotation": 270},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#base"},
+				"down": {"uv": [16, 16, 0, 0], "texture": "#base", "cullface": "down"}
 			}
 		},
 		{
@@ -27,11 +20,11 @@
 			"from": [1, 1, 1],
 			"to": [15, 2, 15],
 			"faces": {
-				"north": {"uv": [15, 1, 14, 15], "texture": "#1_base", "rotation": 90},
-				"east": {"uv": [1, 15, 15, 14], "texture": "#1_base"},
-				"south": {"uv": [2, 1, 1, 15], "texture": "#1_base", "rotation": 270},
-				"west": {"uv": [15, 1, 1, 2], "texture": "#1_base"},
-				"up": {"uv": [1, 1, 15, 15], "texture": "#1_base", "rotation": 270}
+				"north": {"uv": [15, 1, 14, 15], "texture": "#base", "rotation": 90},
+				"east": {"uv": [1, 15, 15, 14], "texture": "#base"},
+				"south": {"uv": [2, 1, 1, 15], "texture": "#base", "rotation": 270},
+				"west": {"uv": [15, 1, 1, 2], "texture": "#base"},
+				"up": {"uv": [1, 1, 15, 15], "texture": "#base", "rotation": 270}
 			}
 		},
 		{
@@ -39,11 +32,11 @@
 			"from": [2, 2, 2],
 			"to": [14, 3, 14],
 			"faces": {
-				"north": {"uv": [14, 2, 2, 3], "texture": "#1_base"},
-				"east": {"uv": [14, 2, 13, 14], "texture": "#1_base", "rotation": 90},
-				"south": {"uv": [2, 14, 14, 13], "texture": "#1_base"},
-				"west": {"uv": [3, 2, 2, 14], "texture": "#1_base", "rotation": 270},
-				"up": {"uv": [2, 2, 14, 14], "texture": "#1_base"}
+				"north": {"uv": [14, 2, 2, 3], "texture": "#base"},
+				"east": {"uv": [14, 2, 13, 14], "texture": "#base", "rotation": 90},
+				"south": {"uv": [2, 14, 14, 13], "texture": "#base"},
+				"west": {"uv": [3, 2, 2, 14], "texture": "#base", "rotation": 270},
+				"up": {"uv": [2, 2, 14, 14], "texture": "#base"}
 			}
 		},
 		{
@@ -52,10 +45,10 @@
 			"to": [11, 4, 11],
 			"rotation": {"angle": 45, "axis": "y", "origin": [8, 8, 8]},
 			"faces": {
-				"north": {"uv": [1, 12, 7, 13], "texture": "#1_pylon"},
-				"east": {"uv": [9, 12, 15, 13], "texture": "#1_pylon"},
-				"south": {"uv": [1, 12, 7, 13], "texture": "#1_pylon"},
-				"west": {"uv": [9, 12, 15, 13], "texture": "#1_pylon"}
+				"north": {"uv": [1, 12, 7, 13], "texture": "#pylon"},
+				"east": {"uv": [9, 12, 15, 13], "texture": "#pylon"},
+				"south": {"uv": [1, 12, 7, 13], "texture": "#pylon"},
+				"west": {"uv": [9, 12, 15, 13], "texture": "#pylon"}
 			}
 		},
 		{
