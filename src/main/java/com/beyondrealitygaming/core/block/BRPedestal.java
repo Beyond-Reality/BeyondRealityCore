@@ -13,6 +13,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import java.util.Map;
@@ -20,7 +22,7 @@ import java.util.Map;
 public class BRPedestal extends BRUnbreakableBlock {
     private static final PropertyBool DOWN = PropertyBool.create("down");
     private static final PropertyBool UP = PropertyBool.create("up");
-    private static final String cname = "beyondreality:pedestal";
+    private static final String CNAME = "beyondreality:pedestal";
     protected BRPedestal(String name, CreativeTabs tabs) {
         super(name, tabs);
         setLightLevel(1.0F);
@@ -37,11 +39,12 @@ public class BRPedestal extends BRUnbreakableBlock {
         return new BlockStateContainer(this, DOWN, UP, TYPE);
     }
 
+    @SideOnly(Side.CLIENT)
     @Override
     public void registerModels() {
         TYPE.getAllowedValues().forEach((type) -> {
             ModelLoader.setCustomStateMapper(this, new StateMapper());
-            ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), type, new ModelResourceLocation(cname, "inventory"));
+            ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), type, new ModelResourceLocation(CNAME, "inventory"));
         });
     }
 
@@ -82,10 +85,11 @@ public class BRPedestal extends BRUnbreakableBlock {
 
         @Override
         @Nonnull
-        protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
-            ResourceLocation loc = new ResourceLocation(cname);
-            String propstr = getPropertyString(state.getProperties());
-            return new ModelResourceLocation(loc, propstr);
+        protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
+            return new ModelResourceLocation(
+                    new ResourceLocation(CNAME),
+                    getPropertyString(state.getProperties())
+            );
         }
 
         @Override
@@ -95,26 +99,20 @@ public class BRPedestal extends BRUnbreakableBlock {
 
             for (Map.Entry<IProperty<?>, Comparable<? >> entry : values.entrySet())
             {
-                IProperty<?> iproperty = (IProperty)entry.getKey();
+                IProperty<?> iProperty = entry.getKey();
 
-                if(!iproperty.equals(TYPE)) {
+                if(!iProperty.equals(TYPE)) {
                     if (stringbuilder.length() != 0)
                     {
                         stringbuilder.append(",");
                     }
-                    stringbuilder.append(iproperty.getName());
+                    stringbuilder.append(iProperty.getName());
                     stringbuilder.append("=");
-                    stringbuilder.append(this.getPropertyName(iproperty, entry.getValue()));
+                    stringbuilder.append(entry.getValue().toString());
                 }
             }
 
             return stringbuilder.toString();
         }
-
-        @Nonnull
-        @SuppressWarnings("unchecked")
-        private <T extends Comparable<T>> String getPropertyName(IProperty<T> property, Comparable<?> value) {
-            return property.getName((T)value);
         }
-    }
 }
